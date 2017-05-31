@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0BC1EDF35FF00D0763B /* main.cpp */; };
+		6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57881EDF641A00176B40 /* triangles.frag */; };
+		6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57871EDF63C200176B40 /* triangles.vert */; };
+		6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0BC1EDF35FF00D0763B /* main.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
@@ -16,16 +18,20 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		6C73D0B71EDF35FF00D0763B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */,
+				6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C6E57871EDF63C200176B40 /* triangles.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.vert; sourceTree = "<group>"; };
+		6C6E57881EDF641A00176B40 /* triangles.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.frag; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* openGL_tutorial_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_tutorial_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0BC1EDF35FF00D0763B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -50,6 +56,8 @@
 		6C73D0B01EDF35FF00D0763B = {
 			isa = PBXGroup;
 			children = (
+				6C6E57881EDF641A00176B40 /* triangles.frag */,
+				6C6E57871EDF63C200176B40 /* triangles.vert */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
 				6C73D0BB1EDF35FF00D0763B /* openGL_tutorial_1 */,
@@ -270,6 +278,7 @@
 				6C73D0C21EDF35FF00D0763B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

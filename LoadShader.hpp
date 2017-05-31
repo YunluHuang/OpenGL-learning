@@ -9,7 +9,8 @@
 #ifndef LoadShader_hpp
 #define LoadShader_hpp
 
-#include <stdio.h>
+#include "stdlib.h"
+#include <iostream>
 #include <OpenGL/gl3.h>
 
 typedef struct {
@@ -18,6 +19,6 @@ typedef struct {
     GLuint shader;
 } ShaderInfo;
 
-GLuint LoadShaders( ShaderInfo *);
+GLuint LoadShaders(ShaderInfo *);
 
 #endif /* LoadShader_hpp */

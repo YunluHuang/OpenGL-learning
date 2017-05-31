@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0BC1EDF35FF00D0763B /* main.cpp */; };
+		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
+		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
+		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,10 @@
 /* Begin PBXFileReference section */
 		6C73D0B91EDF35FF00D0763B /* openGL_tutorial_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_tutorial_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0BC1EDF35FF00D0763B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadShader.cpp; sourceTree = "<group>"; };
+		6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoadShader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */,
+				6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +50,11 @@
 		6C73D0B01EDF35FF00D0763B = {
 			isa = PBXGroup;
 			children = (
+				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
+				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
 				6C73D0BB1EDF35FF00D0763B /* openGL_tutorial_1 */,
 				6C73D0BA1EDF35FF00D0763B /* Products */,
+				6C73D0C31EDF371A00D0763B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +72,15 @@
 				6C73D0BC1EDF35FF00D0763B /* main.cpp */,
 			);
 			path = openGL_tutorial_1;
+			sourceTree = "<group>";
+		};
+		6C73D0C31EDF371A00D0763B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C73D0C61EDF372000D0763B /* OpenGL.framework */,
+				6C73D0C41EDF371A00D0763B /* GLUT.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,
 				6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

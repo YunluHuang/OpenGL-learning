@@ -1,15 +1,57 @@
-//
-//  main.cpp
-//  openGL_tutorial_1
-//
-//  Created by Ah Huang on 5/31/17.
-//  Copyright © 2017 Ah Huang. All rights reserved.
-//
-
+#include <OpenGL/gl3.h>
+#include <GLUT/glut.h>
 #include <iostream>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+#include "LoadShader.hpp"
+
+#define BUFFER_OFFSET(x) ((const void *)(x))
+using namespace std;
+
+enum VAO_IDs {Triangles, NumVAOs};
+enum Buffer_IDs {ArrayBuffer, NumBuffers};
+enum Attrib_IDs {vPosition = 0};
+
+GLuint VAOs[NumVAOs];
+GLuint Buffers[NumBuffers];
+
+const GLuint NumVertices = 6;
+
+void init() {
+    glGenVertexArrays(NumVAOs, VAOs);
+    glBindVertexArray(VAOs[Triangles]);
+    
+    GLfloat vertices[NumVertices][2] = {
+        {-0.9f, -0.9f},
+        {0.85f, -0.9f},
+        {-0.9f, 0.85f},
+        {0.9f, -0.85f},
+        {0.9f, 0.9f},
+        {-0.85f, 0.9f}
+    };
+    
+    glGenBuffers(NumBuffers, Buffers);
+    glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
+                 GL_STATIC_DRAW);
+    
+    ShaderInfo shaders[] = {
+        {GL_VERTEX_SHADER, "triangles.vert"},
+        {GL_FRAGMENT_SHADER, "triangles.frag"},
+        {GL_NONE, NULL}
+    };
+    
+    GLuint program = LoadShaders(shaders);
+    glUseProgram(program);
+    
+    glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(vPosition);
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glBindVertexArray(VAOs[Triangles]);
+    glDrawArrays(GL_TRIANGLES, 0, NumVertices);
+    
+    glFlush();
 }

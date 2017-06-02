@@ -642,6 +642,7 @@
 		6C3BEBD11EE13A0100F7ED4C /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				DFDB3A9E1EE2321D009E578E /* tests */,
 				6C3BEBD21EE13A0E00F7ED4C /* textures */,
 				6C3BEBCE1EE1393800F7ED4C /* models */,
 			);
@@ -1445,6 +1446,13 @@
 				6C6E57871EDF63C200176B40 /* triangles.vert */,
 			);
 			name = shaders;
+			sourceTree = "<group>";
+		};
+		DFDB3A9E1EE2321D009E578E /* tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

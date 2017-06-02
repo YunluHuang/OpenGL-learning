@@ -15,20 +15,18 @@
 #include <GLUT/glut.h>
 #include <glm/glm.hpp>
 
-#include "variables.h"
-
 #include <vector>
 #include <cstdio>
 #include <iostream>
 
-enum Primitives {Triangles};
+#include "variables.h"
+#include "Mesh.hpp"
+
 //Vertex attribute: poisition id = 0
 enum Attrib_IDs {vPosition = 0};
 
 void genBuffers();
-void initMesh(Mesh *mesh);
-void initPrimitive(Primitives primitive);
-void displayMesh(Mesh *mesh);
-void displayPrimitive(Primitives primitive);
+void initMesh(Mesh * mesh);
+void displayMesh(Mesh * mesh);
 
 #endif /* Geometry_hpp */

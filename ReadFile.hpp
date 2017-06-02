@@ -12,9 +12,11 @@
 #include "variables.h"
 
 #include <stdio.h>
+#include <string>
+#include <map>
 
 typedef glm::vec3 vec3;
 
-void readfile();
+void readfile(const char * filename);
 
 #endif /* ReadFile_hpp */

@@ -7,6 +7,7 @@
 //
 
 #include "ReadFile.hpp"
+#include "Mesh.hpp"
 
 using namespace std;
 
@@ -16,14 +17,22 @@ vector<GLuint> VBOs;
 vector<GLuint> NBOs;
 vector<GLuint> EBOs;
 
-std::vector<Mesh *> Meshes;
-
-unsigned int TriangleID = 0;
+std::vector<Mesh *> objects;
+std::map<string, Mesh *> loadedMeshes;
 
 void addMesh(const char * filename) {
-    
+    string file = filename;
+    auto it = loadedMeshes.find(file);
+    if (it != loadedMeshes.end()) {
+        Mesh * mesh = new Mesh(filename);
+        loadedMeshes[file] = mesh;
+        objects.push_back(mesh);
+    }
+    else {
+        objects.push_back(it->second);
+    }
 }
 
-void readfile() {
+void readfile(const char * filename) {
     
 }

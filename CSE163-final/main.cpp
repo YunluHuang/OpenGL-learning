@@ -40,16 +40,21 @@ GLuint mvpPos;
 
 void init() {
     genBuffers();
-    initMesh(Meshes[0]);
-    initPrimitive(Triangles);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
         {GL_FRAGMENT_SHADER, "triangles.frag"},
         {GL_NONE, NULL}
     };
+    
     program = loadShaders(shaders);
     glUseProgram(program);
+    
+    unsigned int counter = 0;
+    for (auto it = loadedMeshes.begin(); it != loadedMeshes.end(); it++) {
+        it->second->id = counter++;
+        initMesh(it->second);
+    }
 }
 
 void display() {
@@ -63,8 +68,10 @@ void display() {
     mvpPos = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
     
-    displayMesh(Meshes[0]);
-    displayPrimitive(Triangles);
+    for (int i = 0; i < objects.size(); i++) {
+        displayMesh(objects[i]);
+    }
+    
     glFlush();
 }
 
@@ -79,7 +86,12 @@ void keyboard(unsigned char key, int x, int y) {
     }
 }
 
-int main(int argc, char * *argv) {
+int main(int argc, char * argv[]) {
+    
+    if (argc < 2) {
+        cerr << "Please specify the scene file" << endl;
+        return -1;
+    }
     
     glutInit(&argc, argv);
     
@@ -90,7 +102,7 @@ int main(int argc, char * *argv) {
     
     cout << "GLSL version is: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
     
-    readfile();
+    readfile(argv[1]);
     init();
     
     glutDisplayFunc(display);

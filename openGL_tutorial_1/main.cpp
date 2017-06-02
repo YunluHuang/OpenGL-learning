@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "LoadShader.hpp"
-#include "Scene.hpp"
+#include "Geometry.hpp"
 
 #define BUFFER_OFFSET(x) ((const void *)(x))
 using namespace std;
@@ -36,6 +36,8 @@ void init() {
 //    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
 //                 GL_STATIC_DRAW);
     
+    initGeometry();
+    
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
         {GL_FRAGMENT_SHADER, "triangles.frag"},
@@ -55,6 +57,7 @@ void display() {
 //    
 //    glBindVertexArray(VAOs[0]);
 //    glDrawArrays(GL_TRIANGLES, 0, );
+    displayGeometry();
     
     glFlush();
 }

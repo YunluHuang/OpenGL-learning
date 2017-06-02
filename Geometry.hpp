@@ -8,44 +8,28 @@
 
 #ifndef Geometry_hpp
 #define Geometry_hpp
-//include OpenGL and glut
+
+#include <stdio.h>
 #include <OpenGL/gl3.h>
-#include <OpenGL/glext.h>
+#define __gl_h_
 #include <GLUT/glut.h>
-
-//force glm to use radians
-#ifndef GLM_FORCE_RADIANS
-#define GLM_FORCE_RADIANS
-#endif
-//include glm
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
-#include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <iterator>
 
-typedef glm::vec2 vec2;
 typedef glm::vec3 vec3;
-typedef glm::vec4 vec4;
-typedef glm::mat2 mat2;
-typedef glm::mat3 mat3;
-typedef glm::mat4 mat4;
 
-#define PI = 3.14159265f
+//Triangles take VAO[0], total VAOs = 1
+enum VAO_IDs {Triangles, NumObjs};
+//Vertex attribute: poisition id = 0
+enum Attrib_IDs {vPosition = 0};
 
-using namespace std;
+extern std::vector<vec3> vertices;
+extern std::vector<GLuint> indices;
 
-vector<vec3> meshVertices;
-vector<vec3> meshNormals;
-vector<unsigned int> meshIndices;
-
-void initMesh();
-void refreshMesh();
-void solidMesh(float size);
-
+void initGeometry();
+void loadObj();
+void bindBuffer();
+void displayGeometry();
 
 #endif /* Geometry_hpp */

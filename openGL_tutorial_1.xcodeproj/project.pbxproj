@@ -13,7 +13,7 @@
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
-		6C82135C1EE0DD2D0086DCE4 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C82135A1EE0DD2D0086DCE4 /* Scene.cpp */; };
+		6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,8 +39,8 @@
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadShader.cpp; sourceTree = "<group>"; };
 		6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoadShader.hpp; sourceTree = "<group>"; };
-		6C82135A1EE0DD2D0086DCE4 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
-		6C82135B1EE0DD2D0086DCE4 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
+		6C82135B1EE0DD2D0086DCE4 /* Geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		6C8213601EE0DDCA0086DCE4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6C8213621EE0DDCA0086DCE4 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		6C8213641EE0DDCA0086DCE4 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -645,7 +645,7 @@
 		6C82135D1EE0DD3A0086DCE4 /* extern */ = {
 			isa = PBXGroup;
 			children = (
-				6C82135B1EE0DD2D0086DCE4 /* Scene.hpp */,
+				6C82135B1EE0DD2D0086DCE4 /* Geometry.hpp */,
 				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
 			);
 			name = extern;
@@ -654,7 +654,7 @@
 		6C82135E1EE0DD930086DCE4 /* inter */ = {
 			isa = PBXGroup;
 			children = (
-				6C82135A1EE0DD2D0086DCE4 /* Scene.cpp */,
+				6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 			);
 			name = inter;
@@ -1439,7 +1439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C82135C1EE0DD2D0086DCE4 /* Scene.cpp in Sources */,
+				6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */,
 				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,
 				6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */,
 			);
@@ -1540,7 +1540,12 @@
 		6C73D0C11EDF35FF00D0763B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/glm-0.9.7.1";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/glm-0.9.7.1",
+					"$(SRCROOT)/**",
+				);
+				OTHER_LDFLAGS = "-v";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1548,7 +1553,12 @@
 		6C73D0C21EDF35FF00D0763B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/glm-0.9.7.1";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/glm-0.9.7.1",
+					"$(SRCROOT)/**",
+				);
+				OTHER_LDFLAGS = "-v";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

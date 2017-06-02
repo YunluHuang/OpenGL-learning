@@ -35,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C19D88C1EE2142100DFC2EB /* testScene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testScene; sourceTree = "<group>"; };
 		6C3BEBCD1EE1393300F7ED4C /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		6C3BEBD31EE13F5500F7ED4C /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = variables.h; sourceTree = "<group>"; };
 		6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReadFile.cpp; sourceTree = "<group>"; };
@@ -613,6 +614,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C19D88B1EE2140100DFC2EB /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+				6C19D88C1EE2142100DFC2EB /* testScene */,
+			);
+			name = scenes;
+			sourceTree = "<group>";
+		};
 		6C3BEBCC1EE136FB00F7ED4C /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +651,7 @@
 		6C3BEBD11EE13A0100F7ED4C /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				6C19D88B1EE2140100DFC2EB /* scenes */,
 				6C3BEBD21EE13A0E00F7ED4C /* textures */,
 				6C3BEBCE1EE1393800F7ED4C /* models */,
 			);

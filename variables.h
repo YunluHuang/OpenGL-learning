@@ -10,6 +10,7 @@
 #define __gl_h_
 #include <GLUT/glut.h>
 #include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "LoadMesh.hpp"
 
@@ -18,6 +19,7 @@
 typedef glm::vec3 vec3;
 typedef glm::vec4 vec4;
 typedef glm::mat4 mat4;
+typedef glm::quat quat;
 
 extern int width, height;
 

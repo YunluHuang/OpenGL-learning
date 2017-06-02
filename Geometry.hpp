@@ -21,8 +21,6 @@
 #include <cstdio>
 #include <iostream>
 
-typedef glm::vec3 vec3;
-
 enum Primitives {Triangles};
 //Vertex attribute: poisition id = 0
 enum Attrib_IDs {vPosition = 0};

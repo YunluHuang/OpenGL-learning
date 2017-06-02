@@ -1,6 +1,7 @@
 #include <OpenGL/gl3.h>
 #define __gl_h_
 #include <GLUT/glut.h>
+#include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
 #include "LoadShader.hpp"
@@ -8,9 +9,34 @@
 
 #define MAINPROGRAM
 #include "ReadFile.hpp"
+#include "variables.h"
 
 #define BUFFER_OFFSET(x) ((const void *)(x))
+#define PI 3.1415926f
+#define EYE vec3(0.0,0.0,5.0)
+#define UP vec3(0.0,1.0,0.0)
+#define CENTER vec3(0.0,0.0,0.0)
+
 using namespace std;
+
+//initialize the window size
+int width = 512;
+int height = 512;
+float zNear = 0.1f;
+float zFar = 100.0f;
+float fovy = 90.0f;
+
+//initialize camera position
+vec3 eye = EYE;
+vec3 up = UP;
+vec3 center = CENTER;
+
+//initialize key press rotation amount
+float rotateAmount = 1 / PI;
+
+//initialize the programID
+GLuint program;
+GLuint mvpPos;
 
 void init() {
     genBuffers();
@@ -22,11 +48,21 @@ void init() {
         {GL_FRAGMENT_SHADER, "triangles.frag"},
         {GL_NONE, NULL}
     };
-    GLuint program = loadShaders(shaders);
+    program = loadShaders(shaders);
     glUseProgram(program);
 }
 
 void display() {
+    
+    //compute the camera view
+    mat4 view = glm::lookAt(eye, center, up);
+    mat4 projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    mat4 model = mat4(1.0f);
+    mat4 mvp = projection * view * model;
+    
+    mvpPos = glGetUniformLocation(program, "MVP");
+    glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
+    
     displayMesh(Meshes[0]);
     displayPrimitive(Triangles);
     glFlush();
@@ -44,10 +80,13 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 int main(int argc, char * *argv) {
+    
     glutInit(&argc, argv);
+    
+    //create the window
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA);
-    glutInitWindowSize(512, 512);
-    glutCreateWindow(argv[0]);
+    glutInitWindowSize(width, height);
+    glutCreateWindow("final-project");
     
     cout << "GLSL version is: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
     

@@ -13,13 +13,20 @@
 
 #include "LoadMesh.hpp"
 
-#ifdef MAINPROGRAM
-#define EXTERN
-#else
-#define EXTERN extern
-#endif
-
 #include <vector>
+
+typedef glm::vec3 vec3;
+typedef glm::mat4 mat4;
+
+extern int width, height;
+
+extern glm::vec3 eye;
+extern glm::vec3 up;
+extern glm::vec3 center;
+extern float fovy, zNear, zFar;
+extern float rotateAmount;
+
+extern GLuint mvpPos;
 
 extern int numTypes;
 

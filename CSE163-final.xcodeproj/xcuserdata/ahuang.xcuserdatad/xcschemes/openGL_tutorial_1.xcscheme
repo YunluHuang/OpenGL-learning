@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6C73D0B81EDF35FF00D0763B"
-               BuildableName = "openGL_tutorial_1"
-               BlueprintName = "openGL_tutorial_1"
-               ReferencedContainer = "container:openGL_tutorial_1.xcodeproj">
+               BuildableName = "CSE163-final"
+               BlueprintName = "CSE163-final"
+               ReferencedContainer = "container:CSE163-final.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6C73D0B81EDF35FF00D0763B"
-            BuildableName = "openGL_tutorial_1"
-            BlueprintName = "openGL_tutorial_1"
-            ReferencedContainer = "container:openGL_tutorial_1.xcodeproj">
+            BuildableName = "CSE163-final"
+            BlueprintName = "CSE163-final"
+            ReferencedContainer = "container:CSE163-final.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6C73D0B81EDF35FF00D0763B"
-            BuildableName = "openGL_tutorial_1"
-            BlueprintName = "openGL_tutorial_1"
-            ReferencedContainer = "container:openGL_tutorial_1.xcodeproj">
+            BuildableName = "CSE163-final"
+            BlueprintName = "CSE163-final"
+            ReferencedContainer = "container:CSE163-final.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6C73D0B81EDF35FF00D0763B"
-            BuildableName = "openGL_tutorial_1"
-            BlueprintName = "openGL_tutorial_1"
-            ReferencedContainer = "container:openGL_tutorial_1.xcodeproj">
+            BuildableName = "CSE163-final"
+            BlueprintName = "CSE163-final"
+            ReferencedContainer = "container:CSE163-final.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

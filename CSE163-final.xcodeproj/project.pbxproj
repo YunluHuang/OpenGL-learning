@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57881EDF641A00176B40 /* triangles.frag */; };
 		6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57871EDF63C200176B40 /* triangles.vert */; };
-		6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0BC1EDF35FF00D0763B /* main.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
 		6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */; };
+		6CFF62671EE1070700B237F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,8 +33,7 @@
 /* Begin PBXFileReference section */
 		6C6E57871EDF63C200176B40 /* triangles.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.vert; sourceTree = "<group>"; };
 		6C6E57881EDF641A00176B40 /* triangles.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.frag; sourceTree = "<group>"; };
-		6C73D0B91EDF35FF00D0763B /* openGL_tutorial_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_tutorial_1; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C73D0BC1EDF35FF00D0763B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadShader.cpp; sourceTree = "<group>"; };
@@ -588,6 +587,7 @@
 		6C8215951EE0DDCA0086DCE4 /* glm.natvis */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = glm.natvis; sourceTree = "<group>"; };
 		6C8215961EE0DDCA0086DCE4 /* glm_core.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = glm_core.cpp; sourceTree = "<group>"; };
 		6C8215971EE0DDCA0086DCE4 /* usertype.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = usertype.dat; sourceTree = "<group>"; };
+		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,9 +609,8 @@
 				6C82135F1EE0DDCA0086DCE4 /* glm-0.9.7.1 */,
 				6C82135E1EE0DD930086DCE4 /* inter */,
 				6C82135D1EE0DD3A0086DCE4 /* extern */,
-				6C6E57881EDF641A00176B40 /* triangles.frag */,
-				6C6E57871EDF63C200176B40 /* triangles.vert */,
-				6C73D0BB1EDF35FF00D0763B /* openGL_tutorial_1 */,
+				6CFF62681EE1079400B237F3 /* shaders */,
+				6C73D0BB1EDF35FF00D0763B /* CSE163-final */,
 				6C73D0BA1EDF35FF00D0763B /* Products */,
 				6C73D0C31EDF371A00D0763B /* Frameworks */,
 			);
@@ -620,16 +619,17 @@
 		6C73D0BA1EDF35FF00D0763B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C73D0B91EDF35FF00D0763B /* openGL_tutorial_1 */,
+				6C73D0B91EDF35FF00D0763B /* CSE163-final */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6C73D0BB1EDF35FF00D0763B /* openGL_tutorial_1 */ = {
+		6C73D0BB1EDF35FF00D0763B /* CSE163-final */ = {
 			isa = PBXGroup;
 			children = (
-				6C73D0BC1EDF35FF00D0763B /* main.cpp */,
+				6CFF62661EE1070700B237F3 /* main.cpp */,
 			);
+			name = "CSE163-final";
 			path = openGL_tutorial_1;
 			sourceTree = "<group>";
 		};
@@ -1382,12 +1382,21 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		6CFF62681EE1079400B237F3 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				6C6E57881EDF641A00176B40 /* triangles.frag */,
+				6C6E57871EDF63C200176B40 /* triangles.vert */,
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C73D0B81EDF35FF00D0763B /* openGL_tutorial_1 */ = {
+		6C73D0B81EDF35FF00D0763B /* CSE163-final */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C73D0C01EDF35FF00D0763B /* Build configuration list for PBXNativeTarget "openGL_tutorial_1" */;
+			buildConfigurationList = 6C73D0C01EDF35FF00D0763B /* Build configuration list for PBXNativeTarget "CSE163-final" */;
 			buildPhases = (
 				6C73D0B51EDF35FF00D0763B /* Sources */,
 				6C73D0B61EDF35FF00D0763B /* Frameworks */,
@@ -1397,9 +1406,9 @@
 			);
 			dependencies = (
 			);
-			name = openGL_tutorial_1;
+			name = "CSE163-final";
 			productName = openGL_tutorial_1;
-			productReference = 6C73D0B91EDF35FF00D0763B /* openGL_tutorial_1 */;
+			productReference = 6C73D0B91EDF35FF00D0763B /* CSE163-final */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -1417,7 +1426,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6C73D0B41EDF35FF00D0763B /* Build configuration list for PBXProject "openGL_tutorial_1" */;
+			buildConfigurationList = 6C73D0B41EDF35FF00D0763B /* Build configuration list for PBXProject "CSE163-final" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1429,7 +1438,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6C73D0B81EDF35FF00D0763B /* openGL_tutorial_1 */,
+				6C73D0B81EDF35FF00D0763B /* CSE163-final */,
 			);
 		};
 /* End PBXProject section */
@@ -1441,7 +1450,7 @@
 			files = (
 				6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */,
 				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,
-				6C73D0BD1EDF35FF00D0763B /* main.cpp in Sources */,
+				6CFF62671EE1070700B237F3 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1566,7 +1575,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C73D0B41EDF35FF00D0763B /* Build configuration list for PBXProject "openGL_tutorial_1" */ = {
+		6C73D0B41EDF35FF00D0763B /* Build configuration list for PBXProject "CSE163-final" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C73D0BE1EDF35FF00D0763B /* Debug */,
@@ -1575,7 +1584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6C73D0C01EDF35FF00D0763B /* Build configuration list for PBXNativeTarget "openGL_tutorial_1" */ = {
+		6C73D0C01EDF35FF00D0763B /* Build configuration list for PBXNativeTarget "CSE163-final" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C73D0C11EDF35FF00D0763B /* Debug */,

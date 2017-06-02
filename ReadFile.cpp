@@ -20,23 +20,10 @@ std::vector<Mesh *> Meshes;
 
 unsigned int TriangleID = 0;
 
-void add() {
-    numTypes++;
-    VAOs.push_back(0);
-    VBOs.push_back(0);
-    EBOs.push_back(0);
+void addMesh(const char * filename) {
+    
 }
 
 void readfile() {
-    Mesh *mesh = new Mesh{
-        static_cast<unsigned int>(numTypes),
-        "teapot.obj",
-        vector<vec3>(),
-        vector<vec3>(),
-        vector<GLuint>()
-    };
-    Meshes.push_back(mesh);
-    add();
-    TriangleID = numTypes;
-    add();
+    
 }

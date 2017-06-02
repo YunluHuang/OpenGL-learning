@@ -17,6 +17,7 @@
 		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
 		6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */; };
 		6CFF62671EE1070700B237F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		DFDB3A9D1EE21565009E578E /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFDB3A9B1EE21565009E578E /* Mesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -598,6 +599,8 @@
 		6C8215961EE0DDCA0086DCE4 /* glm_core.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = glm_core.cpp; sourceTree = "<group>"; };
 		6C8215971EE0DDCA0086DCE4 /* usertype.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = usertype.dat; sourceTree = "<group>"; };
 		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
+		DFDB3A9B1EE21565009E578E /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		DFDB3A9C1EE21565009E578E /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +699,7 @@
 		6C82135D1EE0DD3A0086DCE4 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				DFDB3A9C1EE21565009E578E /* Mesh.hpp */,
 				6C82135B1EE0DD2D0086DCE4 /* Geometry.hpp */,
 				6C3BEBD81EE159F500F7ED4C /* LoadMesh.hpp */,
 				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
@@ -712,6 +716,7 @@
 				6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 				6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */,
+				DFDB3A9B1EE21565009E578E /* Mesh.cpp */,
 			);
 			name = intern;
 			sourceTree = "<group>";
@@ -1504,6 +1509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFDB3A9D1EE21565009E578E /* Mesh.cpp in Sources */,
 				6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */,
 				6C3BEBD61EE140F000F7ED4C /* ReadFile.cpp in Sources */,
 				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,

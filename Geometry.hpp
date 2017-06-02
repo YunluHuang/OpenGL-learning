@@ -16,6 +16,8 @@
 #include <glm/glm.hpp>
 
 #include <vector>
+#include <cstdio>
+#include <iostream>
 
 typedef glm::vec3 vec3;
 
@@ -25,9 +27,11 @@ enum VAO_IDs {Triangles, NumObjs};
 enum Attrib_IDs {vPosition = 0};
 
 extern std::vector<vec3> vertices;
+extern std::vector<vec3> normals;
 extern std::vector<GLuint> indices;
 
-void initGeometry();
+void initGeometry(char *fileName);
+void parseFile(char *fileName);
 void loadObj();
 void bindBuffer();
 void displayGeometry();

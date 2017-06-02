@@ -9,56 +9,21 @@
 #define BUFFER_OFFSET(x) ((const void *)(x))
 using namespace std;
 
-//enum VAO_IDs {Triangles, NumVAOs};
-//enum Buffer_IDs {ArrayBuffer, NumBuffers};
-
-//
-//GLuint VAOs[NumVAOs];
-//GLuint Buffers[NumBuffers];
-//
-//const GLuint NumVertices = 6;
-
 void init() {
-//    glGenVertexArrays(NumVAOs, VAOs);
-//    glBindVertexArray(VAOs[Triangles]);
-    
-//    GLfloat vertices[NumVertices][2] = {
-//        {-0.9f, -0.9f},
-//        {0.85f, -0.9f},
-//        {-0.9f, 0.85f},
-//        {0.9f, -0.85f},
-//        {0.9f, 0.9f},
-//        {-0.85f, 0.9f}
-//    };
-    
-//    glGenBuffers(NumBuffers, Buffers);
-//    glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
-//                 GL_STATIC_DRAW);
-    
-    initGeometry();
+    char sampleFile[] = "teapot.obj";
+    initGeometry(sampleFile);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
         {GL_FRAGMENT_SHADER, "triangles.frag"},
         {GL_NONE, NULL}
     };
-    
-    GLuint program = LoadShaders(shaders);
+    GLuint program = loadShaders(shaders);
     glUseProgram(program);
-    
-//    glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-//    glEnableVertexAttribArray(vPosition);
 }
 
 void display() {
-//    cout << "display() called" << endl;
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    
-//    glBindVertexArray(VAOs[0]);
-//    glDrawArrays(GL_TRIANGLES, 0, );
     displayGeometry();
-    
     glFlush();
 }
 

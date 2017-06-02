@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C3BEBCF1EE139BA00F7ED4C /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C3BEBCD1EE1393300F7ED4C /* teapot.obj */; };
 		6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57881EDF641A00176B40 /* triangles.frag */; };
 		6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57871EDF63C200176B40 /* triangles.vert */; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */; };
 		6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */; };
-		6CFF62671EE1070700B237F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
+		6CFF62671EE1070700B237F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				6C3BEBCF1EE139BA00F7ED4C /* teapot.obj in CopyFiles */,
 				6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */,
 				6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */,
 			);
@@ -31,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C3BEBCD1EE1393300F7ED4C /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		6C6E57871EDF63C200176B40 /* triangles.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.vert; sourceTree = "<group>"; };
 		6C6E57881EDF641A00176B40 /* triangles.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.frag; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -603,13 +606,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6C73D0B01EDF35FF00D0763B = {
+		6C3BEBCC1EE136FB00F7ED4C /* include */ = {
 			isa = PBXGroup;
 			children = (
 				6C82135F1EE0DDCA0086DCE4 /* glm-0.9.7.1 */,
-				6C82135E1EE0DD930086DCE4 /* inter */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		6C3BEBCE1EE1393800F7ED4C /* models */ = {
+			isa = PBXGroup;
+			children = (
+				6C3BEBCD1EE1393300F7ED4C /* teapot.obj */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		6C3BEBD01EE139F600F7ED4C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				6C82135E1EE0DD930086DCE4 /* intern */,
 				6C82135D1EE0DD3A0086DCE4 /* extern */,
 				6CFF62681EE1079400B237F3 /* shaders */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		6C3BEBD11EE13A0100F7ED4C /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				6C3BEBD21EE13A0E00F7ED4C /* textures */,
+				6C3BEBCE1EE1393800F7ED4C /* models */,
+			);
+			name = resource;
+			sourceTree = "<group>";
+		};
+		6C3BEBD21EE13A0E00F7ED4C /* textures */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = textures;
+			sourceTree = "<group>";
+		};
+		6C73D0B01EDF35FF00D0763B = {
+			isa = PBXGroup;
+			children = (
+				6C3BEBD11EE13A0100F7ED4C /* resource */,
+				6C3BEBCC1EE136FB00F7ED4C /* include */,
+				6C3BEBD01EE139F600F7ED4C /* src */,
 				6C73D0BB1EDF35FF00D0763B /* CSE163-final */,
 				6C73D0BA1EDF35FF00D0763B /* Products */,
 				6C73D0C31EDF371A00D0763B /* Frameworks */,
@@ -651,13 +695,13 @@
 			name = extern;
 			sourceTree = "<group>";
 		};
-		6C82135E1EE0DD930086DCE4 /* inter */ = {
+		6C82135E1EE0DD930086DCE4 /* intern */ = {
 			isa = PBXGroup;
 			children = (
 				6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 			);
-			name = inter;
+			name = intern;
 			sourceTree = "<group>";
 		};
 		6C82135F1EE0DDCA0086DCE4 /* glm-0.9.7.1 */ = {
@@ -1551,7 +1595,7 @@
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/glm-0.9.7.1",
+					"$(SRCROOT)/include/*",
 					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = "-v";
@@ -1564,7 +1608,7 @@
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/glm-0.9.7.1",
+					"$(SRCROOT)/include/*",
 					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = "-v";

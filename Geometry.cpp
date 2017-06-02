@@ -15,11 +15,63 @@ GLuint VBOs[NumObjs];
 GLuint EBOs[NumObjs];
 
 vector<vec3> vertices;
+vector<vec3> normals;
 vector<GLuint> indices;
 
-void initGeometry() {
+void initGeometry(char *fileName) {
+    parseFile(fileName);
     loadObj();
     bindBuffer();
+}
+
+void parseFile(char *fileName) {
+    FILE* fp;
+    float x, y, z;
+    int fx, fy, fz, ignore;
+    int c1, c2;
+    float minY = INFINITY, minZ = INFINITY;
+    float maxY = -INFINITY, maxZ = -INFINITY;
+    
+    fp = fopen(fileName, "rb");
+    
+    if (fp == NULL) {
+        cerr << "Error loading file: " << fileName << endl;
+        exit(-1);
+    }
+    
+    while (!feof(fp)) {
+        c1 = fgetc(fp);
+        while (!(c1 == 'v' || c1 == 'f')) {
+            c1 = fgetc(fp);
+            if (feof(fp))
+                break;
+        }
+        c2 = fgetc(fp);
+        
+        if ((c1 == 'v') && (c2 == ' ')) {
+            fscanf(fp, "%f %f %f", &x, &y, &z);
+            vertices.push_back(vec3(x, y, z));
+            if (y < minY) minY = y;
+            if (z < minZ) minZ = z;
+            if (y > maxY) maxY = y;
+            if (z > maxZ) maxZ = z;
+        }
+        else if ((c1 == 'v') && (c2 == 'n')) {
+            fscanf(fp, "%f %f %f", &x, &y, &z);
+            // Ignore the normals in mytest2, as we use a solid color for the teapot.
+            normals.push_back(glm::normalize(vec3(x, y, z)));
+        }
+        else if (c1 == 'f')
+        {
+            fscanf(fp, "%d//%d %d//%d %d//%d", &fx, &ignore, &fy, &ignore, &fz, &ignore);
+            indices.push_back(fx - 1);
+            indices.push_back(fy - 1);
+            indices.push_back(fz - 1);
+        }
+    }
+    
+    fclose(fp);
+
 }
 
 /**
@@ -27,18 +79,20 @@ void initGeometry() {
  */
 void loadObj() {
     
-    //initialize the triagnle's vertices
-    vertices.push_back(vec3(-0.9f, -0.9f, 0.0f));
-    vertices.push_back(vec3(0.85f, -0.9f, 0.0f));
-    vertices.push_back(vec3(-0.9f, 0.85f, 0.0f));
-    vertices.push_back(vec3(0.9f, -0.85f, 0.0f));
-    vertices.push_back(vec3(0.9f, 0.9f, 0.0f));
-    vertices.push_back(vec3(-0.85f, 0.9f, 0.0f));
+//    //initialize the triagnle's vertices
+//    vertices.push_back(vec3(-0.9f, -0.9f, 0.0f));
+//    vertices.push_back(vec3(0.85f, -0.9f, 0.0f));
+//    vertices.push_back(vec3(-0.9f, 0.85f, 0.0f));
+//    vertices.push_back(vec3(0.9f, -0.85f, 0.0f));
+//    vertices.push_back(vec3(0.9f, 0.9f, 0.0f));
+//    vertices.push_back(vec3(-0.85f, 0.9f, 0.0f));
+//    
+//    //initialize the faces
+//    for(int i = 0; i < vertices.size(); i++) {
+//        indices.push_back(i);
+//    }
     
-    //initialize the faces
-    for(int i = 0; i < vertices.size(); i++) {
-        indices.push_back(i);
-    }
+    //compute normal
     
 }
 

@@ -32,6 +32,7 @@ vec3 up = UP;
 vec3 center = CENTER;
 
 //initialize key press rotation amount
+mat4 model, view, projection, mvp;
 float rotateAmount = 1 / PI;
 
 //initialize the programID mvpPos
@@ -42,6 +43,12 @@ void init() {
     genBuffers();
     initMesh(Meshes[0]);
     initPrimitive(Triangles);
+    
+    //compute the camera view
+    model = mat4(1.0f);
+    view = glm::lookAt(eye, center, up);
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    mvp = projection * view * model;
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
@@ -54,11 +61,7 @@ void init() {
 
 void display() {
     
-    //compute the camera view
-    mat4 view = glm::lookAt(eye, center, up);
-    mat4 projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    mat4 model = mat4(1.0f);
-    mat4 mvp = projection * view * model;
+
     
     mvpPos = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
@@ -68,15 +71,61 @@ void display() {
     glFlush();
 }
 
+/**
+ handle keyboard press
+*/
 void keyboard(unsigned char key, int x, int y) {
     switch (key) {
-        case 27:
+        case 27: {
             exit(1);
             break;
-        default:
+        }
+        default: {
             cout << "invalid key" << endl;
             break;
+        }
     }
+    glutPostRedisplay();
+}
+
+/** 
+ handle arrow key press
+*/
+void arrowKey(int key, int x, int y) {
+    switch (key) {
+        //left
+        case 100: {
+            //rotate horizontally counter-clockwise
+            cout << "left arrow key" << endl;
+            mvp = glm::rotate(mvp, rotateAmount, up);
+            break;
+        }
+        //up
+        case 101: {
+            //rotate vertically counter-clockwise
+            cout << "up arrow key" << endl;
+            mvp = glm::rotate(mvp, rotateAmount, cross(eye - center, up));
+            break;
+        }
+        //right
+        case 102: {
+            //rotate horizontally counter-clockwise
+            cout << "right arrow key" << endl;
+            mvp = glm::rotate(mvp, -rotateAmount, up);
+            break;
+        }
+        //down
+        case 103: {
+            //rotate vertically counter-clockwise
+            cout << "down arrow key" << endl;
+            mvp = glm::rotate(mvp, -rotateAmount, cross(eye - center, up));
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    glutPostRedisplay();
 }
 
 int main(int argc, char * *argv) {
@@ -95,6 +144,7 @@ int main(int argc, char * *argv) {
     
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
+    glutSpecialFunc(arrowKey);
     
     glutMainLoop();
 }

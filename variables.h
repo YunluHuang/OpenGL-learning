@@ -16,16 +16,18 @@
 #include <vector>
 
 typedef glm::vec3 vec3;
+typedef glm::vec4 vec4;
 typedef glm::mat4 mat4;
 
 extern int width, height;
 
-extern glm::vec3 eye;
-extern glm::vec3 up;
-extern glm::vec3 center;
+extern vec3 eye;
+extern vec3 up;
+extern vec3 center;
 extern float fovy, zNear, zFar;
 extern float rotateAmount;
 
+extern mat4 model, view, projection, mvp;
 extern GLuint mvpPos;
 
 extern int numTypes;

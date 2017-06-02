@@ -34,7 +34,7 @@ vec3 center = CENTER;
 //initialize key press rotation amount
 float rotateAmount = 1 / PI;
 
-//initialize the programID
+//initialize the programID mvpPos
 GLuint program;
 GLuint mvpPos;
 

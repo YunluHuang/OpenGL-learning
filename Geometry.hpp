@@ -21,24 +21,16 @@
 #include <cstdio>
 #include <iostream>
 
-//typedef glm::vec3 vec3;
-//
-//typedef struct {
-//    unsigned int meshID;
-//    const char *fileName;
-//    std::vector<vec3> vertices;
-//    std::vector<vec3> normals;
-//    std::vector<GLuint> indices;
-//} Mesh;
+typedef glm::vec3 vec3;
 
+enum Primitives {Triangles};
 //Vertex attribute: poisition id = 0
 enum Attrib_IDs {vPosition = 0};
 
 void genBuffers();
 void initMesh(Mesh *mesh);
-//void parseFile(Mesh *mesh);
-//void loadObj(Mesh *mesh);
-void bindBuffers(Mesh *mesh);
+void initPrimitive(Primitives primitive);
 void displayMesh(Mesh *mesh);
+void displayPrimitive(Primitives primitive);
 
 #endif /* Geometry_hpp */

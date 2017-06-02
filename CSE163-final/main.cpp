@@ -15,6 +15,7 @@ using namespace std;
 void init() {
     genBuffers();
     initMesh(Meshes[0]);
+    initPrimitive(Triangles);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
@@ -27,6 +28,7 @@ void init() {
 
 void display() {
     displayMesh(Meshes[0]);
+    displayPrimitive(Triangles);
     glFlush();
 }
 

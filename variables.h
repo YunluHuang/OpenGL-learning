@@ -21,7 +21,7 @@
 
 #include <vector>
 
-extern int numObjs;
+extern int numTypes;
 
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
@@ -29,6 +29,8 @@ extern std::vector<GLuint> NBOs;
 extern std::vector<GLuint> EBOs;
 
 extern std::vector<Mesh *> Meshes;
+
+extern unsigned int TriangleID;
 
 //extern std::vector<std::vector<glm::vec3>> objVertices;
 //extern std::vector<std::vector<glm::vec3>> objNormals;

@@ -10,31 +10,33 @@
 
 using namespace std;
 
-int numObjs = 1;
+int numTypes = 0;
 vector<GLuint> VAOs;
 vector<GLuint> VBOs;
 vector<GLuint> NBOs;
 vector<GLuint> EBOs;
 
-//vector<vector<vec3>> objVertices;
-//vector<vector<vec3>> objNormals;
-//vector<vector<GLuint>> objIndices;
 std::vector<Mesh *> Meshes;
 
-void addMesh(unsigned int meshID) {
-    VAOs.push_back(meshID);
-    VBOs.push_back(meshID);
-    EBOs.push_back(meshID);
+unsigned int TriangleID = 0;
+
+void add() {
+    numTypes++;
+    VAOs.push_back(0);
+    VBOs.push_back(0);
+    EBOs.push_back(0);
 }
 
 void readfile() {
     Mesh *mesh = new Mesh{
-        0,
+        static_cast<unsigned int>(numTypes),
         "teapot.obj",
         vector<vec3>(),
         vector<vec3>(),
         vector<GLuint>()
     };
     Meshes.push_back(mesh);
-    addMesh(mesh->meshID);
+    add();
+    TriangleID = numTypes;
+    add();
 }

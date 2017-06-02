@@ -15,25 +15,30 @@
 #include <GLUT/glut.h>
 #include <glm/glm.hpp>
 
+#include "variables.h"
+
 #include <vector>
 #include <cstdio>
 #include <iostream>
 
-typedef glm::vec3 vec3;
+//typedef glm::vec3 vec3;
+//
+//typedef struct {
+//    unsigned int meshID;
+//    const char *fileName;
+//    std::vector<vec3> vertices;
+//    std::vector<vec3> normals;
+//    std::vector<GLuint> indices;
+//} Mesh;
 
-//Triangles take VAO[0], total VAOs = 1
-enum VAO_IDs {Triangles, NumObjs};
 //Vertex attribute: poisition id = 0
 enum Attrib_IDs {vPosition = 0};
 
-extern std::vector<vec3> vertices;
-extern std::vector<vec3> normals;
-extern std::vector<GLuint> indices;
-
-void initGeometry(char *fileName);
-void parseFile(char *fileName);
-void loadObj();
-void bindBuffer();
-void displayGeometry();
+void genBuffers();
+void initMesh(Mesh *mesh);
+//void parseFile(Mesh *mesh);
+//void loadObj(Mesh *mesh);
+void bindBuffers(Mesh *mesh);
+void displayMesh(Mesh *mesh);
 
 #endif /* Geometry_hpp */

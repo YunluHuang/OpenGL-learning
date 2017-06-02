@@ -6,12 +6,15 @@
 #include "LoadShader.hpp"
 #include "Geometry.hpp"
 
+#define MAINPROGRAM
+#include "ReadFile.hpp"
+
 #define BUFFER_OFFSET(x) ((const void *)(x))
 using namespace std;
 
 void init() {
-    char sampleFile[] = "teapot.obj";
-    initGeometry(sampleFile);
+    genBuffers();
+    initMesh(Meshes[0]);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
@@ -23,8 +26,19 @@ void init() {
 }
 
 void display() {
-    displayGeometry();
+    displayMesh(Meshes[0]);
     glFlush();
+}
+
+void keyboard(unsigned char key, int x, int y) {
+    switch (key) {
+        case 27:
+            exit(1);
+            break;
+        default:
+            cout << "invalid key" << endl;
+            break;
+    }
 }
 
 int main(int argc, char * *argv) {
@@ -35,9 +49,11 @@ int main(int argc, char * *argv) {
     
     cout << "GLSL version is: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
     
+    readfile();
     init();
     
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
     
     glutMainLoop();
 }

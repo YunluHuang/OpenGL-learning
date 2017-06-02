@@ -10,6 +10,7 @@
 #define Mesh_hpp
 
 #include <stdio.h>
+#include <iostream>
 #include <vector>
 #include <glm/glm.hpp>
 #include <OpenGL/gl3.h>

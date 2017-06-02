@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6C3BEBCF1EE139BA00F7ED4C /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C3BEBCD1EE1393300F7ED4C /* teapot.obj */; };
 		6C3BEBD61EE140F000F7ED4C /* ReadFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */; };
-		6C3BEBD91EE159F500F7ED4C /* LoadMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */; };
 		6C6E578C1EDF661B00176B40 /* triangles.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57881EDF641A00176B40 /* triangles.frag */; };
 		6C6E578D1EDF661B00176B40 /* triangles.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6E57871EDF63C200176B40 /* triangles.vert */; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
@@ -40,8 +39,6 @@
 		6C3BEBD31EE13F5500F7ED4C /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = variables.h; sourceTree = "<group>"; };
 		6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReadFile.cpp; sourceTree = "<group>"; };
 		6C3BEBD51EE140F000F7ED4C /* ReadFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReadFile.hpp; sourceTree = "<group>"; };
-		6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadMesh.cpp; sourceTree = "<group>"; };
-		6C3BEBD81EE159F500F7ED4C /* LoadMesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoadMesh.hpp; sourceTree = "<group>"; };
 		6C6E57871EDF63C200176B40 /* triangles.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.vert; sourceTree = "<group>"; };
 		6C6E57881EDF641A00176B40 /* triangles.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangles.frag; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -701,7 +698,6 @@
 			children = (
 				DFDB3A9C1EE21565009E578E /* Mesh.hpp */,
 				6C82135B1EE0DD2D0086DCE4 /* Geometry.hpp */,
-				6C3BEBD81EE159F500F7ED4C /* LoadMesh.hpp */,
 				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
 				6C3BEBD51EE140F000F7ED4C /* ReadFile.hpp */,
 				6C3BEBD31EE13F5500F7ED4C /* variables.h */,
@@ -713,7 +709,6 @@
 			isa = PBXGroup;
 			children = (
 				6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */,
-				6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 				6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */,
 				DFDB3A9B1EE21565009E578E /* Mesh.cpp */,
@@ -1514,7 +1509,6 @@
 				6C3BEBD61EE140F000F7ED4C /* ReadFile.cpp in Sources */,
 				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,
 				6CFF62671EE1070700B237F3 /* main.cpp in Sources */,
-				6C3BEBD91EE159F500F7ED4C /* LoadMesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

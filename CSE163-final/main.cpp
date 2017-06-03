@@ -93,6 +93,9 @@ void display() {
         modelView = view * objects[i]->transf;
         glUniformMatrix4fv(modelViewPos, 1, GL_FALSE, &modelView[0][0]);
         
+        cout << objects[i]->ambient[0] << ", " << objects[i]->ambient[1] << ", "
+        <<objects[i]->ambient[2] << endl;
+        
         // Pass color to the shader
         glUniform3f(ambientPosition, objects[i]->ambient[0], objects[i]->ambient[1], objects[i]->ambient[2]);
         glUniform3f(diffusePosition, objects[i]->diffuse[0], objects[i]->diffuse[1], objects[i]->diffuse[2]);

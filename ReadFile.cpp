@@ -23,10 +23,14 @@ std::map<string, Mesh *> loadedMeshes;
 void addMesh(const char * filename) {
     string file = filename;
     auto it = loadedMeshes.find(file);
-    if (it != loadedMeshes.end()) {
+    if (it == loadedMeshes.end()) {
         Mesh * mesh = new Mesh(filename);
+        mesh->id = loadedMeshes.size();
         loadedMeshes[file] = mesh;
         objects.push_back(mesh);
+        VAOs.push_back(0);
+        VBOs.push_back(0);
+        EBOs.push_back(0);
     }
     else {
         objects.push_back(it->second);
@@ -34,5 +38,5 @@ void addMesh(const char * filename) {
 }
 
 void readfile(const char * filename) {
-    
+    addMesh("teapot.obj");
 }

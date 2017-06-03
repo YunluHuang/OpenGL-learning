@@ -17,7 +17,7 @@
 
 struct Mesh {
     Mesh(const char * filename);
-    int id;
+    unsigned long id;
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;

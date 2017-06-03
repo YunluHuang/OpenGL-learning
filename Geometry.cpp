@@ -11,9 +11,16 @@
 using namespace std;
 
 void genBuffers() {
-    glGenVertexArrays(numTypes, &VAOs[0]);
-    glGenBuffers(numTypes, &VBOs[0]);
-    glGenBuffers(numTypes, &EBOs[0]);
+    int size = (int) loadedMeshes.size();
+    glGenVertexArrays(size, &VAOs[0]);
+    glGenBuffers(size, &VBOs[0]);
+    glGenBuffers(size, &EBOs[0]);
+}
+
+void initAllMeshes() {
+    for (auto it = loadedMeshes.begin(); it != loadedMeshes.end(); it++) {
+        initMesh(it->second);
+    }
 }
 
 void initMesh(Mesh * mesh) {

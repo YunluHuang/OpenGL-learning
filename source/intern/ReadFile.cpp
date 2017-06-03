@@ -35,6 +35,7 @@ void addObject(const char * filename) {
         objects.push_back(mesh);
         VAOs.push_back(0);
         VBOs.push_back(0);
+        NBOs.push_back(0);
         EBOs.push_back(0);
     }
     else {

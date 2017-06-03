@@ -58,8 +58,8 @@ void init() {
     glutWarpPointer(width / 2, height / 2);
     
     ShaderInfo shaders[] = {
-        {GL_VERTEX_SHADER, "triangles.vert"},
-        {GL_FRAGMENT_SHADER, "triangles.frag"},
+        {GL_VERTEX_SHADER, "triangles.vert.glsl"},
+        {GL_FRAGMENT_SHADER, "triangles.frag.glsl"},
         {GL_NONE, NULL}
     };
     
@@ -71,6 +71,7 @@ void init() {
 
 void display() {
     
+    cout << "display()" << endl;
     view = glm::lookAt(eye, center, up);
     mvp = projection * view * model;
     mvpPos = glGetUniformLocation(program, "MVP");

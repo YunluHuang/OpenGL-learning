@@ -83,6 +83,12 @@ void readfile(const char * filename) {
         if (command == "#") {
             continue;
         }
+        else if (command == "specular") {
+            
+        }
+        else if (command == "") {
+            
+        }
         else if (command == "object") {
             char * objname = strtok(nullptr, " \n");
             addObject(objname);

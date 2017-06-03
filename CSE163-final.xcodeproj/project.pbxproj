@@ -60,6 +60,7 @@
 		DF3F3EC81EE3445D00DAC187 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
 		DF3F3ECB1EE3447300DAC187 /* Object.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
 		DF3F3ED01EE3513700DAC187 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		DF3F3ED21EE35CC700DAC187 /* sphere.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
 		DFB66C671EE2CF0100CAE706 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DFB66C691EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		DFB66C6B1EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -1409,6 +1410,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3F3ED01EE3513700DAC187 /* cube.obj */,
+				DF3F3ED21EE35CC700DAC187 /* sphere.obj */,
 				DFB66E9D1EE2CF0200CAE706 /* teapot.obj */,
 			);
 			path = model;

@@ -61,6 +61,11 @@ void init() {
     program = loadShaders(shaders);
     glUseProgram(program);
     
+    ambientPosition = glGetUniformLocation(program, "ambient");
+    specularPosition = glGetUniformLocation(program, "specular");
+    diffusePosition = glGetUniformLocation(program, "diffuse");
+    shininessPosition = glGetUniformLocation(program, "shininess");
+    
     initAllMeshes();
 }
 

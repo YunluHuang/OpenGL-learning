@@ -36,6 +36,7 @@ float limitedFPS = 1.0f / 60.0f;
 //initialize the programID mvpPos
 GLuint program;
 GLuint modelViewPos, projectionPos;
+GLuint ambientPosition, diffusePosition, specularPosition, shininessPosition;
 
 void printMat4(mat4 & m) {
     for (int i = 0; i < 4; i++) {

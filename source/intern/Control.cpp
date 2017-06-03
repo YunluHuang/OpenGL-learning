@@ -147,7 +147,6 @@ void mouseRotate(int x, int y) {
 }
 
 void mouseMove(int x, int y) {
-    
     oldX = x;
     oldY = y;
     glutPostRedisplay();

@@ -30,8 +30,8 @@ extern float fovy, zNear, zFar;
 extern float rotateAmount;
 extern float moveSpeed, mouseSpeed, limitedFPS;
 
-extern mat4 model, view, projection, mvp;
-extern GLuint mvpPos;
+extern mat4 model, view, projection, modelView;
+extern GLuint modelViewPos, projectionPos;
 
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;

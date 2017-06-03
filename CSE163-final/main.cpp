@@ -24,7 +24,7 @@ vec3 up = UP;
 vec3 center = CENTER;
 
 //initialize mvp
-mat4 model, view, projection, mvp;
+mat4 model, view, projection, modelView;
 
 //initialize key press rotation amount
 float rotateAmount = 1 / PI;
@@ -35,7 +35,7 @@ float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
 GLuint program;
-GLuint mvpPos;
+GLuint modelViewPos, projectionPos;
 
 void printMat4(mat4 & m) {
     for (int i = 0; i < 4; i++) {
@@ -48,11 +48,6 @@ void printMat4(mat4 & m) {
 
 void init() {
     genBuffers();
-    
-    //compute the camera view
-    model = mat4(1.0f);
-    view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
     //initialize mouse
     glutWarpPointer(width / 2, height / 2);
@@ -71,13 +66,19 @@ void init() {
 
 void display() {
     
-    cout << "display()" << endl;
+    glClear(GL_COLOR_BUFFER_BIT);
+    
     view = glm::lookAt(eye, center, up);
-    mvpPos = glGetUniformLocation(program, "MVP");
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    modelViewPos = glGetUniformLocation(program, "modelView");
+    
+    projectionPos = glGetUniformLocation(program, "projection");
+    glUniformMatrix4fv(projectionPos, 1, GL_FALSE, &projection[0][0]);
+    
     
     for (int i = 0; i < objects.size(); i++) {
-        mvp = projection * view * objects[i]->transf;
-        glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
+        modelView = view * objects[i]->transf;
+        glUniformMatrix4fv(modelViewPos, 1, GL_FALSE, &modelView[0][0]);
         displayObject(objects[i]);
     }
     

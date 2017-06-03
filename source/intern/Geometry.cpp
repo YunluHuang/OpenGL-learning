@@ -40,25 +40,21 @@ void initMesh(Mesh * mesh) {
     glBindBuffer(GL_ARRAY_BUFFER, NBOs[mesh->id]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * mesh->normals.size(), &(mesh->normals)[0], GL_STATIC_DRAW);
     
-//    glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-//    glEnableVertexAttribArray(vNormal);
+    glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(vNormal);
     
     //bind EBO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOs[mesh->id]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mesh->indices.size(), &(mesh->indices)[0], GL_STATIC_DRAW);
     
-//    glVertexAttribPointer(vFace, 1, GL_UNSIGNED_INT, GL_FALSE, 0, 0);
-//    glEnableVertexAttribArray(vFace);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glVertexAttribPointer(vFace, 1, GL_UNSIGNED_INT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(vFace);
 }
 
 void displayObject(Object * object) {
     
-    
     glBindVertexArray(VAOs[object->mesh->id]);
+    
     glDrawElements(GL_TRIANGLES, (int) object->mesh->indices.size(), GL_UNSIGNED_INT, 0);
     
     glBindVertexArray(0);

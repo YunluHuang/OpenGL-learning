@@ -171,7 +171,7 @@ int main(int argc, char * argv[]) {
     
     if (argc < 2) {
         cerr << "Please specify the scene file" << endl;
-//        return -1;
+        return -1;
     }
     
     glutInit(&argc, argv);

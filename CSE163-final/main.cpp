@@ -39,7 +39,7 @@ float rotateAmount = 1 / PI;
 
 //initialize mouse setting
 int oldX, oldY;
-float speed = 3.0f, mouseSpeed = 0.05f;
+float moveSpeed = 0.1f, mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
@@ -81,11 +81,31 @@ void display() {
     glFlush();
 }
 
-/**
- handle keyboard press
-*/
 void keyboard(unsigned char key, int x, int y) {
+    vec3 xAxis = normalize(cross(eye - center, up));
+    vec3 yAxis = normalize(up);
+    vec3 zAxis = normalize(eye - center);
     switch (key) {
+        case 'w': {
+            cout << "w pressed, move forward" << endl;
+            view = glm::translate(view, moveSpeed * zAxis);
+            break;
+        }
+        case 's': {
+            cout << "s pressed, move backward" << endl;
+            view = glm::translate(view, moveSpeed * -zAxis);
+            break;
+        }
+        case 'a': {
+            cout << "a pressed, move left" << endl;
+            view = glm::translate(view, moveSpeed * -xAxis);
+            break;
+        }
+        case 'd': {
+            cout << "d pressed, move right" << endl;
+            view = glm::translate(view, moveSpeed * xAxis);
+            break;
+        }
         case 27: {
             exit(1);
             break;
@@ -102,33 +122,36 @@ void keyboard(unsigned char key, int x, int y) {
  handle arrow key press
 */
 void arrowKey(int key, int x, int y) {
+    vec3 xAxis = normalize(cross(eye - center, up));
+    vec3 yAxis = normalize(up);
+    vec3 zAxis = normalize(eye - center);
     switch (key) {
         //left
         case 100: {
             //rotate horizontally counter-clockwise
             cout << "left arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, up);
+            model = glm::rotate(model, rotateAmount, yAxis);
             break;
         }
         //up
         case 101: {
             //rotate vertically counter-clockwise
             cout << "up arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, cross(eye - center, up));
+            model = glm::rotate(model, rotateAmount, xAxis);
             break;
         }
         //right
         case 102: {
             //rotate horizontally counter-clockwise
             cout << "right arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, up);
+            model = glm::rotate(model, -rotateAmount, yAxis);
             break;
         }
         //down
         case 103: {
             //rotate vertically counter-clockwise
             cout << "down arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, cross(eye - center, up));
+            model = glm::rotate(model, -rotateAmount, xAxis);
             break;
         }
         default: {
@@ -138,7 +161,15 @@ void arrowKey(int key, int x, int y) {
     glutPostRedisplay();
 }
 
-void mouseDrag(int x, int y) {
+void mouse(int button, int state, int x, int y) {
+    if(button == 3 || button == 4) {
+        if(state == GLUT_UP) {
+            cout << "scroll up" << endl;
+        }
+    }
+}
+
+void mouseRotate(int x, int y) {
     //press left button
     cout << "oldx = " << oldX << ", x = " << x << endl;
     float rotateX = mouseSpeed * limitedFPS * float (x - oldX);
@@ -146,19 +177,15 @@ void mouseDrag(int x, int y) {
     vec3 eulerAngle = vec3(rotateY, rotateX, 0.0f);
     quat quaternion = quat(eulerAngle);
     mat4 rotationM = glm::toMat4(quaternion);
-    view = rotationM * view;
+    cout << "eye = (" << eye.x << ", " << eye.y << ", " << eye.z << ")" << endl;
+    eye = vec3(rotationM * vec4(eye, 0.0f));
+    view = glm::inverse(rotationM) * view;
     oldX = x;
     oldY = y;
     glutPostRedisplay();
 }
 
 void mouseMove(int x, int y) {
-//    float rotateX = mouseSpeed * limitedFPS * float (oldX - x);
-//    float rotateY = mouseSpeed * limitedFPS * float (oldY - y);
-//    vec3 eulerAngle = vec3(rotateX, rotateY, 0.0f);
-//    quat quaternion = quat(eulerAngle);
-//    mat4 rotationM = glm::toMat4(quaternion);
-//    model = rotationM * model;
     oldX = x;
     oldY = y;
     glutPostRedisplay();
@@ -181,8 +208,9 @@ int main(int argc, char * *argv) {
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(arrowKey);
-    glutPassiveMotionFunc(mouseDrag);
-    glutMotionFunc(mouseDrag);
+    glutMouseFunc(mouse);
+    glutPassiveMotionFunc(mouseMove);
+    glutMotionFunc(mouseRotate);
     
     glutMainLoop();
 }

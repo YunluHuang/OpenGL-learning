@@ -16,12 +16,9 @@
 #include <vector>
 #include <map>
 
+#include "math.hpp"
+#include "Light.hpp"
 #include "Mesh.hpp"
-
-typedef glm::vec3 vec3;
-typedef glm::vec4 vec4;
-typedef glm::mat4 mat4;
-typedef glm::quat quat;
 
 extern int width, height;
 
@@ -35,8 +32,6 @@ extern float moveSpeed, mouseSpeed, limitedFPS;
 extern mat4 model, view, projection, mvp;
 extern GLuint mvpPos;
 
-extern int numTypes;
-
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
 extern std::vector<GLuint> NBOs;
@@ -45,7 +40,7 @@ extern std::vector<GLuint> EBOs;
 extern std::vector<Mesh *> objects;
 extern std::map<std::string, Mesh *> loadedMeshes;
 
-extern unsigned int TriangleID;
+extern std::vector<Light *> lights;
 
 //extern std::vector<std::vector<glm::vec3>> objVertices;
 //extern std::vector<std::vector<glm::vec3>> objNormals;

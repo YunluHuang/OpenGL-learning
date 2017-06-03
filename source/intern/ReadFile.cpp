@@ -6,6 +6,9 @@
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
+#include "Light.hpp"
+#include "PointLight.hpp"
+#include "DirectLight.hpp"
 #include "ReadFile.hpp"
 #include "Mesh.hpp"
 
@@ -19,6 +22,8 @@ vector<GLuint> EBOs;
 
 std::vector<Mesh *> objects;
 std::map<string, Mesh *> loadedMeshes;
+
+std::vector<Light *> lights;
 
 void addObject(const char * filename) {
     string file = filename;
@@ -35,6 +40,14 @@ void addObject(const char * filename) {
     else {
         objects.push_back(it->second);
     }
+}
+
+void addPointLight(vec3 pos, vec3 color) {
+    lights.push_back(new PointLight(pos, color));
+}
+
+void addDirectLight(vec3 dir, vec3 color) {
+    lights.push_back(new DirectLight(dir, color));
 }
 
 void readfile(const char * filename) {
@@ -64,6 +77,24 @@ void readfile(const char * filename) {
         if (command == "object") {
             char * objname = strtok(nullptr, " \n");
             addObject(objname);
+        }
+        else if (command == "pointlight") {
+            float x = atof(strtok(nullptr, " \n"));
+            float y = atof(strtok(nullptr, " \n"));
+            float z = atof(strtok(nullptr, " \n"));
+            float r = atof(strtok(nullptr, " \n"));
+            float g = atof(strtok(nullptr, " \n"));
+            float b = atof(strtok(nullptr, " \n"));
+            addPointLight(vec3(x, y, z), vec3(r, g, b));
+        }
+        else if (command == "directlight") {
+            float x = atof(strtok(nullptr, " \n"));
+            float y = atof(strtok(nullptr, " \n"));
+            float z = atof(strtok(nullptr, " \n"));
+            float r = atof(strtok(nullptr, " \n"));
+            float g = atof(strtok(nullptr, " \n"));
+            float b = atof(strtok(nullptr, " \n"));
+            addDirectLight(vec3(x, y, z), vec3(r, g, b));
         }
         else {
             cerr << "Unknown Command in Scene File: " << command << endl;

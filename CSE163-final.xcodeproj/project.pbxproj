@@ -9,15 +9,16 @@
 /* Begin PBXBuildFile section */
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
-		6CFF62671EE1070700B237F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
+		DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EB31EE2D2A700DAC187 /* Control.cpp */; };
+		DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */; };
+		DF3F3EB91EE2D2E900DAC187 /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAA1EE2CF0200CAE706 /* LoadShader.cpp */; };
+		DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
+		DF3F3EBB1EE2D2E900DAC187 /* ReadFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
 		DFB66EB31EE2CFD500CAE706 /* triangles.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */; };
-		DFB66EB41EE2D04E00CAE706 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */; };
-		DFB66EB51EE2D04E00CAE706 /* LoadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAA1EE2CF0200CAE706 /* LoadShader.cpp */; };
-		DFB66EB61EE2D04E00CAE706 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
-		DFB66EB71EE2D04E00CAE706 /* ReadFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
+		DF3F3EB31EE2D2A700DAC187 /* Control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
+		DF3F3EB51EE2D2B100DAC187 /* Control.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Control.hpp; sourceTree = "<group>"; };
 		DFB66C671EE2CF0100CAE706 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DFB66C691EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		DFB66C6B1EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -1422,6 +1425,7 @@
 		DFB66EA21EE2CF0200CAE706 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				DF3F3EB51EE2D2B100DAC187 /* Control.hpp */,
 				DFB66EA31EE2CF0200CAE706 /* Geometry.hpp */,
 				DFB66EA41EE2CF0200CAE706 /* LoadShader.hpp */,
 				DFB66EA51EE2CF0200CAE706 /* Mesh.hpp */,
@@ -1434,6 +1438,7 @@
 		DFB66EA81EE2CF0200CAE706 /* intern */ = {
 			isa = PBXGroup;
 			children = (
+				DF3F3EB31EE2D2A700DAC187 /* Control.cpp */,
 				DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */,
 				DFB66EAA1EE2CF0200CAE706 /* LoadShader.cpp */,
 				DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */,
@@ -1508,11 +1513,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFB66EB41EE2D04E00CAE706 /* Geometry.cpp in Sources */,
-				DFB66EB51EE2D04E00CAE706 /* LoadShader.cpp in Sources */,
-				DFB66EB61EE2D04E00CAE706 /* Mesh.cpp in Sources */,
-				DFB66EB71EE2D04E00CAE706 /* ReadFile.cpp in Sources */,
-				6CFF62671EE1070700B237F3 /* main.cpp in Sources */,
+				DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */,
+				DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */,
+				DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */,
+				DF3F3EB91EE2D2E900DAC187 /* LoadShader.cpp in Sources */,
+				DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */,
+				DF3F3EBB1EE2D2E900DAC187 /* ReadFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1612,6 +1618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					include/,
 					include/glm/,
@@ -1626,6 +1633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					include/,
 					include/glm/,

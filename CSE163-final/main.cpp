@@ -6,6 +6,7 @@
 
 #include "LoadShader.hpp"
 #include "Geometry.hpp"
+#include "Control.hpp"
 
 #define MAINPROGRAM
 #include "ReadFile.hpp"
@@ -38,8 +39,7 @@ mat4 model, view, projection, mvp;
 float rotateAmount = 1 / PI;
 
 //initialize mouse setting
-int oldX, oldY;
-float speed = 3.0f, mouseSpeed = 0.05f;
+float moveSpeed = 0.1f, mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
@@ -54,10 +54,13 @@ void init() {
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
+    //compute the camera view
+    model = mat4(1.0f);
+    view = glm::lookAt(eye, center, up);
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    
     //initialize mouse
-    oldX = width / 2;
-    oldY = height / 2;
-    glutWarpPointer(oldX, oldY);
+    glutWarpPointer(width / 2, height / 2);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
@@ -84,89 +87,6 @@ void display() {
     glFlush();
 }
 
-/**
- handle keyboard press
-*/
-void keyboard(unsigned char key, int x, int y) {
-    switch (key) {
-        case 27: {
-            exit(1);
-            break;
-        }
-        default: {
-            cout << "invalid key" << endl;
-            break;
-        }
-    }
-    glutPostRedisplay();
-}
-
-/** 
- handle arrow key press
-*/
-void arrowKey(int key, int x, int y) {
-    switch (key) {
-        //left
-        case 100: {
-            //rotate horizontally counter-clockwise
-            cout << "left arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, up);
-            break;
-        }
-        //up
-        case 101: {
-            //rotate vertically counter-clockwise
-            cout << "up arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, cross(eye - center, up));
-            break;
-        }
-        //right
-        case 102: {
-            //rotate horizontally counter-clockwise
-            cout << "right arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, up);
-            break;
-        }
-        //down
-        case 103: {
-            //rotate vertically counter-clockwise
-            cout << "down arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, cross(eye - center, up));
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-    glutPostRedisplay();
-}
-
-void mouseDrag(int x, int y) {
-    //press left button
-    cout << "oldx = " << oldX << ", x = " << x << endl;
-    float rotateX = mouseSpeed * limitedFPS * float (x - oldX);
-    float rotateY = mouseSpeed * limitedFPS * float (y - oldY);
-    vec3 eulerAngle = vec3(rotateY, rotateX, 0.0f);
-    quat quaternion = quat(eulerAngle);
-    mat4 rotationM = glm::toMat4(quaternion);
-    view = rotationM * view;
-    oldX = x;
-    oldY = y;
-    glutPostRedisplay();
-}
-
-void mouseMove(int x, int y) {
-//    float rotateX = mouseSpeed * limitedFPS * float (oldX - x);
-//    float rotateY = mouseSpeed * limitedFPS * float (oldY - y);
-//    vec3 eulerAngle = vec3(rotateX, rotateY, 0.0f);
-//    quat quaternion = quat(eulerAngle);
-//    mat4 rotationM = glm::toMat4(quaternion);
-//    model = rotationM * model;
-    oldX = x;
-    oldY = y;
-    glutPostRedisplay();
-}
-
 int main(int argc, char * argv[]) {
     
     if (argc < 2) {
@@ -189,8 +109,9 @@ int main(int argc, char * argv[]) {
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(arrowKey);
-    glutPassiveMotionFunc(mouseDrag);
-    glutMotionFunc(mouseDrag);
+    glutMouseFunc(mouse);
+    glutPassiveMotionFunc(mouseMove);
+    glutMotionFunc(mouseRotate);
     
     glutMainLoop();
 }

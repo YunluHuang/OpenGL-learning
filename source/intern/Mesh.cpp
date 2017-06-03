@@ -11,6 +11,7 @@
 using namespace std;
 
 Mesh::Mesh(const char * filename) {
+    
     FILE* fp;
     float x, y, z;
     int fx, fy, fz, ignore;

@@ -28,6 +28,6 @@ enum Attrib_IDs {vPosition = 0, vNormal = 1, vFace = 2};
 void genBuffers();
 void initAllMeshes();
 void initMesh(Mesh * mesh);
-void displayMesh(Mesh * mesh);
+void displayObject(Object * object);
 
 #endif /* Geometry_hpp */

@@ -10,16 +10,6 @@
 
 using namespace std;
 
-//defined for Triangle primitive
-GLfloat TriangleVertices[6][2] = {
-    { -0.30, -0.30 },
-    {  0.30, -0.30 },
-    { -0.30,  0.30 },
-    {  0.30, -0.30 },
-    {  0.30,  0.30 },
-    { -0.30,  0.30 }
-};
-
 void genBuffers() {
     glGenVertexArrays(numTypes, &VAOs[0]);
     glGenBuffers(numTypes, &VBOs[0]);
@@ -54,7 +44,7 @@ void displayMesh(Mesh * mesh) {
     glClear(GL_COLOR_BUFFER_BIT);
     
     glBindVertexArray(VAOs[mesh->id]);
-    glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, (int) mesh->indices.size(), GL_UNSIGNED_INT, 0);
     
     glBindVertexArray(0);
 }

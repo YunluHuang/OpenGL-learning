@@ -54,11 +54,6 @@ void init() {
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
-    //compute the camera view
-    model = mat4(1.0f);
-    view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    
     //initialize mouse
     glutWarpPointer(width / 2, height / 2);
     
@@ -76,6 +71,7 @@ void init() {
 
 void display() {
     
+    view = glm::lookAt(eye, center, up);
     mvp = projection * view * model;
     mvpPos = glGetUniformLocation(program, "MVP");
     glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
@@ -85,6 +81,10 @@ void display() {
     }
     
     glFlush();
+}
+
+void idle() {
+    // display();
 }
 
 int main(int argc, char * argv[]) {
@@ -101,16 +101,15 @@ int main(int argc, char * argv[]) {
     glutInitWindowSize(width, height);
     glutCreateWindow("final-project");
     
-    cout << "GLSL version is: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
-    
     readfile(argv[1]);
     init();
     
     glutDisplayFunc(display);
+    glutIdleFunc(idle);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(arrowKey);
     glutMouseFunc(mouse);
-    glutPassiveMotionFunc(mouseMove);
+    glutPassiveMotionFunc(mouseRotate);
     glutMotionFunc(mouseRotate);
     
     glutMainLoop();

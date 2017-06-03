@@ -41,7 +41,6 @@ void readfile(const char * filename) {
     
     FILE * fp;
     string line;
-    int bufSize = 128;
     size_t length = 0;
     char * buf;
     

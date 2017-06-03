@@ -53,6 +53,12 @@ extern GLuint shininessPosition;
 
 extern std::vector<Light *> lights;
 
+extern std::vector<GLfloat> lightPos;
+extern std::vector<GLfloat> lightColor;
+extern GLuint lightAmountPosition;
+extern GLuint lightPosPosition;
+extern GLuint lightColorPosition;
+
 //extern std::vector<std::vector<glm::vec3>> objVertices;
 //extern std::vector<std::vector<glm::vec3>> objNormals;
 //extern std::vector<std::vector<GLuint>> objIndices;

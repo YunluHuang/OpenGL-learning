@@ -2,6 +2,10 @@
 
 out vec4 fColor;
 
+uniform int lightAmount;
+uniform vec4 lightPositions[10];
+uniform vec3 lightColors[10];
+
 void main() {
     fColor = vec4(0.0, 0.0, 1.0, 1.0);
 }

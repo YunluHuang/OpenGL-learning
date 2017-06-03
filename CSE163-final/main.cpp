@@ -4,6 +4,8 @@
 #include "Control.hpp"
 
 #define MAINPROGRAM
+#include "PointLight.hpp"
+#include "DirectLight.hpp"
 #include "ReadFile.hpp"
 #include "variables.h"
 
@@ -37,6 +39,8 @@ float limitedFPS = 1.0f / 60.0f;
 GLuint program;
 GLuint modelViewPos, projectionPos;
 GLuint ambientPosition, diffusePosition, specularPosition, shininessPosition;
+GLuint lightAmountPosition, lightPosPosition, lightColorPosition;
+vector<GLfloat> lightPos, lightColor;
 
 void printMat4(mat4 & m) {
     for (int i = 0; i < 4; i++) {
@@ -67,26 +71,62 @@ void init() {
     program = loadShaders(shaders);
     glUseProgram(program);
     
+    // Matrices position
+    projectionPos = glGetUniformLocation(program, "projection");
+    modelViewPos = glGetUniformLocation(program, "modelView");
+    
+    // Object color related shader param
     ambientPosition = glGetUniformLocation(program, "ambient");
     specularPosition = glGetUniformLocation(program, "specular");
     diffusePosition = glGetUniformLocation(program, "diffuse");
     shininessPosition = glGetUniformLocation(program, "shininess");
+    
+    // Light related shader param
+    lightAmountPosition = glGetUniformLocation(program, "lightAmount");
+    lightPosPosition = glGetUniformLocation(program, "lightPositions");
+    lightColorPosition = glGetUniformLocation(program, "lightColors");
     
     initAllMeshes();
 }
 
 void display() {
     
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    // Update Matrices
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    modelViewPos = glGetUniformLocation(program, "modelView");
     
-    projectionPos = glGetUniformLocation(program, "projection");
+    // Pass the projection to the shader
     glUniformMatrix4fv(projectionPos, 1, GL_FALSE, &projection[0][0]);
     
+    // Pass the lights to the shader
+    glUniform1i(lightAmountPosition, (int) lights.size());
+    for (int i = 0; i < lights.size(); i++) {
+        PointLight * ptlgt = static_cast<PointLight *>(lights[i]);
+        DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);
+        if (ptlgt != nullptr) {
+            vec3 pos = ptlgt->pos;
+            lightPos.push_back(pos[0]);
+            lightPos.push_back(pos[1]);
+            lightPos.push_back(pos[2]);
+            lightPos.push_back(1);
+        }
+        else if (dirlgt != nullptr) {
+            vec3 dir = dirlgt->dir;
+            lightPos.push_back(dir[0]);
+            lightPos.push_back(dir[1]);
+            lightPos.push_back(dir[2]);
+            lightPos.push_back(0);
+        }
+        lightColor.push_back(lights[i]->color[0]);
+        lightColor.push_back(lights[i]->color[1]);
+        lightColor.push_back(lights[i]->color[2]);
+    }
+    glUniform4fv(lightPosPosition, (int) lights.size(), &lightPos[0]);
+    glUniform3fv(lightColorPosition, (int) lights.size(), &lightColor[0]);
     
+    // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
         
         // Setup mvp
@@ -120,7 +160,7 @@ int main(int argc, char * argv[]) {
     glutInit(&argc, argv);
     
     //create the window
-    glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA);
+    glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(width, height);
     glutCreateWindow("final-project");
     

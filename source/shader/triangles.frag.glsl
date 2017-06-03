@@ -2,9 +2,19 @@
 
 out vec4 fColor;
 
+in vec4 myVertex;
+in vec3 myNormal;
+
 uniform int lightAmount;
 uniform vec4 lightPositions[10];
 uniform vec3 lightColors[10];
+
+uniform mat4 modelView;
+
+uniform vec3 ambient;
+uniform vec3 diffuse;
+uniform vec3 specular;
+uniform float shininess;
 
 void main() {
     vec3 lightPos = vec3(0.0, 12.0, 0.0);

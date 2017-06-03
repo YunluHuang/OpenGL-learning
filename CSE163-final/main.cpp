@@ -36,6 +36,7 @@ float limitedFPS = 1.0f / 60.0f;
 //initialize the programID mvpPos
 GLuint program;
 GLuint modelViewPos, projectionPos;
+GLuint ambientPosition, diffusePosition, specularPosition, shininessPosition;
 
 void printMat4(mat4 & m) {
     for (int i = 0; i < 4; i++) {
@@ -66,6 +67,11 @@ void init() {
     program = loadShaders(shaders);
     glUseProgram(program);
     
+    // Initiate Matrices Position
+    modelViewPos = glGetUniformLocation(program, "modelView");
+    projectionPos = glGetUniformLocation(program, "projection");
+    
+    // Initiate Color Position
     ambientPosition = glGetUniformLocation(program, "ambient");
     specularPosition = glGetUniformLocation(program, "specular");
     diffusePosition = glGetUniformLocation(program, "diffuse");
@@ -80,11 +86,7 @@ void display() {
     
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    modelViewPos = glGetUniformLocation(program, "modelView");
-    
-    projectionPos = glGetUniformLocation(program, "projection");
     glUniformMatrix4fv(projectionPos, 1, GL_FALSE, &projection[0][0]);
-    
     
     for (int i = 0; i < objects.size(); i++) {
         

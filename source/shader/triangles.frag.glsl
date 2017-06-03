@@ -7,7 +7,21 @@ uniform vec4 lightPositions[10];
 uniform vec3 lightColors[10];
 
 void main() {
-    fColor = vec4(0.0, 0.0, 1.0, 1.0);
+    vec3 lightPos = vec3(0.0, 12.0, 0.0);
+    vec3 lightColor = vec3(0.0, 0.0, 1.0);
+
+    vec3 vPos = vec3(modelView * myVertex);
+    vec3 normal = vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0));
+    normal = normalize(normal);
+    
+    vec3 inDir = normalize(-vPos);
+    vec3 outDir = normalize(lightPos - vPos);
+    vec3 halfAngle = normalize(inDir + outDir);
+    vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
+    vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
+    vec3 finalColor = ambient + lightColor * (diffuseColor + specularColor);
+    fColor = vec4(finalColor, 1.0);
+    
 }
 
 //in vec3 myNormal;

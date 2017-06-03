@@ -1,9 +1,9 @@
 #version 410 core
 
-out vec4 finalColor
+out vec4 fColor;
 
 void main() {
-    finalColor = (0.0, 0.0, 1.0, 0.0);
+    fColor = vec4(0.0, 0.0, 1.0, 1.0);
 }
 
 //in vec3 myNormal;

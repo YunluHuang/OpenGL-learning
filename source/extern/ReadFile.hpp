@@ -11,8 +11,6 @@
 
 #include "variables.h"
 
-
-
 #include <stdio.h>
 #include <fstream>
 #include <string>

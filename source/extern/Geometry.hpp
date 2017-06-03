@@ -23,7 +23,7 @@
 #include "Mesh.hpp"
 
 //Vertex attribute: poisition id = 0
-enum Attrib_IDs {vPosition = 0};
+enum Attrib_IDs {vPosition = 0, vNormal = 1, vFace = 2};
 
 void genBuffers();
 void initAllMeshes();

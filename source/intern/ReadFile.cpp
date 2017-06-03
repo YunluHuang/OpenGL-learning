@@ -42,6 +42,7 @@ void addObject(const char * filename) {
         loadedMeshes[file] = mesh;
         VAOs.push_back(0);
         VBOs.push_back(0);
+        NBOs.push_back(0);
         EBOs.push_back(0);
     }
     else {

@@ -24,7 +24,7 @@ vec3 up = UP;
 vec3 center = CENTER;
 
 //initialize mvp
-mat4 model, view, projection, mvp;
+mat4 model, view, projection, modelView;
 
 //initialize key press rotation amount
 float rotateAmount = 1 / PI;
@@ -35,7 +35,7 @@ float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
 GLuint program;
-GLuint mvpPos;
+GLuint modelViewPos, projectionPos;
 
 void printMat4(mat4 & m) {
     for (int i = 0; i < 4; i++) {
@@ -58,8 +58,8 @@ void init() {
     glutWarpPointer(width / 2, height / 2);
     
     ShaderInfo shaders[] = {
-        {GL_VERTEX_SHADER, "triangles.vert"},
-        {GL_FRAGMENT_SHADER, "triangles.frag"},
+        {GL_VERTEX_SHADER, "triangles.vert.glsl"},
+        {GL_FRAGMENT_SHADER, "triangles.frag.glsl"},
         {GL_NONE, NULL}
     };
     
@@ -79,15 +79,20 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     view = glm::lookAt(eye, center, up);
-    mvpPos = glGetUniformLocation(program, "MVP");
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    modelViewPos = glGetUniformLocation(program, "modelView");
+    
+    projectionPos = glGetUniformLocation(program, "projection");
+    glUniformMatrix4fv(projectionPos, 1, GL_FALSE, &projection[0][0]);
+    
     
     for (int i = 0; i < objects.size(); i++) {
         
         // Setup mvp
-        mvp = projection * view * objects[i]->transf;
-        glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
+        modelView = view * objects[i]->transf;
+        glUniformMatrix4fv(modelViewPos, 1, GL_FALSE, &modelView[0][0]);
         
-        //
+        // Pass color to the shader
         glUniform3f(ambientPosition, objects[i]->ambient[0], objects[i]->ambient[1], objects[i]->ambient[2]);
         glUniform3f(diffusePosition, objects[i]->diffuse[0], objects[i]->diffuse[1], objects[i]->diffuse[2]);
         glUniform3f(specularPosition, objects[i]->specular[0], objects[i]->specular[1], objects[i]->specular[2]);

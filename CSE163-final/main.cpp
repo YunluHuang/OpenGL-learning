@@ -52,7 +52,7 @@ void init() {
     //compute the camera view
     model = mat4(1.0f);
     view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    projection = glm::perspective(glm::radians(fovy), (float) width / (float) height, zNear, zFar);
     
     //initialize mouse
     glutWarpPointer(width / 2, height / 2);
@@ -66,6 +66,11 @@ void init() {
     program = loadShaders(shaders);
     glUseProgram(program);
     
+    ambientPosition = glGetUniformLocation(program, "ambient");
+    specularPosition = glGetUniformLocation(program, "specular");
+    diffusePosition = glGetUniformLocation(program, "diffuse");
+    shininessPosition = glGetUniformLocation(program, "shininess");
+    
     initAllMeshes();
 }
 
@@ -77,8 +82,18 @@ void display() {
     mvpPos = glGetUniformLocation(program, "MVP");
     
     for (int i = 0; i < objects.size(); i++) {
+        
+        // Setup mvp
         mvp = projection * view * objects[i]->transf;
         glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
+        
+        //
+        glUniform3f(ambientPosition, objects[i]->ambient[0], objects[i]->ambient[1], objects[i]->ambient[2]);
+        glUniform3f(diffusePosition, objects[i]->diffuse[0], objects[i]->diffuse[1], objects[i]->diffuse[2]);
+        glUniform3f(specularPosition, objects[i]->specular[0], objects[i]->specular[1], objects[i]->specular[2]);
+        glUniform1f(shininessPosition, objects[i]->shininess);
+        
+        // Display the object
         displayObject(objects[i]);
     }
     

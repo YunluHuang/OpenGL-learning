@@ -41,6 +41,16 @@ extern std::vector<GLuint> EBOs;
 extern std::vector<Object *> objects;
 extern std::map<std::string, Mesh *> loadedMeshes;
 
+extern vec3 ambient;
+extern vec3 specular;
+extern vec3 diffuse;
+extern GLfloat shininess;
+
+extern GLuint ambientPosition;
+extern GLuint specularPosition;
+extern GLuint diffusePosition;
+extern GLuint shininessPosition;
+
 extern std::vector<Light *> lights;
 
 //extern std::vector<std::vector<glm::vec3>> objVertices;

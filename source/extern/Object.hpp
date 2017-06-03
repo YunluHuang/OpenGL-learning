@@ -13,9 +13,21 @@
 #include "Mesh.hpp"
 
 struct Object {
-    Object(Mesh * mesh, mat4 transf);
+    
+    // Constructor
+    Object(Mesh * mesh, mat4 transf, vec3 ambient, vec3 diffuse, vec3 specular, float shininess);
+    
+    // Mesh ref
     Mesh * mesh;
+    
+    // Transformation Matrix
     mat4 transf;
+    
+    // Color variables;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
 };
 
 #endif /* Object_h */

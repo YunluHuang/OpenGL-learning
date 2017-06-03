@@ -27,6 +27,11 @@ std::vector<Light *> lights;
 
 std::stack<mat4> transfStack;
 
+vec3 ambient = vec3(0, 0, 0);
+vec3 diffuse = vec3(0.5, 0.5, 0.5);
+vec3 specular = vec3(1, 1, 1);
+float shininess = 1;
+
 void addObject(const char * filename) {
     string file = filename;
     Mesh * mesh;
@@ -42,7 +47,7 @@ void addObject(const char * filename) {
     else {
         mesh = it->second;
     }
-    Object * obj = new Object(mesh, transfStack.top());
+    Object * obj = new Object(mesh, transfStack.top(), ambient, diffuse, specular, shininess);
     objects.push_back(obj);
 }
 
@@ -83,11 +88,27 @@ void readfile(const char * filename) {
         if (command == "#") {
             continue;
         }
-        else if (command == "specular") {
-            
+        else if (command == "ambient") {
+            float r = atof(strtok(nullptr, " \n"));
+            float g = atof(strtok(nullptr, " \n"));
+            float b = atof(strtok(nullptr, " \n"));
+            ambient = vec3(r, g, b);
         }
-        else if (command == "") {
-            
+        else if (command == "specular") {
+            float r = atof(strtok(nullptr, " \n"));
+            float g = atof(strtok(nullptr, " \n"));
+            float b = atof(strtok(nullptr, " \n"));
+            specular = vec3(r, g, b);
+        }
+        else if (command == "diffuse") {
+            float r = atof(strtok(nullptr, " \n"));
+            float g = atof(strtok(nullptr, " \n"));
+            float b = atof(strtok(nullptr, " \n"));
+            diffuse = vec3(r, g, b);
+        }
+        else if (command == "shininess") {
+            float s = atof(strtok(nullptr, " \n"));
+            shininess = s;
         }
         else if (command == "object") {
             char * objname = strtok(nullptr, " \n");

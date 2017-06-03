@@ -590,6 +590,7 @@
 		6C8215961EE0DDCA0086DCE4 /* glm_core.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = glm_core.cpp; sourceTree = "<group>"; };
 		6C8215971EE0DDCA0086DCE4 /* usertype.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = usertype.dat; sourceTree = "<group>"; };
 		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
+		DFB667C51EE2360500CAE706 /* basic.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basic.scene; sourceTree = "<group>"; };
 		DFDB3A9B1EE21565009E578E /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		DFDB3A9C1EE21565009E578E /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -703,10 +704,10 @@
 		6C82135E1EE0DD930086DCE4 /* intern */ = {
 			isa = PBXGroup;
 			children = (
+				DFDB3A9B1EE21565009E578E /* Mesh.cpp */,
 				6C82135A1EE0DD2D0086DCE4 /* Geometry.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 				6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */,
-				DFDB3A9B1EE21565009E578E /* Mesh.cpp */,
 			);
 			name = intern;
 			sourceTree = "<group>";
@@ -1445,6 +1446,7 @@
 		DFDB3A9E1EE2321D009E578E /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DFB667C51EE2360500CAE706 /* basic.scene */,
 			);
 			name = scenes;
 			sourceTree = "<group>";

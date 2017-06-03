@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C19D88F1EE2381800DFC2EB /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C19D88D1EE2381800DFC2EB /* Control.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		6C3BEBCF1EE139BA00F7ED4C /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C3BEBCD1EE1393300F7ED4C /* teapot.obj */; };
 		6C3BEBD61EE140F000F7ED4C /* ReadFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */; };
 		6C3BEBD91EE159F500F7ED4C /* LoadMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		6C19D88C1EE2142100DFC2EB /* testScene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testScene; sourceTree = "<group>"; };
+		6C19D88D1EE2381800DFC2EB /* Control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
+		6C19D88E1EE2381800DFC2EB /* Control.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Control.hpp; sourceTree = "<group>"; };
 		6C3BEBCD1EE1393300F7ED4C /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		6C3BEBD31EE13F5500F7ED4C /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = variables.h; sourceTree = "<group>"; };
 		6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReadFile.cpp; sourceTree = "<group>"; };
@@ -710,6 +713,7 @@
 				6C3BEBD81EE159F500F7ED4C /* LoadMesh.hpp */,
 				6C73D0C91EDF3DBF00D0763B /* LoadShader.hpp */,
 				6C3BEBD51EE140F000F7ED4C /* ReadFile.hpp */,
+				6C19D88E1EE2381800DFC2EB /* Control.hpp */,
 				6C3BEBD31EE13F5500F7ED4C /* variables.h */,
 			);
 			name = extern;
@@ -722,6 +726,7 @@
 				6C3BEBD71EE159F500F7ED4C /* LoadMesh.cpp */,
 				6C73D0C81EDF3DBF00D0763B /* LoadShader.cpp */,
 				6C3BEBD41EE140F000F7ED4C /* ReadFile.cpp */,
+				6C19D88D1EE2381800DFC2EB /* Control.cpp */,
 			);
 			name = intern;
 			sourceTree = "<group>";
@@ -1514,11 +1519,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C3BEBD91EE159F500F7ED4C /* LoadMesh.cpp in Sources */,
+				6C19D88F1EE2381800DFC2EB /* Control.cpp in Sources */,
 				6C82135C1EE0DD2D0086DCE4 /* Geometry.cpp in Sources */,
 				6C3BEBD61EE140F000F7ED4C /* ReadFile.cpp in Sources */,
 				6C73D0CA1EDF3DBF00D0763B /* LoadShader.cpp in Sources */,
 				6CFF62671EE1070700B237F3 /* main.cpp in Sources */,
-				6C3BEBD91EE159F500F7ED4C /* LoadMesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 
 #include "LoadShader.hpp"
 #include "Geometry.hpp"
+#include "Control.hpp"
 
 #define MAINPROGRAM
 #include "ReadFile.hpp"
@@ -24,7 +25,7 @@ int width = 512;
 int height = 512;
 float zNear = 0.1f;
 float zFar = 100.0f;
-float fovy = 45.0f;
+float fovy = 60.0f;
 
 //initialize camera position
 vec3 eye = EYE;
@@ -38,7 +39,6 @@ mat4 model, view, projection, mvp;
 float rotateAmount = 1 / PI;
 
 //initialize mouse setting
-int oldX, oldY;
 float moveSpeed = 0.1f, mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
@@ -57,9 +57,7 @@ void init() {
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
     //initialize mouse
-    oldX = width / 2;
-    oldY = height / 2;
-    glutWarpPointer(oldX, oldY);
+    glutWarpPointer(width / 2, height / 2);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert"},
@@ -81,115 +79,42 @@ void display() {
     glFlush();
 }
 
-void keyboard(unsigned char key, int x, int y) {
-    vec3 xAxis = normalize(cross(eye - center, up));
-    vec3 yAxis = normalize(up);
-    vec3 zAxis = normalize(eye - center);
-    switch (key) {
-        case 'w': {
-            cout << "w pressed, move forward" << endl;
-            view = glm::translate(view, moveSpeed * zAxis);
-            break;
-        }
-        case 's': {
-            cout << "s pressed, move backward" << endl;
-            view = glm::translate(view, moveSpeed * -zAxis);
-            break;
-        }
-        case 'a': {
-            cout << "a pressed, move left" << endl;
-            view = glm::translate(view, moveSpeed * -xAxis);
-            break;
-        }
-        case 'd': {
-            cout << "d pressed, move right" << endl;
-            view = glm::translate(view, moveSpeed * xAxis);
-            break;
-        }
-        case 27: {
-            exit(1);
-            break;
-        }
-        default: {
-            cout << "invalid key" << endl;
-            break;
-        }
-    }
-    glutPostRedisplay();
-}
-
-/** 
- handle arrow key press
-*/
-void arrowKey(int key, int x, int y) {
-    vec3 xAxis = normalize(cross(eye - center, up));
-    vec3 yAxis = normalize(up);
-    vec3 zAxis = normalize(eye - center);
-    switch (key) {
-        //left
-        case 100: {
-            //rotate horizontally counter-clockwise
-            cout << "left arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, yAxis);
-            break;
-        }
-        //up
-        case 101: {
-            //rotate vertically counter-clockwise
-            cout << "up arrow key" << endl;
-            model = glm::rotate(model, rotateAmount, xAxis);
-            break;
-        }
-        //right
-        case 102: {
-            //rotate horizontally counter-clockwise
-            cout << "right arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, yAxis);
-            break;
-        }
-        //down
-        case 103: {
-            //rotate vertically counter-clockwise
-            cout << "down arrow key" << endl;
-            model = glm::rotate(model, -rotateAmount, xAxis);
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-    glutPostRedisplay();
-}
-
-void mouse(int button, int state, int x, int y) {
-    if(button == 3 || button == 4) {
-        if(state == GLUT_UP) {
-            cout << "scroll up" << endl;
-        }
-    }
-}
-
-void mouseRotate(int x, int y) {
-    //press left button
-    cout << "oldx = " << oldX << ", x = " << x << endl;
-    float rotateX = mouseSpeed * limitedFPS * float (x - oldX);
-    float rotateY = mouseSpeed * limitedFPS * float (y - oldY);
-    vec3 eulerAngle = vec3(rotateY, rotateX, 0.0f);
-    quat quaternion = quat(eulerAngle);
-    mat4 rotationM = glm::toMat4(quaternion);
-    cout << "eye = (" << eye.x << ", " << eye.y << ", " << eye.z << ")" << endl;
-    eye = vec3(rotationM * vec4(eye, 0.0f));
-    view = glm::inverse(rotationM) * view;
-    oldX = x;
-    oldY = y;
-    glutPostRedisplay();
-}
-
-void mouseMove(int x, int y) {
-    oldX = x;
-    oldY = y;
-    glutPostRedisplay();
-}
+//void keyboard(unsigned char key, int x, int y) {
+//    vec3 xAxis = normalize(cross(eye - center, up));
+//    vec3 yAxis = normalize(up);
+//    vec3 zAxis = normalize(eye - center);
+//    switch (key) {
+//        case 'w': {
+//            cout << "w pressed, move forward" << endl;
+//            view = glm::translate(view, moveSpeed * zAxis);
+//            break;
+//        }
+//        case 's': {
+//            cout << "s pressed, move backward" << endl;
+//            view = glm::translate(view, moveSpeed * -zAxis);
+//            break;
+//        }
+//        case 'a': {
+//            cout << "a pressed, move left" << endl;
+//            view = glm::translate(view, moveSpeed * -xAxis);
+//            break;
+//        }
+//        case 'd': {
+//            cout << "d pressed, move right" << endl;
+//            view = glm::translate(view, moveSpeed * xAxis);
+//            break;
+//        }
+//        case 27: {
+//            exit(1);
+//            break;
+//        }
+//        default: {
+//            cout << "invalid key" << endl;
+//            break;
+//        }
+//    }
+//    glutPostRedisplay();
+//}
 
 int main(int argc, char * *argv) {
     

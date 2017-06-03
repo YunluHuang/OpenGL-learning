@@ -28,6 +28,7 @@ extern vec3 up;
 extern vec3 center;
 extern float fovy, zNear, zFar;
 extern float rotateAmount;
+extern float moveSpeed, mouseSpeed, limitedFPS;
 
 extern mat4 model, view, projection, mvp;
 extern GLuint mvpPos;

@@ -47,11 +47,11 @@ void initMesh(Mesh * mesh) {
     glBindVertexArray(0);
 }
 
-void displayMesh(Mesh * mesh) {
-    glClear(GL_COLOR_BUFFER_BIT);
+void displayObject(Object * object) {
     
-    glBindVertexArray(VAOs[mesh->id]);
-    glDrawElements(GL_TRIANGLES, (int) mesh->indices.size(), GL_UNSIGNED_INT, 0);
+    
+    glBindVertexArray(VAOs[object->mesh->id]);
+    glDrawElements(GL_TRIANGLES, (int) object->mesh->indices.size(), GL_UNSIGNED_INT, 0);
     
     glBindVertexArray(0);
 }

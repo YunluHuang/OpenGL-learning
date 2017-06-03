@@ -1,8 +1,3 @@
-#include <OpenGL/gl3.h>
-#define __gl_h_
-#include <GLUT/glut.h>
-#include <glm/gtc/matrix_transform.hpp>
-#include <iostream>
 
 #include "LoadShader.hpp"
 #include "Geometry.hpp"
@@ -12,11 +7,7 @@
 #include "ReadFile.hpp"
 #include "variables.h"
 
-#define BUFFER_OFFSET(x) ((const void *)(x))
-#define PI 3.1415926f
-#define EYE vec3(0.0,0.0,5.0)
-#define UP vec3(0.0,1.0,0.0)
-#define CENTER vec3(0.0,0.0,0.0)
+#include "math.hpp"
 
 using namespace std;
 
@@ -25,7 +16,7 @@ int width = 512;
 int height = 512;
 float zNear = 0.1f;
 float zFar = 100.0f;
-float fovy = 45.0f;
+float fovy = 75.0f;
 
 //initialize camera position
 vec3 eye = EYE;
@@ -45,6 +36,15 @@ float limitedFPS = 1.0f / 60.0f;
 //initialize the programID mvpPos
 GLuint program;
 GLuint mvpPos;
+
+void printMat4(mat4 & m) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            std::cout << m[j][i] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
 
 void init() {
     genBuffers();
@@ -71,13 +71,15 @@ void init() {
 
 void display() {
     
+    glClear(GL_COLOR_BUFFER_BIT);
+    
     view = glm::lookAt(eye, center, up);
-    mvp = projection * view * model;
     mvpPos = glGetUniformLocation(program, "MVP");
-    glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
     
     for (int i = 0; i < objects.size(); i++) {
-        displayMesh(objects[i]);
+        mvp = projection * view * objects[i]->transf;
+        glUniformMatrix4fv(mvpPos, 1, GL_FALSE, &mvp[0][0]);
+        displayObject(objects[i]);
     }
     
     glFlush();

@@ -11,9 +11,13 @@
 
 #include "variables.h"
 
+
+
 #include <stdio.h>
+#include <fstream>
 #include <string>
 #include <map>
+#include <stack>
 
 typedef glm::vec3 vec3;
 

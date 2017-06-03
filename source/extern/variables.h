@@ -19,6 +19,7 @@
 #include "math.hpp"
 #include "Light.hpp"
 #include "Mesh.hpp"
+#include "Object.hpp"
 
 extern int width, height;
 
@@ -37,7 +38,7 @@ extern std::vector<GLuint> VBOs;
 extern std::vector<GLuint> NBOs;
 extern std::vector<GLuint> EBOs;
 
-extern std::vector<Mesh *> objects;
+extern std::vector<Object *> objects;
 extern std::map<std::string, Mesh *> loadedMeshes;
 
 extern std::vector<Light *> lights;

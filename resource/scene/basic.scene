@@ -1,1 +1,27 @@
+
+
+# pushtransf
+
+translate -1 0 0
+object cube.obj
+
+# poptransf
+
+# translate 5 0 0
+# pushtransf
+# scale 2 2 2
+
+translate 2 0 0
 object teapot.obj
+
+# poptransf
+
+# pushtransf
+# translate 0 1 0
+
+# pushtransf
+# trasnlate -1 0 0
+# object cube.obj
+# poptransf
+
+# poptransf

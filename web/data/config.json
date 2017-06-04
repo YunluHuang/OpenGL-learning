@@ -1,7 +1,7 @@
 {
     "debug": true,
-    "name": "Keeling Js Default",
-    "port": 21023,
+    "name": "CSE 163 Project 3",
+    "port": 9052,
     "session_secret": "keeling-session",
     "default_page": "index",
     "error_page": "error",

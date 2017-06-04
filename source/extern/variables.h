@@ -38,6 +38,7 @@ extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
 extern std::vector<GLuint> NBOs;
 extern std::vector<GLuint> EBOs;
+extern std::vector<GLuint> FBOs;
 
 extern std::vector<Object *> objects;
 extern std::map<std::string, Mesh *> loadedMeshes;

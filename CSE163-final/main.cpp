@@ -1,5 +1,6 @@
 
 #include "LoadShader.hpp"
+#include "ShadowMap.hpp"
 #include "Geometry.hpp"
 #include "Control.hpp"
 
@@ -37,8 +38,8 @@ float moveSpeed = 0.1f, mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
-GLuint program;
-GLuint modelViewPos, projectionPos;
+GLuint mainProgram;
+GLuint modelViewPos, projectionPos, depthMapID;
 GLuint ambientPosition, diffusePosition, specularPosition, shininessPosition;
 GLuint lightAmountPosition, lightPosPosition, lightColorPosition;
 vector<GLfloat> lightPos, lightColor;
@@ -53,7 +54,6 @@ void printMat4(mat4 & m) {
 }
 
 void init() {
-    genBuffers();
     
     windowX = glutGet((GLenum)GLUT_WINDOW_X);
     windowY = glutGet((GLenum)GLUT_WINDOW_Y) + 46;
@@ -65,36 +65,40 @@ void init() {
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float) width / (float) height, zNear, zFar);
     
-    ShaderInfo shaders[] = {
+    ShaderInfo mainShaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert.glsl"},
         {GL_FRAGMENT_SHADER, "triangles.frag.glsl"},
         {GL_NONE, NULL}
     };
     
-    program = loadShaders(shaders);
-    glUseProgram(program);
+    mainProgram = loadShaders(mainShaders);
+    glUseProgram(mainProgram);
     
     // Matrices position
-    projectionPos = glGetUniformLocation(program, "projection");
-    modelViewPos = glGetUniformLocation(program, "modelView");
+    projectionPos = glGetUniformLocation(mainProgram, "projection");
+    modelViewPos = glGetUniformLocation(mainProgram, "modelView");
     
     // Object color related shader param
-    ambientPosition = glGetUniformLocation(program, "ambient");
-    specularPosition = glGetUniformLocation(program, "specular");
-    diffusePosition = glGetUniformLocation(program, "diffuse");
-    shininessPosition = glGetUniformLocation(program, "shininess");
+    ambientPosition = glGetUniformLocation(mainProgram, "ambient");
+    specularPosition = glGetUniformLocation(mainProgram, "specular");
+    diffusePosition = glGetUniformLocation(mainProgram, "diffuse");
+    shininessPosition = glGetUniformLocation(mainProgram, "shininess");
     
     // Light related shader param
-    lightAmountPosition = glGetUniformLocation(program, "lightAmount");
-    lightPosPosition = glGetUniformLocation(program, "lightPositions");
-    lightColorPosition = glGetUniformLocation(program, "lightColors");
+    lightAmountPosition = glGetUniformLocation(mainProgram, "lightAmount");
+    lightPosPosition = glGetUniformLocation(mainProgram, "lightPositions");
+    lightColorPosition = glGetUniformLocation(mainProgram, "lightColors");
     
-    initAllMeshes();
+    // texture shader param
+    depthMapID = glGetUniformLocation(mainProgram, "depthMap");
+    
+//    initAllMeshes();
 }
 
 void display() {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     
     // Update Matrices
     view = glm::lookAt(eye, center, up);
@@ -128,6 +132,11 @@ void display() {
     }
     glUniform4fv(lightPosPosition, (int) lights.size(), &lightPos[0]);
     glUniform3fv(lightColorPosition, (int) lights.size(), &lightColor[0]);
+    
+    // pass depthMap to the shader
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, depthMap);
+    glUniform1i(depthMapID, 0);
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
@@ -169,6 +178,9 @@ int main(int argc, char * argv[]) {
     glutCreateWindow("final-project");
     
     readfile(argv[1]);
+    genBuffers();
+    initAllMeshes();
+    renderShadow();
     init();
     
     glEnable(GL_DEPTH_TEST);

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
+		6CA5C2181EE3A6ED0011EA25 /* ShadowMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5C2161EE3A6ED0011EA25 /* ShadowMap.cpp */; };
+		6CA5C21B1EE3BFF50011EA25 /* depth.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */; };
+		6CA5C21C1EE3BFF50011EA25 /* depth.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */; };
+		6CFFF5F11EE39DB80070EBEA /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFFF5EF1EE39DB80070EBEA /* FrameBuffer.cpp */; };
 		DF19B3ED1EE3914200E4B19C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF19B3EC1EE3914200E4B19C /* ApplicationServices.framework */; };
 		DF19B3EF1EE3A7B600E4B19C /* temple.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF19B3EE1EE3A50100E4B19C /* temple.scene */; };
 		DF19B3F11EE3ABC500E4B19C /* smoothsphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF19B3F01EE3ABA100E4B19C /* smoothsphere.obj */; };
@@ -38,8 +42,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				DF19B3F11EE3ABC500E4B19C /* smoothsphere.obj in CopyFiles */,
-				DF19B3EF1EE3A7B600E4B19C /* temple.scene in CopyFiles */,
+				6CA5C21B1EE3BFF50011EA25 /* depth.vert.glsl in CopyFiles */,
+				6CA5C21C1EE3BFF50011EA25 /* depth.frag.glsl in CopyFiles */,
 				DF3F3ED51EE38B8600DAC187 /* cube2.obj in CopyFiles */,
 				DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */,
 				DF3F3ED11EE3515B00DAC187 /* cube.obj in CopyFiles */,
@@ -56,7 +60,13 @@
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		6CA5C2161EE3A6ED0011EA25 /* ShadowMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShadowMap.cpp; sourceTree = "<group>"; };
+		6CA5C2171EE3A6ED0011EA25 /* ShadowMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ShadowMap.hpp; path = ../intern/ShadowMap.hpp; sourceTree = "<group>"; };
+		6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = depth.vert.glsl; sourceTree = "<group>"; };
+		6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = depth.frag.glsl; sourceTree = "<group>"; };
 		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
+		6CFFF5EF1EE39DB80070EBEA /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameBuffer.cpp; path = ../extern/FrameBuffer.cpp; sourceTree = "<group>"; };
+		6CFFF5F01EE39DB80070EBEA /* FrameBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameBuffer.hpp; sourceTree = "<group>"; };
 		DF19B3EC1EE3914200E4B19C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		DF19B3EE1EE3A50100E4B19C /* temple.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temple.scene; sourceTree = "<group>"; };
 		DF19B3F01EE3ABA100E4B19C /* smoothsphere.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = smoothsphere.obj; sourceTree = "<group>"; };
@@ -1473,6 +1483,8 @@
 				DFB66EA71EE2CF0200CAE706 /* variables.h */,
 				DF3F3EC71EE2EE3000DAC187 /* math.hpp */,
 				DF3F3ECB1EE3447300DAC187 /* Object.hpp */,
+				6CFFF5F01EE39DB80070EBEA /* FrameBuffer.hpp */,
+				6CA5C2171EE3A6ED0011EA25 /* ShadowMap.hpp */,
 			);
 			path = extern;
 			sourceTree = "<group>";
@@ -1489,6 +1501,8 @@
 				DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */,
 				DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */,
 				DF3F3EC81EE3445D00DAC187 /* Object.cpp */,
+				6CFFF5EF1EE39DB80070EBEA /* FrameBuffer.cpp */,
+				6CA5C2161EE3A6ED0011EA25 /* ShadowMap.cpp */,
 			);
 			path = intern;
 			sourceTree = "<group>";
@@ -1498,6 +1512,8 @@
 			children = (
 				DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */,
 				DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */,
+				6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */,
+				6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -1563,11 +1579,13 @@
 				DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */,
 				DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */,
 				DF3F3EC11EE2EAB000DAC187 /* DirectLight.cpp in Sources */,
+				6CFFF5F11EE39DB80070EBEA /* FrameBuffer.cpp in Sources */,
 				DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */,
 				DF3F3EB91EE2D2E900DAC187 /* LoadShader.cpp in Sources */,
 				DF3F3EC51EE2EB4400DAC187 /* PointLight.cpp in Sources */,
 				DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */,
 				DF3F3ECA1EE3445D00DAC187 /* Object.cpp in Sources */,
+				6CA5C2181EE3A6ED0011EA25 /* ShadowMap.cpp in Sources */,
 				DF3F3EBB1EE2D2E900DAC187 /* ReadFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

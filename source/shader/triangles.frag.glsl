@@ -10,6 +10,7 @@ uniform vec4 lightPositions[10];
 uniform vec3 lightColors[10];
 
 uniform mat4 modelView;
+uniform sampler2DShadow depthMap;
 
 uniform vec3 ambient;
 uniform vec3 diffuse;
@@ -21,6 +22,9 @@ void main() {
     vec3 finalColor = ambient;
     
     vec3 vPos = vec3(modelView * myVertex);
+    
+    float visibility = texture(depthMap, vPos);
+    
     vec3 normal = normalize(vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0)));
     
     for (int i = 0; i < lightAmount; i++) {
@@ -44,7 +48,7 @@ void main() {
         
         finalColor += lightColor * (diffuseColor + specularColor);
     }
-    
-    fColor = vec4(finalColor, 1.0);
+//    visibility = 0.2;
+    finalColor *= visibility;
+    fColor = vec4(visibility, visibility, visibility, 1.0);
 }
-

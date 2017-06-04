@@ -26,19 +26,6 @@ void initAllMeshes() {
 
 void initMesh(Mesh * mesh) {
     
-    
-    vector<vec3> vertices;
-    vector<vec3> normals;
-    vector<vec3> indices;
-    
-    for (int i = 0; i < mesh->indices.size(); i += 3) {
-        
-        int v1, v2, v3, n1, n2, n3;
-        v1 = mesh->indices[i], v2 = mesh->indices[i + 1], v3 = mesh->indices[i + 2];
-//        n1 = mesh->normalIndicies[i];
-    }
-    
-    
     //bind buffers to VAO
     glBindVertexArray(VAOs[mesh->id]);
     

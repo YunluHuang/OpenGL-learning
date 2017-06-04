@@ -21,7 +21,6 @@ struct Mesh {
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;
-    std::vector<GLuint> normalIndices;
 };
 
 #endif /* Mesh_hpp */

@@ -6,59 +6,73 @@
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
+#include "math.hpp"
 #include "Mesh.hpp"
 
 using namespace std;
 
+#include <fstream>
+
 Mesh::Mesh(const char * filename) {
     
-    FILE* fp;
-    float x, y, z;
-    int fx, fy, fz, nx, ny, nz, ignore;
-    int c1, c2;
-    float minY = INFINITY, minZ = INFINITY;
-    float maxY = -INFINITY, maxZ = -INFINITY;
+    vector<vec3> verts;
+    vector<vec3> norms;
     
-    fp = fopen(filename, "rb");
+    string line;
+    size_t bufSize = 128;
+    char buf[bufSize];
     
-    if (fp == NULL) {
+    std::ifstream ifs (filename, std::ifstream::in | std::ifstream::binary);
+    
+    if (!ifs.is_open()) {
         cerr << "Error loading object file: " << filename << endl;
         exit(-1);
     }
     
-    while (!feof(fp)) {
-        c1 = fgetc(fp);
-        while (!(c1 == 'v' || c1 == 'f')) {
-            c1 = fgetc(fp);
-            if (feof(fp))
-                break;
+    while (!ifs.eof()) {
+        
+        // Get Line String
+        ifs.getline(buf, bufSize);
+        line = buf;
+        if (line == "") {
+            continue;
         }
-        c2 = fgetc(fp);
-        if ((c1 == 'v') && (c2 == ' ')) {
-            fscanf(fp, "%f %f %f", &x, &y, &z);
-            vertices.push_back(glm::vec3(x, y, z));
-            if (y < minY) minY = y;
-            if (z < minZ) minZ = z;
-            if (y > maxY) maxY = y;
-            if (z > maxZ) maxZ = z;
+        
+        // Get command (the first
+        string command = strtok(buf, " \n");
+        if (command == "v") {
+            float x = atof(strtok(nullptr, " \n"));
+            float y = atof(strtok(nullptr, " \n"));
+            float z = atof(strtok(nullptr, " \n"));
+            verts.push_back(vec3(x, y, z));
         }
-        else if ((c1 == 'v') && (c2 == 'n')) {
-            fscanf(fp, "%f %f %f", &x, &y, &z);
-            // Ignore the normals in mytest2, as we use a solid color for the teapot.
-            normals.push_back(glm::normalize(glm::vec3(x, y, z)));
+        else if (command == "vn") {
+            float x = atof(strtok(nullptr, " \n"));
+            float y = atof(strtok(nullptr, " \n"));
+            float z = atof(strtok(nullptr, " \n"));
+            norms.push_back(normalize(vec3(x, y, z)));
         }
-        else if (c1 == 'f')
-        {
-            fscanf(fp, "%d//%d %d//%d %d//%d", &fx, &nx, &fy, &ny, &fz, &nz);
-            indices.push_back(fx - 1);
-            indices.push_back(fy - 1);
-            indices.push_back(fz - 1);
+        else if (command == "f") {
             
-            normalIndices.push_back(nx - 1);
-            normalIndices.push_back(ny - 1);
-            normalIndices.push_back(nz - 1);
+            int fx = atoi(strtok(buf + 2, " /\n"));
+            int nx = atoi(strtok(nullptr, " /\n"));
+            int fy = atoi(strtok(nullptr, " /\n"));
+            int ny = atoi(strtok(nullptr, " /\n"));
+            int fz = atoi(strtok(nullptr, " /\n"));
+            int nz = atoi(strtok(nullptr, " /\n"));
+            
+            vertices.push_back(verts[fx - 1]);
+            vertices.push_back(verts[fy - 1]);
+            vertices.push_back(verts[fz - 1]);
+            
+            normals.push_back(norms[nx - 1]);
+            normals.push_back(norms[ny - 1]);
+            normals.push_back(norms[nz - 1]);
+            
+            GLuint offset = (unsigned int) indices.size();
+            indices.push_back(offset);
+            indices.push_back(offset + 1);
+            indices.push_back(offset + 2);
         }
     }
-    
-    fclose(fp);
 }

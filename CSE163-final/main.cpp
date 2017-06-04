@@ -38,20 +38,25 @@ float moveSpeed = 0.1f, mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
 //initialize the programID mvpPos
-GLuint mainProgram;
-GLuint modelViewPos, projectionPos, depthMapID;
+GLuint mainProgram, depthProgram;
+GLuint modelViewPos, projectionPos;
 GLuint ambientPosition, diffusePosition, specularPosition, shininessPosition;
 GLuint lightAmountPosition, lightPosPosition, lightColorPosition;
 vector<GLfloat> lightPos, lightColor;
 
-void printMat4(mat4 & m) {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            std::cout << m[j][i] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
+GLuint depthMVPPos, depthMapPos, DepthBiasID, ShadowMapID;
+GLuint frameBuffer;
+GLuint depthTexture;
+
+
+//void printMat4(mat4 & m) {
+//    for (int i = 0; i < 4; i++) {
+//        for (int j = 0; j < 4; j++) {
+//            std::cout << m[j][i] << " ";
+//        }
+//        std::cout << std::endl;
+//    }
+//}
 
 void init() {
     
@@ -72,7 +77,7 @@ void init() {
     };
     
     mainProgram = loadShaders(mainShaders);
-    glUseProgram(mainProgram);
+//    glUseProgram(mainProgram);
     
     // Matrices position
     projectionPos = glGetUniformLocation(mainProgram, "projection");
@@ -90,12 +95,64 @@ void init() {
     lightColorPosition = glGetUniformLocation(mainProgram, "lightColors");
     
     // texture shader param
-    depthMapID = glGetUniformLocation(mainProgram, "depthMap");
+    depthMapPos = glGetUniformLocation(mainProgram, "depthMap");
     
 //    initAllMeshes();
 }
 
 void display() {
+    
+//    glBindVertexArray(VAOs[0]);
+    
+    //render to texture
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    glViewport(0, 0, width, height);
+    
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glUseProgram(depthProgram);
+    
+    
+    glm::vec3 lightInvDir = glm::vec3(0.5f,2,2);
+    
+    // Compute the MVP matrix from the light's point of view
+    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
+    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
+//    glm::mat4 depthModelMatrix = glm::mat4(1.0);
+//    glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
+    
+    for (int i = 0; i < objects.size(); i++) {
+        mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * objects[i]->transf;
+        glUniformMatrix4fv(depthMVPPos, 1, GL_FALSE, &depthMVP[0][0]);
+        // Display the object
+        displayObject(objects[i]);
+    }
+    
+    
+    // render to the scene
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, width, height);
+    
+    glUseProgram(mainProgram);
+    
+    glm::mat4 biasMatrix(
+                         0.5, 0.0, 0.0, 0.0,
+                         0.0, 0.5, 0.0, 0.0,
+                         0.0, 0.0, 0.5, 0.0,
+                         0.5, 0.5, 0.5, 1.0
+                         );
+    
+    
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, depthTexture);
+    glUniform1i(ShadowMapID, 1);
+    
+    
+    
+    //render noraml scene
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -136,10 +193,26 @@ void display() {
     // pass depthMap to the shader
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, depthMap);
-    glUniform1i(depthMapID, 0);
+    glUniform1i(depthMapPos, 0);
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
+        
+        /////////////////////////////////
+        mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * objects[i]->transf;
+        glm::mat4 depthBiasMVP = biasMatrix * depthMVP;
+        glUniformMatrix4fv(DepthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
+        
+        
+        
+        
+        
+        
+        
+        //////////////////////////////////
+        
+        
+        
         
         // Setup mvp
         modelView = view * objects[i]->transf;
@@ -180,7 +253,43 @@ int main(int argc, char * argv[]) {
     readfile(argv[1]);
     genBuffers();
     initAllMeshes();
-    renderShadow();
+    
+    //renderShadow();
+    ShaderInfo depthShaders[] = {
+        {GL_VERTEX_SHADER, "depth.vert.glsl"},
+        {GL_FRAGMENT_SHADER, "depth.frag.glsl"},
+        {GL_NONE, NULL}
+    };
+    depthProgram = loadShaders(depthShaders);
+    
+    depthMVPPos = glGetUniformLocation(depthProgram, "depthMVP");
+    
+    frameBuffer = 0;
+    glGenFramebuffers(1, &frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    
+    glGenTextures(1, &depthTexture);
+    glBindTexture(GL_TEXTURE_2D, depthTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1024, 1024, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0);
+    
+    glDrawBuffer(GL_NONE);
+    
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        cerr << "bind frame buffer error" << endl;
+    
+    DepthBiasID = glGetUniformLocation(mainProgram, "DepthBiasMVP");
+    ShadowMapID = glGetUniformLocation(mainProgram, "shadowMap");
+    
+    
+    // render the scene
     init();
     
     glEnable(GL_DEPTH_TEST);

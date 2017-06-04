@@ -5,12 +5,15 @@ layout(location = 1) in vec3 vNormal;
 
 uniform mat4 modelView;
 uniform mat4 projection;
+uniform mat4 DepthBiasMVP;
 
 out vec3 myNormal;
 out vec4 myVertex;
+out vec4 ShadowCoord;
 
 void main() {
     gl_Position = projection * modelView * vec4(vPosition, 1.0);
+    ShadowCoord = DepthBiasMVP * vec4(vPosition,1);
     myNormal = vNormal;
     myVertex = vec4(vPosition, 1.0);
 }

@@ -15,7 +15,7 @@
 #include <iostream>
 #include "DirectLight.hpp"
 #include "variables.h"
-#include "FrameBuffer.hpp"
+//#include "FrameBuffer.hpp"
 #include "LoadShader.hpp"
 #include "Geometry.hpp"
 

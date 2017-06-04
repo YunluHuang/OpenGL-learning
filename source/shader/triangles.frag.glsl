@@ -4,6 +4,7 @@ out vec4 fColor;
 
 in vec4 myVertex;
 in vec3 myNormal;
+in vec4 ShadowCoord;
 
 uniform int lightAmount;
 uniform vec4 lightPositions[10];
@@ -23,7 +24,7 @@ void main() {
     
     vec3 vPos = vec3(modelView * myVertex);
     
-    float visibility = texture(depthMap, vPos);
+    float visibility = texture( depthMap, vec3(ShadowCoord.xy, (ShadowCoord.z)/ShadowCoord.w) );
     
     vec3 normal = normalize(vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0)));
     
@@ -50,5 +51,5 @@ void main() {
     }
 //    visibility = 0.2;
     finalColor *= visibility;
-    fColor = vec4(visibility, visibility, visibility, 1.0);
+    fColor = vec4(finalColor, 1.0);
 }

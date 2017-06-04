@@ -42,6 +42,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF19B3F11EE3ABC500E4B19C /* smoothsphere.obj in CopyFiles */,
+				DF19B3EF1EE3A7B600E4B19C /* temple.scene in CopyFiles */,
 				6CA5C21B1EE3BFF50011EA25 /* depth.vert.glsl in CopyFiles */,
 				6CA5C21C1EE3BFF50011EA25 /* depth.frag.glsl in CopyFiles */,
 				DF3F3ED51EE38B8600DAC187 /* cube2.obj in CopyFiles */,

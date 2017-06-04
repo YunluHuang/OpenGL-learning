@@ -102,30 +102,102 @@
                                     <code>Space</code> and <code>x</code> to go up or down, mocking
                                     the control system in the FPS Game.
                                 </p>
+                                <p>
+                                    Here's a little demo on the control system.
+                                </p>
+                                <div class="center">
+                                    <video id="control-video" src="res/control.mp4" width="480px" height="360px" autoplay></video>
+                                    <script>
+                                        $("#control-video").hover(function () {
+                                            if (this.hasAttribute("controls")) {
+                                                this.removeAttribute("controls");
+                                            } else {
+                                                this.setAttribute("controls", "controls");
+                                            }
+                                        });
+                                    </script>
+                                </div>
                             </li>
                             <li>
                                 <h3>Scene File Reader</h3>
                                 <p>
                                     This scene file reader is pretty much the same as the original
                                     one, except that we are going to modify it to also load the
-                                    <code>.mtl</code> files for object material.
+                                    <code>.mtl</code> files for object material. Here is a write-up
+                                    on the file reader:
                                 </p>
+                                <p>
+                                    You can have comment in the scene file:
+                                </p>
+                                <pre># This is some comment</pre>
+                                <p>
+                                    You can input any object file here:
+                                </p>
+                                <pre>object [FILE.obj]</pre>
+                                <p>
+                                    Setting the ambient color for the next object to be drawn
+                                </p>
+                                <pre>ambient [R] [G] [B]</pre>
+                                <p>
+                                    Setting the diffuse color for the next object to be drawn
+                                </p>
+                                <pre>diffuse [R] [G] [B]</pre>
+                                <p>
+                                    Setting the specular color for the next object to be drawn
+                                </p>
+                                <pre>specular [R] [G] [B]</pre>
+                                <p>
+                                    Setting the shininess for the specular the next object to be drawn
+                                </p>
+                                <pre>shininess [S]</pre>
+                                <p>
+                                    Translate the next object to be drawn
+                                </p>
+                                <pre>translate [X] [Y] [Z]</pre>
+                                <p>
+                                    Scale the next object to be drawn
+                                </p>
+                                <pre>scale [X] [Y] [Z]</pre>
+                                <p>
+                                    Rotate the next object to be drawn by X axis
+                                </p>
+                                <pre>rotatex [X]</pre>
+                                <p>
+                                    Rotate the next object to be drawn by Y axis
+                                </p>
+                                <pre>rotatey [Y]</pre>
+                                <p>
+                                    Rotate the next object to be drawn by Z axis
+                                </p>
+                                <pre>rotatez [Z]</pre>
+                                <p>
+                                    Push the Transformation matrix stack
+                                </p>
+                                <pre>pushtransf</pre>
+                                <p>
+                                    Pop from the Transformation matrix stack. If the stack has no
+                                    element, then nothing will be popped.
+                                </p>
+                                <pre>poptransf</pre>
                             </li>
                             <li>
                                 <h3>GLSL Shader</h3>
                                 <p>
                                     This is exactly the requirement 1.2.1. We have implemented a
                                     basic GLSL shader pretty much like the one we had in CSE 167
-                                    Homework 2.
-                                </p>
-                            </li>
-                            <li>
-                                <h3>Shadow Map</h3>
-                                <p>
-                                    We have done shadow 
+                                    Homework 2. This shader include Ambient Lighting, Phone and
+                                    Lambert Shading, and Arbitray Amount Lighting. We also included
+                                    shadow mapping in our scene.
                                 </p>
                             </li>
                         </ol>
+                    </div>
+                </section>
+                <section id="gallery-section">
+                    <h2>Gallery</h2>
+                    <div class="center">
+                        <img src="img/suzanne.png" width="500px" />
+                        <img src="img/bump_map.png" width="500px" />
                     </div>
                 </section>
             </section>

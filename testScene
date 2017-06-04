@@ -1,3 +1,0 @@
-# This is comment
-# to load an object, start with specify mesh/primitive "filename"
-mesh "teapot.obj"

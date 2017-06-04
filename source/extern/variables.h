@@ -34,8 +34,8 @@ extern float moveSpeed, mouseSpeed, limitedFPS;
 extern mat4 model, view, projection, modelView;
 extern GLuint modelViewPos, projectionPos;
 
-extern GLuint depthMap;
-extern GLuint depthMapID;
+//extern GLuint depthMap;
+//extern GLuint depthMapID;
 
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
@@ -58,8 +58,8 @@ extern GLuint shininessPosition;
 
 extern std::vector<Light *> lights;
 
-extern std::vector<GLfloat> lightPos;
-extern std::vector<GLfloat> lightColor;
+extern std::vector<vec4> lightPos;
+extern std::vector<vec3> lightColor;
 extern GLuint lightAmountPosition;
 extern GLuint lightPosPosition;
 extern GLuint lightColorPosition;

@@ -1,0 +1,8 @@
+ambient 0.2 0.1 0.1
+diffuse 0.4 0.2 0.0
+specular 1 1 1
+shininess 10
+
+directlight 0 -1 0 1 1 1
+
+object suzanne.obj

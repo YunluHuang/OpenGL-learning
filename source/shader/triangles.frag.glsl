@@ -19,11 +19,18 @@ uniform float shininess;
 
 void main() {
     
+    // Setup the final color first
     vec3 finalColor = ambient;
     
+    // Calculate the transformed position
     vec3 vPos = vec3(modelView * myVertex);
     
-    float visibility = texture(depthMap, vPos);
+    // Calculate the visibility
+//    float visibility = texture(depthMap, vPos);
+//    if (visibility == 0) {
+//        fColor = vec4(0, 0, 0, 0);
+//        return;
+//    }
     
     vec3 normal = normalize(vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0)));
     
@@ -31,13 +38,12 @@ void main() {
         
         // Get Light Color
         vec3 lightColor = lightColors[i];
+        vec4 lightSpace = modelView * lightPositions[i];
         
         // Calculate in and out direction
-        bool isDirectLight = lightPositions[i].w == 0;
-        vec3 lightPos = lightPositions[i].xyz;
-        vec3 outDir = isDirectLight ? -lightPos : normalize(lightPos - vPos);
-        
-        outDir = normalize(vec3(transpose(inverse(modelView)) * vec4(outDir, 0.0)));
+        bool isDirectLight = lightSpace.w == 0;
+        vec3 lightPos = lightSpace.xyz;
+        vec3 outDir = isDirectLight ? normalize(-lightPos) : normalize(lightPos - vPos);
         
         vec3 inDir = normalize(-vPos);
         
@@ -48,7 +54,8 @@ void main() {
         
         finalColor += lightColor * (diffuseColor + specularColor);
     }
+    
 //    visibility = 0.2;
-    finalColor *= visibility;
-    fColor = vec4(visibility, visibility, visibility, 1.0);
+//    finalColor *= visibility;
+    fColor = vec4(finalColor, 1.0);
 }

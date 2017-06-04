@@ -34,6 +34,9 @@ extern float moveSpeed, mouseSpeed, limitedFPS;
 extern mat4 model, view, projection, modelView;
 extern GLuint modelViewPos, projectionPos;
 
+extern GLuint depthMap;
+extern GLuint depthMapID;
+
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
 extern std::vector<GLuint> NBOs;

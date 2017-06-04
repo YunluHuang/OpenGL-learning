@@ -3,7 +3,8 @@ diffuse 0.4 0.2 0.0
 specular 1 1 1
 shininess 10
 
-pointlight 0 10 0 1 1 1
+# pointlight 0 10 0 1 1 1
+directlight 0 -1 0 1 1 1
 
 # pushtransf
 

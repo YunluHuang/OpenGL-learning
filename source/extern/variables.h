@@ -22,6 +22,7 @@
 #include "Object.hpp"
 
 extern int width, height;
+extern int windowX, windowY;
 
 extern vec3 eye;
 extern vec3 up;

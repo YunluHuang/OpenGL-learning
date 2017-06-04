@@ -16,6 +16,7 @@ using namespace std;
 //initialize the window size
 int width = 512;
 int height = 512;
+int windowX, windowY;
 float zNear = 0.1f;
 float zFar = 100.0f;
 float fovy = 75.0f;
@@ -54,13 +55,15 @@ void printMat4(mat4 & m) {
 void init() {
     genBuffers();
     
+    windowX = glutGet((GLenum)GLUT_WINDOW_X);
+    windowY = glutGet((GLenum)GLUT_WINDOW_Y) + 30;
+    
+    glutSetCursor(GLUT_CURSOR_NONE);
+    
     //compute the camera view
     model = mat4(1.0f);
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float) width / (float) height, zNear, zFar);
-    
-    //initialize mouse
-    glutWarpPointer(width / 2, height / 2);
     
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, "triangles.vert.glsl"},
@@ -132,9 +135,6 @@ void display() {
         // Setup mvp
         modelView = view * objects[i]->transf;
         glUniformMatrix4fv(modelViewPos, 1, GL_FALSE, &modelView[0][0]);
-        
-        cout << objects[i]->ambient[0] << ", " << objects[i]->ambient[1] << ", "
-        <<objects[i]->ambient[2] << endl;
         
         // Pass color to the shader
         glUniform3f(ambientPosition, objects[i]->ambient[0], objects[i]->ambient[1], objects[i]->ambient[2]);

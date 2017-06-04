@@ -10,6 +10,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
+#include <ApplicationServices/ApplicationServices.h>
+
 using namespace std;
 
 int oldX = width / 2;
@@ -130,16 +132,19 @@ void mouseRotate(int x, int y) {
     // press left button
     // cout << "oldx = " << oldX << ", x = " << x << endl;
     
-    float rotateX = -mouseSpeed * limitedFPS * float (x - oldX);
-    float rotateY = -mouseSpeed * limitedFPS * float (y - oldY);
+    float rotateX = -mouseSpeed * limitedFPS * float (x - width / 2);
+    float rotateY = -mouseSpeed * limitedFPS * float (y - height / 2);
     
     vec3 diff = center - eye;
     vec3 eulerAngle = vec3(rotateY, rotateX, 0.0f);
     quat quaternion = quat(eulerAngle);
     mat4 rotationM = glm::toMat4(quaternion);
-    // cout << "eye = (" << eye.x << ", " << eye.y << ", " << eye.z << ")" << endl;
     diff = vec3(rotationM * vec4(diff, 0.0f));
     center = eye + diff;
+    
+    CGPoint warpPoint = CGPointMake(windowX + width / 2, windowY + height / 2 + 18);
+    CGWarpMouseCursorPosition(warpPoint);
+    CGAssociateMouseAndMouseCursorPosition(true);
     
     oldX = x;
     oldY = y;

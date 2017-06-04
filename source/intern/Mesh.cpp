@@ -14,7 +14,7 @@ Mesh::Mesh(const char * filename) {
     
     FILE* fp;
     float x, y, z;
-    int fx, fy, fz, ignore;
+    int fx, fy, fz, nx, ny, nz, ignore;
     int c1, c2;
     float minY = INFINITY, minZ = INFINITY;
     float maxY = -INFINITY, maxZ = -INFINITY;
@@ -49,10 +49,14 @@ Mesh::Mesh(const char * filename) {
         }
         else if (c1 == 'f')
         {
-            fscanf(fp, "%d//%d %d//%d %d//%d", &fx, &ignore, &fy, &ignore, &fz, &ignore);
+            fscanf(fp, "%d//%d %d//%d %d//%d", &fx, &nx, &fy, &ny, &fz, &nz);
             indices.push_back(fx - 1);
             indices.push_back(fy - 1);
             indices.push_back(fz - 1);
+            
+            normalIndices.push_back(nx - 1);
+            normalIndices.push_back(ny - 1);
+            normalIndices.push_back(nz - 1);
         }
     }
     

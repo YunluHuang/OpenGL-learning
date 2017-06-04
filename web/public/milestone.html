@@ -8,11 +8,126 @@
     </head>
     <body>
         <nav id="side-nav">
-            <%- include("view/milestone_sidebar.html") %>
+            <div id="page-title">
+                <h2>CSE 163 Project 3</h2>
+                <ul id="student-info" style="color: rgba(150, 150, 150, 1)">
+                    <li>Ziyang Li, A92070182</li>
+                    <li>Yunlu Huang, A91008991</li>
+                </ul>
+            </div>
+            <ul id="section-list">
+                <li>
+                    <a data-sec="#overall-section">Milestone</a>
+                    <ul>
+                        <li>
+                            <a data-sec="#abstract-section">Abstract</a>
+                        </li>
+                        <li>
+                            <a data-sec="#current-section">What We Have Done So Far</a>
+                        </li>
+                        <li>
+                            <a data-sec="#gallery-section">Gallery</a>
+                        </li>
+                        <li>
+                            <a data-sec="#compile-section">Road Map</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
         <main>
-            <section>
-                
+            <section id="overall-section">
+                <h2>Milestone</h2>
+                <section id="abstract-section">
+                    <h2>Abstract</h2>
+                    <div>
+                        <p>
+                            In this CSE 163 Final Project, we basically want to do the Basic
+                            High Quality and Real Time Rendering, as described in section 1.2 on the
+                            write-up. Despite the required GLSL shaders, shadow mapping, and
+                            environment mapping, we also want to do Irradiance Environment Maps and
+                            also Ambient Occlusion Shader. To also approach the main purpose of
+                            real-time rendering, Game, we will also write arbitrary
+                            <code>.obj</code> file loader that can load relatively large scene that
+                            is modeled in Blender, some material loader that can apply to different
+                            objects, and a First-Person Camera that can act like in the Game.
+                        </p>
+                    </div>
+                </section>
+                <section id="current-section">
+                    <h2>What We Have Done So Far</h2>
+                    <div>
+                        <ol>
+                            <li>
+                                <h3>OpenGL Program Structure</h3>
+                                <p>
+                                    Since we are aiming at a larger scale of real-time rendering
+                                    program, the original Homework 2 Code in CSE 167 will not fit
+                                    for our future development, so we have completely rewrote our
+                                    OpenGL Program.
+                                </p>
+                            </li>
+                            <li>
+                                <h3><code>.obj</code> File Loader</h3>
+                                <p>
+                                    In this project, unlike the original CSE 167 Homework 2, we want
+                                    to base our models all on the <code>.obj</code> file format.
+                                    Which means, even for the primitives we want to use an object
+                                    file. But when we attempt to load a simple model we exported
+                                    from Blender, the original file parser failed. So now we have
+                                    completely rewrote a new file loader that can load various kinds
+                                    of models.
+                                </p>
+                                <p>
+                                    Also, the original file loader cannot handle the normals in the
+                                    obj files. So now we can handle those kinds of models as well,
+                                    both smooth shading and flat shading. All the information comes
+                                    from the obj file.
+                                </p>
+                                <p>
+                                    It is very interesting that we have implemented a cache system.
+                                    Everytime we load a file, we will store the object in the cache.
+                                    So that if we want to reference that object another time, we
+                                    don't have to reload the object into the VAO. We believe that
+                                    this will enormously improve the performance of the program.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>FPS-like Control System</h3>
+                                <p>
+                                    We have written a new control system. In this control system
+                                    we use mouse hover to change the view direction, and we use
+                                    <code>W</code>, <code>A</code>, <code>S</code>, <code>D</code>,
+                                    to control the position of the camera. We can also use
+                                    <code>Space</code> and <code>x</code> to go up or down, mocking
+                                    the control system in the FPS Game.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>Scene File Reader</h3>
+                                <p>
+                                    This scene file reader is pretty much the same as the original
+                                    one, except that we are going to modify it to also load the
+                                    <code>.mtl</code> files for object material.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>GLSL Shader</h3>
+                                <p>
+                                    This is exactly the requirement 1.2.1. We have implemented a
+                                    basic GLSL shader pretty much like the one we had in CSE 167
+                                    Homework 2.
+                                </p>
+                            </li>
+                            <li>
+                                <h3>Shadow Map</h3>
+                                <p>
+                                    We have done shadow 
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
             </section>
         </main>
         <script src="js/basic.js"></script>

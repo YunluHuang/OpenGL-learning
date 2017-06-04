@@ -36,6 +36,9 @@ void main() {
         bool isDirectLight = lightPositions[i].w == 0;
         vec3 lightPos = lightPositions[i].xyz;
         vec3 outDir = isDirectLight ? -lightPos : normalize(lightPos - vPos);
+        
+        outDir = normalize(vec3(transpose(inverse(modelView)) * vec4(outDir, 0.0)));
+        
         vec3 inDir = normalize(-vPos);
         
         // Calculate diffuse and specular color

@@ -142,7 +142,7 @@ void mouseRotate(int x, int y) {
     diff = vec3(rotationM * vec4(diff, 0.0f));
     center = eye + diff;
     
-    CGPoint warpPoint = CGPointMake(windowX + width / 2, windowY + height / 2 + 18);
+    CGPoint warpPoint = CGPointMake(windowX + width / 2, windowY + height / 2);
     CGWarpMouseCursorPosition(warpPoint);
     CGAssociateMouseAndMouseCursorPosition(true);
     

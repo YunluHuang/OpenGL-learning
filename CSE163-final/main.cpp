@@ -56,7 +56,7 @@ void printMat4(mat4 & m) {
 void init() {
     
     windowX = glutGet((GLenum)GLUT_WINDOW_X);
-    windowY = glutGet((GLenum)GLUT_WINDOW_Y) + 30;
+    windowY = glutGet((GLenum)GLUT_WINDOW_Y) + 46;
     
     glutSetCursor(GLUT_CURSOR_NONE);
     

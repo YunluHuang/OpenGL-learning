@@ -55,25 +55,25 @@ scale 0.2 0.2 0.2
 pushtransf
 diffuse 1.0 0.3 0.3
 translate -4 0 -4
-object sphere.obj
+object smoothsphere.obj
 poptransf
 
 pushtransf
 diffuse 1.0 1.0 0.3
 translate -4 0 4
-object sphere.obj
+object smoothsphere.obj
 poptransf
 
 pushtransf
 diffuse 0 0 1.0
 translate 4 0 -4
-object sphere.obj
+object smoothsphere.obj
 poptransf
 
 pushtransf
 diffuse 0 1.0 0
 translate 4 0 4
-object sphere.obj
+object smoothsphere.obj
 poptransf
 
 poptransf

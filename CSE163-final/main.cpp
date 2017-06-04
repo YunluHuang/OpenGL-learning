@@ -147,6 +147,7 @@ void display() {
     }
     
     glFlush();
+    glutSwapBuffers();
 }
 
 void idle() {
@@ -163,12 +164,15 @@ int main(int argc, char * argv[]) {
     glutInit(&argc, argv);
     
     //create the window
-    glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(width, height);
     glutCreateWindow("final-project");
     
     readfile(argv[1]);
     init();
+    
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     
     glutDisplayFunc(display);
     glutIdleFunc(idle);

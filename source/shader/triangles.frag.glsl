@@ -17,21 +17,32 @@ uniform vec3 specular;
 uniform float shininess;
 
 void main() {
-    vec3 lightPos = vec3(0.0, 12.0, 0.0);
-    vec3 lightColor = vec3(0.0, 0.0, 1.0);
-
+    
+    vec3 finalColor = ambient;
+    
     vec3 vPos = vec3(modelView * myVertex);
-    vec3 normal = vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0));
-    normal = normalize(normal);
+    vec3 normal = normalize(vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0)));
     
-    vec3 inDir = normalize(-vPos);
-    vec3 outDir = normalize(lightPos - vPos);
-    vec3 halfAngle = normalize(inDir + outDir);
-    vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
-    vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
-    vec3 finalColor = ambient + lightColor * (diffuseColor + specularColor);
+    for (int i = 0; i < lightAmount; i++) {
+        
+        // Get Light Color
+        vec3 lightColor = lightColors[i];
+        
+        // Calculate in and out direction
+        bool isDirectLight = lightPositions[i].w == 0;
+        vec3 lightPos = lightPositions[i].xyz;
+        vec3 outDir = isDirectLight ? -lightPos : normalize(lightPos - vPos);
+        vec3 inDir = normalize(-vPos);
+        
+        // Calculate diffuse and specular color
+        vec3 halfAngle = normalize(inDir + outDir);
+        vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
+        vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
+        
+        finalColor += lightColor * (diffuseColor + specularColor);
+    }
+    
     fColor = vec4(finalColor, 1.0);
-    
 }
 
 //in vec3 myNormal;

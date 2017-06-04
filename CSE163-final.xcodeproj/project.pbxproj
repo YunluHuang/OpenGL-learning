@@ -20,6 +20,7 @@
 		DF3F3EC51EE2EB4400DAC187 /* PointLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EC41EE2EB4400DAC187 /* PointLight.cpp */; };
 		DF3F3ECA1EE3445D00DAC187 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EC81EE3445D00DAC187 /* Object.cpp */; };
 		DF3F3ED11EE3515B00DAC187 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF3F3ED01EE3513700DAC187 /* cube.obj */; };
+		DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF3F3ED21EE35CC700DAC187 /* sphere.obj */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
@@ -33,6 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */,
 				DF3F3ED11EE3515B00DAC187 /* cube.obj in CopyFiles */,
 				DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */,
 				DFB66EB31EE2CFD500CAE706 /* triangles.vert.glsl in CopyFiles */,

@@ -159,7 +159,6 @@ void readfile(const char * filename) {
         }
         else if (command == "pushtransf") {
             transfStack.push(transfStack.top());
-            cout << "pushing, size " << transfStack.size() << endl;
         }
         else if (command == "poptransf") {
             if (transfStack.empty()) {
@@ -167,7 +166,6 @@ void readfile(const char * filename) {
                 continue;
             }
             transfStack.pop();
-            cout << "popping, size " << transfStack.size() << endl;
         }
         else {
             cerr << "Unknown Command in Scene File: " << command << endl;

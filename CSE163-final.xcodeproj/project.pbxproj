@@ -10,6 +10,7 @@
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		DF19B3ED1EE3914200E4B19C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF19B3EC1EE3914200E4B19C /* ApplicationServices.framework */; };
+		DF19B3EF1EE3A7B600E4B19C /* temple.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF19B3EE1EE3A50100E4B19C /* temple.scene */; };
 		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
 		DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EB31EE2D2A700DAC187 /* Control.cpp */; };
 		DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */; };
@@ -36,6 +37,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF19B3EF1EE3A7B600E4B19C /* temple.scene in CopyFiles */,
 				DF3F3ED51EE38B8600DAC187 /* cube2.obj in CopyFiles */,
 				DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */,
 				DF3F3ED11EE3515B00DAC187 /* cube.obj in CopyFiles */,
@@ -54,6 +56,7 @@
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6CFF62661EE1070700B237F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "CSE163-final/main.cpp"; sourceTree = SOURCE_ROOT; };
 		DF19B3EC1EE3914200E4B19C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		DF19B3EE1EE3A50100E4B19C /* temple.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temple.scene; sourceTree = "<group>"; };
 		DF3F3EB31EE2D2A700DAC187 /* Control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
 		DF3F3EB51EE2D2B100DAC187 /* Control.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Control.hpp; sourceTree = "<group>"; };
 		DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
@@ -1430,6 +1433,7 @@
 			isa = PBXGroup;
 			children = (
 				DFB66E9F1EE2CF0200CAE706 /* basic.scene */,
+				DF19B3EE1EE3A50100E4B19C /* temple.scene */,
 			);
 			path = scene;
 			sourceTree = "<group>";

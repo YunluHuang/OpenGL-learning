@@ -154,7 +154,7 @@ void displayDepthMap() {
     
     float near_plane = 1.0f, far_plane = 7.5f;
     
-    lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+    lightProjection = glm::ortho(-1.5f, 1.5f, -1.5f, 1.5f, near_plane, far_plane);
     lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
     
@@ -215,13 +215,8 @@ void displayMainProgram() {
     mainShader->set("lightPositions", lightPos);
     mainShader->set("lightColors", lightColor);
     
-    glm::mat4 biasMatrix(
-                         0.5, 0.0, 0.0, 0.0,
-                         0.0, 0.5, 0.0, 0.0,
-                         0.0, 0.0, 0.5, 0.0,
-                         0.5, 0.5, 0.5, 1.0
-                         );
-    glm::mat4 depthBiasVP = biasMatrix * lightSpaceMatrix;
+    mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
+    mat4 depthBiasVP = biasMatrix * lightSpaceMatrix;
     mainShader->set("lightSpaceMatrix", depthBiasVP);
     
     // Pass objects to the shader

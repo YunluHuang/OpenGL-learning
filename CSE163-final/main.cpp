@@ -110,6 +110,9 @@ void initShadowMap() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    
     float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
     
@@ -147,7 +150,7 @@ void displayDepthMap() {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
+    glm::vec3 lightPos(-4.0f, 2.0f, 3.0f);
     
     float near_plane = 1.0f, far_plane = 7.5f;
     
@@ -211,13 +214,22 @@ void displayMainProgram() {
     }
     mainShader->set("lightPositions", lightPos);
     mainShader->set("lightColors", lightColor);
-    mainShader->set("lightSpaceMatrix", lightSpaceMatrix);
+    
+    glm::mat4 biasMatrix(
+                         0.5, 0.0, 0.0, 0.0,
+                         0.0, 0.5, 0.0, 0.0,
+                         0.0, 0.0, 0.5, 0.0,
+                         0.5, 0.5, 0.5, 1.0
+                         );
+    glm::mat4 depthBiasVP = biasMatrix * lightSpaceMatrix;
+    mainShader->set("lightSpaceMatrix", depthBiasVP);
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
         
         // Setup mvp
-        mainShader->set("modelView", view * objects[i]->transf);
+        mainShader->set("model", objects[i]->transf);
+        mainShader->set("view", view);
         mainShader->set("ambient", objects[i]->ambient);
         mainShader->set("diffuse", objects[i]->diffuse);
         mainShader->set("specular", objects[i]->specular);

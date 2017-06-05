@@ -42,6 +42,10 @@ struct Shader {
     void set(const char * name, const std::vector<vec2> & vs);
     void set(const char * name, const std::vector<vec3> & vs);
     void set(const char * name, const std::vector<vec4> & vs);
+    
+    void set(const char * name, const std::vector<mat2> & ms);
+    void set(const char * name, const std::vector<mat3> & ms);
+    void set(const char * name, const std::vector<mat4> & ms);
 };
 
 

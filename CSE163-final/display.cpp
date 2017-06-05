@@ -17,6 +17,8 @@
 
 using namespace std;
 
+void processKeyboard();
+
 std::vector<GLuint> VAOs;
 std::vector<GLuint> VBOs;
 std::vector<GLuint> NBOs;
@@ -123,6 +125,9 @@ void displayMainProgram() {
 }
 
 void display() {
+    
+    processKeyboard();
+    
     displayDepthMap();
     displayMainProgram();
     
@@ -131,5 +136,5 @@ void display() {
 }
 
 void idle() {
-    // display();
+     display();
 }

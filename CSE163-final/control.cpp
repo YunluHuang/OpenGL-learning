@@ -24,51 +24,60 @@ float limitedFPS = 1.0f / 60.0f;
 int oldX = width / 2;
 int oldY = height / 2;
 
-void keyboard(unsigned char key, int x, int y) {
+bool activeKey[1024];
+
+void processKeyboard() {
+    
     vec3 xAxis = -normalize(cross(eye - center, up)); xAxis.y = 0;
     vec3 yAxis = normalize(up);
     vec3 zAxis = -normalize(eye - center); zAxis.y = 0;
+    
+    if (activeKey['w']) {
+        center += moveSpeed * zAxis;
+        eye += moveSpeed * zAxis;
+    }
+    
+    if (activeKey['s']) {
+        center -= moveSpeed * zAxis;
+        eye -= moveSpeed * zAxis;
+    }
+    
+    if (activeKey['a']) {
+        center -= moveSpeed * xAxis;
+        eye -= moveSpeed * xAxis;
+    }
+    
+    if (activeKey['d']) {
+        center += moveSpeed * xAxis;
+        eye += moveSpeed * xAxis;
+    }
+    
+    if (activeKey[' ']) {
+        center += moveSpeed * yAxis;
+        eye += moveSpeed * yAxis;
+    }
+    
+    if (activeKey['x']) {
+        center -= moveSpeed * yAxis;
+        eye -= moveSpeed * yAxis;
+    }
+}
+
+void keyboardDown(unsigned char key, int x, int y) {
+    activeKey[key] = true;
     switch (key) {
-        case 'w': {
-            center += moveSpeed * zAxis;
-            eye += moveSpeed * zAxis;
-            break;
-        }
-        case 's': {
-            center -= moveSpeed * zAxis;
-            eye -= moveSpeed * zAxis;
-            break;
-        }
-        case 'a': {
-            center -= moveSpeed * xAxis;
-            eye -= moveSpeed * xAxis;
-            break;
-        }
-        case 'd': {
-            center += moveSpeed * xAxis;
-            eye += moveSpeed * xAxis;
-            break;
-        }
-        case ' ': {
-            center += moveSpeed * yAxis;
-            eye += moveSpeed * yAxis;
-            break;
-        }
-        case 'x': {
-            center -= moveSpeed * yAxis;
-            eye -= moveSpeed * yAxis;
-            break;
-        }
         case 27: {
             exit(1);
             break;
         }
         default: {
-            cout << "invalid key" << endl;
             break;
         }
     }
-    glutPostRedisplay();
+}
+
+void keyboardUp(unsigned char key, int x, int y) {
+    activeKey[key] = false;
 }
 
 void mouse(int button, int state, int x, int y) {

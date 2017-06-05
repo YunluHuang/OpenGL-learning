@@ -173,3 +173,15 @@ void Shader::set(const char * name, const std::vector<vec4> & vs) {
     }
     glUniform4fv(getUniId(name), (int) vs.size(), &v[0]);
 }
+
+void set(const char * name, const std::vector<mat2> & ms) {
+    
+}
+
+void set(const char * name, const std::vector<mat3> & ms) {
+    
+}
+
+void set(const char * name, const std::vector<mat4> & ms) {
+    
+}

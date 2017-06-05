@@ -12,7 +12,8 @@ void readfile(const char * filename);
 void init();
 void display();
 void idle();
-void keyboard(unsigned char key, int x, int y);
+void keyboardDown(unsigned char key, int x, int y);
+void keyboardUp(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void mouseRotate(int x, int y);
 void mouseMove(int x, int y);
@@ -38,7 +39,8 @@ int main(int argc, char * argv[]) {
     
     glutDisplayFunc(display);
     glutIdleFunc(idle);
-    glutKeyboardFunc(keyboard);
+    glutKeyboardFunc(keyboardDown);
+    glutKeyboardUpFunc(keyboardUp);
     glutMouseFunc(mouse);
     glutPassiveMotionFunc(mouseRotate);
     glutMotionFunc(mouseRotate);

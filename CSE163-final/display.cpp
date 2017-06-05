@@ -27,7 +27,7 @@ void displayDepthMap() {
     // render scene from light's point of view
     depthShader->use();
     
-    lightProjection = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, 1.0f, 7.5f);
+    lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, 1.0f, 7.5f);
     
     for (int i = 0; i < lights.size(); i++) {
         
@@ -89,6 +89,7 @@ void displayMainProgram() {
         
         mat4 depthBiasVP = biasMatrix * lightSpaceMatrices[i];
         mainShader->set(("lightSpaceMatrices[" + to_string(i) + "]").c_str(), depthBiasVP);
+        mainShader->set(("depthMaps[" + to_string(i) + "]").c_str(), i);
         
         PointLight * ptlgt = static_cast<PointLight *>(lights[i]);
         DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);

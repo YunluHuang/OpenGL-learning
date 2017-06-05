@@ -55,19 +55,19 @@ void initMainShader() {
 
 void initShadowMap() {
     
+    depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
+    
     for (int i = 0; i < lights.size(); i++) {
         depthMapFBOs.push_back(0);
         depthMaps.push_back(0);
     }
     
-    depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
-    
     glGenFramebuffers(10, &depthMapFBOs[0]);
     glGenTextures(10, &depthMaps[0]);
     
-    for (int i = 0; i < depthMaps.size(); i++) {
+    for (int i = 0; i < lights.size(); i++) {
         
-        cout << depthMaps[i] << endl;
+        cout << depthMapFBOs[i] << endl;
         
         glBindTexture(GL_TEXTURE_2D, depthMaps[i]);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);

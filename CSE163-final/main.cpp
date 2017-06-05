@@ -10,10 +10,8 @@ int width = 720, height = 480;
 
 void readfile(const char * filename);
 void init();
-
 void display();
 void idle();
-
 void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void mouseRotate(int x, int y);

@@ -4,14 +4,14 @@ out vec4 fColor;
 
 in vec4 myVertex;
 in vec3 myNormal;
-in vec4 shadowCoord;
+in vec4 shadowCoords[10];
 
 uniform int lightAmount;
 uniform vec4 lightPositions[10];
 uniform vec3 lightColors[10];
 
-uniform mat4 lightSpaceMatrix;
-uniform sampler2DShadow depthMap;
+uniform mat4 lightSpaceMatrices[10];
+uniform sampler2DShadow depthMaps[10];
 
 uniform mat4 view;
 uniform mat4 model;
@@ -20,8 +20,6 @@ uniform vec3 ambient;
 uniform vec3 diffuse;
 uniform vec3 specular;
 uniform float shininess;
-
-vec3 lightPosition = vec3(-4.0f, 2.0f, 3.0f);
 
 void main() {
     
@@ -38,15 +36,15 @@ void main() {
     for (int i = 0; i < lightAmount; i++) {
     
         // Get Light Color
-        vec3 lightColor = vec3(1, 1, 1);
-        vec4 lightSpace = modelView * vec4(lightPosition, 1.0f);
+        vec3 lightColor = lightColors[i];
+        vec4 lightSpace = modelView * lightPositions[i];
         
         // Calculate in and out direction
         bool isDirectLight = lightSpace.w == 0;
         vec3 lightPos = lightSpace.xyz;
-        vec3 outDir = isDirectLight ? normalize(lightPos) : normalize(lightPos - vPos);
+        vec3 outDir = isDirectLight ? normalize(-lightPos) : normalize(lightPos - vPos);
         
-        float visibility = texture(depthMap, vec3(shadowCoord.xy, (shadowCoord.z - 0.002) / shadowCoord.w));
+        float visibility = texture(depthMaps[i], vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w));
     
         vec3 inDir = normalize(-vPos);
         

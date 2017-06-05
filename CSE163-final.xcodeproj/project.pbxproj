@@ -17,10 +17,8 @@
 		DF19B3F61EE3E18000E4B19C /* temple.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF19B3EE1EE3A50100E4B19C /* temple.scene */; };
 		DF19B3F71EE3E18000E4B19C /* suzanne.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF19B3F21EE3E12900E4B19C /* suzanne.scene */; };
 		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
-		DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EB31EE2D2A700DAC187 /* Control.cpp */; };
 		DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */; };
 		DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
-		DF3F3EBB1EE2D2E900DAC187 /* ReadFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */; };
 		DF3F3EBE1EE2EA2500DAC187 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */; };
 		DF3F3EC11EE2EAB000DAC187 /* DirectLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */; };
 		DF3F3EC51EE2EB4400DAC187 /* PointLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EC41EE2EB4400DAC187 /* PointLight.cpp */; };
@@ -31,6 +29,10 @@
 		DF44CE821EE4644E00C58E2F /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE811EE4644E00C58E2F /* Shader.cpp */; };
 		DF44CE841EE4893600C58E2F /* debugQuad.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE7F1EE40C8900C58E2F /* debugQuad.frag.glsl */; };
 		DF44CE851EE4893600C58E2F /* debugQuad.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE801EE40C9B00C58E2F /* debugQuad.vert.glsl */; };
+		DF44CE881EE602D300C58E2F /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE861EE602D300C58E2F /* display.cpp */; };
+		DF44CE8A1EE6033600C58E2F /* init.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE891EE6033600C58E2F /* init.cpp */; };
+		DF44CE8D1EE603D500C58E2F /* readfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE8B1EE603D500C58E2F /* readfile.cpp */; };
+		DF44CE8F1EE607FB00C58E2F /* control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE8E1EE607FB00C58E2F /* control.cpp */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
@@ -76,8 +78,6 @@
 		DF19B3F01EE3ABA100E4B19C /* smoothsphere.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = smoothsphere.obj; sourceTree = "<group>"; };
 		DF19B3F21EE3E12900E4B19C /* suzanne.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = suzanne.scene; sourceTree = "<group>"; };
 		DF19B3F31EE3E14400E4B19C /* suzanne.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = suzanne.obj; sourceTree = "<group>"; };
-		DF3F3EB31EE2D2A700DAC187 /* Control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
-		DF3F3EB51EE2D2B100DAC187 /* Control.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Control.hpp; sourceTree = "<group>"; };
 		DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		DF3F3EBF1EE2EA4300DAC187 /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectLight.cpp; sourceTree = "<group>"; };
@@ -94,6 +94,11 @@
 		DF44CE801EE40C9B00C58E2F /* debugQuad.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = debugQuad.vert.glsl; sourceTree = "<group>"; };
 		DF44CE811EE4644E00C58E2F /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		DF44CE831EE4645A00C58E2F /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		DF44CE861EE602D300C58E2F /* display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = display.cpp; path = "CSE163-final/display.cpp"; sourceTree = SOURCE_ROOT; };
+		DF44CE891EE6033600C58E2F /* init.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = init.cpp; path = "CSE163-final/init.cpp"; sourceTree = SOURCE_ROOT; };
+		DF44CE8B1EE603D500C58E2F /* readfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = readfile.cpp; path = "CSE163-final/readfile.cpp"; sourceTree = SOURCE_ROOT; };
+		DF44CE8C1EE603D500C58E2F /* variables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = variables.h; path = "CSE163-final/variables.h"; sourceTree = SOURCE_ROOT; };
+		DF44CE8E1EE607FB00C58E2F /* control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = control.cpp; path = "CSE163-final/control.cpp"; sourceTree = SOURCE_ROOT; };
 		DFB66C671EE2CF0100CAE706 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DFB66C691EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		DFB66C6B1EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -641,11 +646,8 @@
 		DFB66E9F1EE2CF0200CAE706 /* basic.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = basic.scene; sourceTree = "<group>"; };
 		DFB66EA31EE2CF0200CAE706 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		DFB66EA51EE2CF0200CAE706 /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
-		DFB66EA61EE2CF0200CAE706 /* ReadFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ReadFile.hpp; sourceTree = "<group>"; };
-		DFB66EA71EE2CF0200CAE706 /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = variables.h; sourceTree = "<group>"; };
 		DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
-		DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ReadFile.cpp; sourceTree = "<group>"; };
 		DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangles.frag.glsl; sourceTree = "<group>"; };
 		DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangles.vert.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -688,6 +690,11 @@
 			isa = PBXGroup;
 			children = (
 				6CFF62661EE1070700B237F3 /* main.cpp */,
+				DF44CE861EE602D300C58E2F /* display.cpp */,
+				DF44CE891EE6033600C58E2F /* init.cpp */,
+				DF44CE8B1EE603D500C58E2F /* readfile.cpp */,
+				DF44CE8E1EE607FB00C58E2F /* control.cpp */,
+				DF44CE8C1EE603D500C58E2F /* variables.h */,
 			);
 			name = "CSE163-final";
 			path = openGL_tutorial_1;
@@ -1485,11 +1492,8 @@
 				DF3F3EBF1EE2EA4300DAC187 /* Light.hpp */,
 				DF3F3EC21EE2EAC400DAC187 /* DirectLight.hpp */,
 				DF3F3EC31EE2EB1400DAC187 /* PointLight.hpp */,
-				DF3F3EB51EE2D2B100DAC187 /* Control.hpp */,
 				DFB66EA31EE2CF0200CAE706 /* Geometry.hpp */,
 				DFB66EA51EE2CF0200CAE706 /* Mesh.hpp */,
-				DFB66EA61EE2CF0200CAE706 /* ReadFile.hpp */,
-				DFB66EA71EE2CF0200CAE706 /* variables.h */,
 				DF3F3EC71EE2EE3000DAC187 /* math.hpp */,
 				DF3F3ECB1EE3447300DAC187 /* Object.hpp */,
 				DF44CE831EE4645A00C58E2F /* Shader.hpp */,
@@ -1503,10 +1507,8 @@
 				DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */,
 				DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */,
 				DF3F3EC41EE2EB4400DAC187 /* PointLight.cpp */,
-				DF3F3EB31EE2D2A700DAC187 /* Control.cpp */,
 				DFB66EA91EE2CF0200CAE706 /* Geometry.cpp */,
 				DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */,
-				DFB66EAC1EE2CF0200CAE706 /* ReadFile.cpp */,
 				DF3F3EC81EE3445D00DAC187 /* Object.cpp */,
 				DF44CE811EE4644E00C58E2F /* Shader.cpp */,
 			);
@@ -1585,14 +1587,16 @@
 			files = (
 				DF3F3EBE1EE2EA2500DAC187 /* Light.cpp in Sources */,
 				DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */,
-				DF3F3EB71EE2D2E900DAC187 /* Control.cpp in Sources */,
 				DF3F3EC11EE2EAB000DAC187 /* DirectLight.cpp in Sources */,
+				DF44CE881EE602D300C58E2F /* display.cpp in Sources */,
+				DF44CE8A1EE6033600C58E2F /* init.cpp in Sources */,
 				DF3F3EB81EE2D2E900DAC187 /* Geometry.cpp in Sources */,
 				DF3F3EC51EE2EB4400DAC187 /* PointLight.cpp in Sources */,
 				DF44CE821EE4644E00C58E2F /* Shader.cpp in Sources */,
 				DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */,
+				DF44CE8F1EE607FB00C58E2F /* control.cpp in Sources */,
+				DF44CE8D1EE603D500C58E2F /* readfile.cpp in Sources */,
 				DF3F3ECA1EE3445D00DAC187 /* Object.cpp in Sources */,
-				DF3F3EBB1EE2D2E900DAC187 /* ReadFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

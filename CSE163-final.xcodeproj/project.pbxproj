@@ -29,6 +29,8 @@
 		DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF3F3ED21EE35CC700DAC187 /* sphere.obj */; };
 		DF3F3ED51EE38B8600DAC187 /* cube2.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF3F3ED41EE38B7300DAC187 /* cube2.obj */; };
 		DF44CE821EE4644E00C58E2F /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE811EE4644E00C58E2F /* Shader.cpp */; };
+		DF44CE841EE4893600C58E2F /* debugQuad.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE7F1EE40C8900C58E2F /* debugQuad.frag.glsl */; };
+		DF44CE851EE4893600C58E2F /* debugQuad.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE801EE40C9B00C58E2F /* debugQuad.vert.glsl */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
@@ -42,6 +44,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF44CE841EE4893600C58E2F /* debugQuad.frag.glsl in CopyFiles */,
+				DF44CE851EE4893600C58E2F /* debugQuad.vert.glsl in CopyFiles */,
 				DF19B3F41EE3E18000E4B19C /* suzanne.obj in CopyFiles */,
 				DF19B3F51EE3E18000E4B19C /* smoothsphere.obj in CopyFiles */,
 				DF19B3F61EE3E18000E4B19C /* temple.scene in CopyFiles */,

@@ -1,14 +1,27 @@
 //
-//  Geometry.cpp
-//  openGL_tutorial_1
+//  geometry.cpp
+//  CSE163-final
 //
-//  Created by Ah Huang on 6/1/17.
+//  Created by Liby Lee on 6/5/17.
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
-#include "Geometry.hpp"
+#ifndef geometry_cpp
+#define geometry_cpp
+
+#include <stdio.h>
+
+#include <vector>
+#include <cstdio>
+#include <iostream>
+
+#include "variables.h"
+#include "Mesh.hpp"
 
 using namespace std;
+
+//Vertex attribute: poisition id = 0
+enum Attrib_IDs {vPosition = 0, vNormal = 1, vFace = 2};
 
 void genBuffers() {
     int size = (int) loadedMeshes.size();
@@ -16,12 +29,6 @@ void genBuffers() {
     glGenBuffers(size, &VBOs[0]);
     glGenBuffers(size, &NBOs[0]);
     glGenBuffers(size, &EBOs[0]);
-}
-
-void initAllMeshes() {
-    for (auto it = loadedMeshes.begin(); it != loadedMeshes.end(); it++) {
-        initMesh(it->second);
-    }
 }
 
 void initMesh(Mesh * mesh) {
@@ -51,49 +58,16 @@ void initMesh(Mesh * mesh) {
     glEnableVertexAttribArray(vFace);
 }
 
+void initAllMeshes() {
+    for (auto it = loadedMeshes.begin(); it != loadedMeshes.end(); it++) {
+        initMesh(it->second);
+    }
+}
+
 void displayObject(Object * object) {
-    
     glBindVertexArray(VAOs[object->mesh->id]);
-    
     glDrawElements(GL_TRIANGLES, (int) object->mesh->indices.size(), GL_UNSIGNED_INT, 0);
-    
     glBindVertexArray(0);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

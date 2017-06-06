@@ -11,13 +11,14 @@
 #include "variables.h"
 #include "math.hpp"
 
-#include "Geometry.hpp"
 #include "PointLight.hpp"
 #include "DirectLight.hpp"
 
 using namespace std;
 
 void processKeyboard();
+
+void displayObject(Object * object);
 
 std::vector<GLuint> VAOs;
 std::vector<GLuint> VBOs;

@@ -10,7 +10,7 @@
 #include "math.hpp"
 
 #include "variables.h"
-#include "Geometry.hpp"
+
 #include "Shader.hpp"
 
 using namespace std;
@@ -39,6 +39,9 @@ std::vector<vec3> lightColor;
 std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
+
+void genBuffers();
+void initAllMeshes();
 
 void initMainShader() {
     

@@ -6,8 +6,8 @@
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
-#ifndef Variables_H
-#define Variables_H
+#ifndef variables_h
+#define variables_h
 
 #include <OpenGL/gl3.h>
 #define __gl_h_

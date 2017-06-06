@@ -60,7 +60,7 @@ void processKeyboard() {
         eye += moveSpeed * yAxis;
     }
     
-    if (glutGetModifiers() == GLUT_ACTIVE_SHIFT) {
+    if (activeKey['x']) {
         center -= moveSpeed * yAxis;
         eye -= moveSpeed * yAxis;
     }

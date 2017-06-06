@@ -27,7 +27,8 @@ std::vector<GLuint> EBOs;
 
 void displayDepthMap() {
     
-    // render scene from light's point of view
+    glCullFace(GL_FRONT);
+    
     depthShader->use();
     
     lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, 1.0f, 7.5f);
@@ -49,7 +50,7 @@ void displayDepthMap() {
         else lightPos = -dirlgt->dir;
         mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
         
-        lightSpaceMatrices.push_back(lightProjection * lightView);
+        lightSpaceMatrices[i] = lightProjection * lightView;
         
         depthShader->set("lightProjectionView", lightSpaceMatrices[i]);
         
@@ -65,7 +66,11 @@ void displayDepthMap() {
         
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
+    
+    glCullFace(GL_BACK);
 }
+
+mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
 void displayMainProgram() {
     
@@ -83,7 +88,6 @@ void displayMainProgram() {
     mainShader->set("projection", projection);
     
     // Pass the lights to the shader
-    mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
     mainShader->set("lightAmount", (int) lights.size());
     for (int i = 0; i < lights.size(); i++) {
         
@@ -98,13 +102,13 @@ void displayMainProgram() {
         DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);
         if (ptlgt != nullptr) {
             vec3 pos = ptlgt->pos;
-            lightPos.push_back(vec4(pos, 1));
+            lightPos[i] = vec4(pos, 1);
         }
         else if (dirlgt != nullptr) {
             vec3 dir = dirlgt->dir;
-            lightPos.push_back(vec4(dir, 0));
+            lightPos[i] = vec4(dir, 0);
         }
-        lightColor.push_back(lights[i]->color);
+        lightColor[i] = lights[i]->color;
     }
     mainShader->set("lightPositions", lightPos);
     mainShader->set("lightColors", lightColor);

@@ -42,18 +42,23 @@ void main() {
         // Calculate in and out direction
         bool isDirectLight = lightSpace.w == 0;
         vec3 lightPos = lightSpace.xyz;
+        vec3 inDir = normalize(-vPos);
         vec3 outDir = isDirectLight ? normalize(-lightPos) : normalize(lightPos - vPos);
         
-        float visibility = texture(depthMaps[i], vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w));
-    
-        vec3 inDir = normalize(-vPos);
+        // Calculate the shadow position with
+        vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);
+        float visibility = texture(depthMaps[i], shadowPos);
         
         // Calculate diffuse and specular color
         vec3 halfAngle = normalize(inDir + outDir);
         vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
-        finalColor += lightColor * (diffuseColor + specularColor) * visibility;
+        vec3 diff = lightPos - vPos;
+        float brightness = 1 / sqrt(dot(diff, diff));
+        
+        // Add all these together
+        finalColor += visibility * lightColor * (diffuseColor + specularColor);
     }
 
     fColor = vec4(finalColor, 1.0);

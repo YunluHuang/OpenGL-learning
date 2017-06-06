@@ -11,7 +11,10 @@
 
 #include "variables.h"
 
+#include "DirectLight.hpp"
+#include "PointLight.hpp"
 #include "Shader.hpp"
+#include "Object.hpp"
 
 using namespace std;
 
@@ -42,6 +45,7 @@ std::vector<mat4> lightSpaceMatrices;
 
 void genBuffers();
 void initAllMeshes();
+void displayObject(Object * object);
 
 void initMainShader() {
     
@@ -65,8 +69,10 @@ void initShadowMap() {
         depthMaps.push_back(0);
     }
     
-    glGenFramebuffers(10, &depthMapFBOs[0]);
-    glGenTextures(10, &depthMaps[0]);
+    glGenFramebuffers((int) lights.size(), &depthMapFBOs[0]);
+    glGenTextures((int) lights.size(), &depthMaps[0]);
+    
+    float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
     
     for (int i = 0; i < lights.size(); i++) {
         
@@ -79,8 +85,6 @@ void initShadowMap() {
         
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-        
-        float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
         glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
         
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs[i]);
@@ -96,9 +100,4 @@ void init() {
     initMainShader();
     initAllMeshes();
     initShadowMap();
-    
-    mainShader->use();
-    for (int i = 0; i < lights.size(); i++) {
-        mainShader->set(("depthMaps[" + to_string(i) + "]").c_str(), depthMaps[i]);
-    }
 }

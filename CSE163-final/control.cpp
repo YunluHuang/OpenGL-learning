@@ -84,24 +84,7 @@ void keyboardUp(unsigned char key, int x, int y) {
 }
 
 void mouse(int button, int state, int x, int y) {
-    if (button == 3 || button == 4) {
-        
-        // Disregard up event
-        if (state == GLUT_UP) {
-            return;
-        }
-        
-        // Calculate
-        vec3 delta = 0.5f * normalize(center - eye);
-        if (button == 3) {
-            eye += delta;
-        }
-        else {
-            eye -= delta;
-        }
-        
-        glutPostRedisplay();
-    }
+    
 }
 
 void setMousePosition(int x, int y) {
@@ -134,7 +117,7 @@ void mouseRotate(int x, int y) {
 }
 
 void mouseMove(int x, int y) {
-//    glutPostRedisplay();
+    
 }
 
 void initControl() {

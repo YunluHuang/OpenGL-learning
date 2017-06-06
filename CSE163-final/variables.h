@@ -40,12 +40,13 @@ extern float limitedFPS;
 
 extern float yaw, pitch;
 
-extern bool activeKey[1024];
+extern bool activeKey[128];
 
 extern mat4 view, projection, modelView;
 
 extern Shader * mainShader;
 extern Shader * depthShader;
+extern Shader * cubeDepthShader;
 extern std::vector<GLuint> depthMapFBOs, depthMaps;
 
 extern mat4 lightProjection;

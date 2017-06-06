@@ -23,7 +23,7 @@ float limitedFPS = 1.0f / 60.0f;
 float yaw = 0;
 float pitch = 0;
 
-bool activeKey[1024];
+bool activeKey[128];
 
 void processKeyboard() {
     
@@ -120,7 +120,14 @@ void mouseMove(int x, int y) {
     
 }
 
+void initKeys() {
+    for (int i = 0; i < 128; i++) {
+        activeKey[i] = false;
+    }
+}
+
 void initControl() {
+    initKeys();
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
     glutMouseFunc(mouse);

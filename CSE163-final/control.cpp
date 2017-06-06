@@ -16,21 +16,24 @@
 
 using namespace std;
 
-float rotateAmount = 1 / PI;
-float moveSpeed = 0.05f;
+float moveSpeed = 0.03f;
 float mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
-int oldX = width / 2;
-int oldY = height / 2;
+float yaw;
+float pitch;
 
 bool activeKey[1024];
 
 void processKeyboard() {
     
-    vec3 xAxis = -normalize(cross(eye - center, up)); xAxis.y = 0;
-    vec3 yAxis = normalize(up);
-    vec3 zAxis = -normalize(eye - center); zAxis.y = 0;
+    vec3 xAxis = -cross(eye - center, up);
+    xAxis.y = 0;
+    xAxis = normalize(xAxis);
+    vec3 yAxis = up;
+    vec3 zAxis = center - eye;
+    zAxis.y = 0;
+    zAxis = normalize(zAxis);
     
     if (activeKey['w']) {
         center += moveSpeed * zAxis;
@@ -57,7 +60,7 @@ void processKeyboard() {
         eye += moveSpeed * yAxis;
     }
     
-    if (activeKey['x']) {
+    if (glutGetModifiers() == GLUT_ACTIVE_SHIFT) {
         center -= moveSpeed * yAxis;
         eye -= moveSpeed * yAxis;
     }
@@ -101,31 +104,47 @@ void mouse(int button, int state, int x, int y) {
     }
 }
 
-void mouseRotate(int x, int y) {
-    // press left button
-    // cout << "oldx = " << oldX << ", x = " << x << endl;
-    
-    float rotateX = -mouseSpeed * limitedFPS * float (x - width / 2);
-    float rotateY = -mouseSpeed * limitedFPS * float (y - height / 2);
-    
-    vec3 diff = center - eye;
-    vec3 eulerAngle = vec3(rotateY, rotateX, 0.0f);
-    quat quaternion = quat(eulerAngle);
-    mat4 rotationM = glm::toMat4(quaternion);
-    diff = vec3(rotationM * vec4(diff, 0.0f));
-    center = eye + diff;
-    
-    CGPoint warpPoint = CGPointMake(windowX + width / 2, windowY + height / 2);
+void setMousePosition(int x, int y) {
+    CGPoint warpPoint = CGPointMake(windowX + x, windowY + y);
     CGWarpMouseCursorPosition(warpPoint);
     CGAssociateMouseAndMouseCursorPosition(true);
+}
+
+void centerMousePosition() {
+    setMousePosition(width / 2, height / 2);
+}
+
+void mouseRotate(int x, int y) {
     
-    oldX = x;
-    oldY = y;
+    yaw += -mouseSpeed * limitedFPS * float (x - width / 2);
+    pitch += -mouseSpeed * limitedFPS * float (y - height / 2);
+    
+    yaw = yaw < -pi ? 2 * pi + yaw : yaw > pi ? -2 * pi + yaw : yaw;
+    pitch = pitch < -pi / 2 ? -pi / 2 + 0.01 : pitch > pi / 2 ? pi / 2 - 0.01 : pitch;
+    
+    mat4 rotation = mat4(1.0f), identity = mat4(1.0f);
+    rotation *= glm::rotate(identity, yaw, vec3(0, 1, 0));
+    rotation *= glm::rotate(identity, pitch, vec3(1, 0, 0));
+    
+    vec3 diff = vec3(rotation * vec4(0, 0, -1.0f, 0.0f));
+    center = eye + diff;
+    
+    centerMousePosition();
     glutPostRedisplay();
 }
 
 void mouseMove(int x, int y) {
-    oldX = x;
-    oldY = y;
-    glutPostRedisplay();
+//    glutPostRedisplay();
+}
+
+void initControl() {
+    
+    yaw = 0;
+    pitch = 0;
+    
+    glutKeyboardFunc(keyboardDown);
+    glutKeyboardUpFunc(keyboardUp);
+    glutMouseFunc(mouse);
+    glutPassiveMotionFunc(mouseRotate);
+    glutMotionFunc(mouseRotate);
 }

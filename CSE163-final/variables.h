@@ -38,6 +38,8 @@ extern float moveSpeed;
 extern float mouseSpeed;
 extern float limitedFPS;
 
+extern float yaw, pitch;
+
 extern bool activeKey[1024];
 
 extern mat4 view, projection, modelView;

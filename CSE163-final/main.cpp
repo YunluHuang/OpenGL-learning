@@ -12,11 +12,7 @@ void readfile(const char * filename);
 void init();
 void display();
 void idle();
-void keyboardDown(unsigned char key, int x, int y);
-void keyboardUp(unsigned char key, int x, int y);
-void mouse(int button, int state, int x, int y);
-void mouseRotate(int x, int y);
-void mouseMove(int x, int y);
+void initControl();
 
 int main(int argc, char * argv[]) {
     
@@ -33,17 +29,13 @@ int main(int argc, char * argv[]) {
     
     readfile(argv[1]);
     init();
+    initControl();
     
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     
     glutDisplayFunc(display);
     glutIdleFunc(idle);
-    glutKeyboardFunc(keyboardDown);
-    glutKeyboardUpFunc(keyboardUp);
-    glutMouseFunc(mouse);
-    glutPassiveMotionFunc(mouseRotate);
-    glutMotionFunc(mouseRotate);
     
     glutMainLoop();
 }

@@ -15,6 +15,8 @@
 
 struct Light {
     Light(vec3 color);
+    virtual vec4 getLightPosition();
+    virtual mat4 getLightSpace();
     vec3 color;
 };
 

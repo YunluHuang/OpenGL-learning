@@ -35,8 +35,6 @@ void displayDepthMap() {
     
     depthShader->use();
     
-    lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, 0.1f, 10.0f);
-    
     for (int i = 0; i < lights.size(); i++) {
         
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -46,17 +44,7 @@ void displayDepthMap() {
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs[i]);
         glClear(GL_DEPTH_BUFFER_BIT);
         
-        vec3 lightPos;
-        
-        PointLight * ptlgt = static_cast<PointLight *>(lights[i]);
-        DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);
-        if (ptlgt) lightPos = ptlgt->pos;
-        else lightPos = -dirlgt->dir;
-        vec3 upTest = cross(lightPos, vec3(0, 1, 0));
-        vec3 lightUp = upTest == vec3(0, 0, 0) ? vec3(1, 0, 0) : vec3(0, 1, 0);
-        mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), lightUp);
-        
-        lightSpaceMatrices[i] = lightProjection * lightView;
+        lightSpaceMatrices[i] = lights[i]->getLightSpace();
         
         depthShader->set("lightProjectionView", lightSpaceMatrices[i]);
         
@@ -102,16 +90,7 @@ void displayMainProgram() {
         mainShader->set(("lightSpaceMatrices[" + to_string(i) + "]").c_str(), depthBiasVP);
         mainShader->set(("depthMaps[" + to_string(i) + "]").c_str(), i);
         
-        PointLight * ptlgt = static_cast<PointLight *>(lights[i]);
-        DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);
-        if (ptlgt != nullptr) {
-            vec3 pos = ptlgt->pos;
-            lightPos[i] = vec4(pos, 1);
-        }
-        else if (dirlgt != nullptr) {
-            vec3 dir = dirlgt->dir;
-            lightPos[i] = vec4(dir, 0);
-        }
+        lightPos[i] = lights[i]->getLightPosition();
         lightColor[i] = lights[i]->color;
     }
     mainShader->set("lightPositions", lightPos);

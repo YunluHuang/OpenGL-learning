@@ -12,8 +12,19 @@
 #include "Light.hpp"
 
 struct PointLight : public Light {
-    PointLight(vec3 pos, vec3 color);
+    
+    // Point Light Projection Matrix
+    const static mat4 projection;
+    
+    // Position of the point light
     vec3 pos;
+    
+    // Constructor
+    PointLight(vec3 pos, vec3 color);
+    
+    // Helper methods
+    virtual vec4 getLightPosition();
+    virtual mat4 getLightSpace();
 };
 
 

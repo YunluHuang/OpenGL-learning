@@ -12,8 +12,19 @@
 #include "Light.hpp"
 
 struct DirectLight : public Light {
-    DirectLight(vec3 dir, vec3 color);
+    
+    // Direct Light Projection Matrix
+    static const mat4 projection;
+    
+    // Direct Light Parameters
     vec3 dir;
+    
+    // Constructor
+    DirectLight(vec3 dir, vec3 color);
+    
+    // Helper functions
+    virtual vec4 getLightPosition();
+    virtual mat4 getLightSpace();
 };
 
 

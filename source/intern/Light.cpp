@@ -11,3 +11,11 @@
 Light::Light(vec3 color) {
     this->color = color;
 }
+
+vec4 Light::getLightPosition() {
+    return vec4();
+}
+
+mat4 Light::getLightSpace() {
+    return mat4();
+}

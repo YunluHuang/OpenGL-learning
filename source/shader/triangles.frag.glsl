@@ -43,7 +43,7 @@ void main() {
         bool isDirectLight = lightSpace.w == 0;
         vec3 lightPos = lightSpace.xyz;
         vec3 inDir = normalize(-vPos);
-        vec3 outDir = isDirectLight ? normalize(-lightPos) : normalize(lightPos - vPos);
+        vec3 outDir = isDirectLight ? normalize(lightPos) : normalize(lightPos - vPos);
         
         // Calculate the shadow position with
         vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);

@@ -33,6 +33,9 @@
 		DF44CE8D1EE603D500C58E2F /* readfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE8B1EE603D500C58E2F /* readfile.cpp */; };
 		DF44CE8F1EE607FB00C58E2F /* control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE8E1EE607FB00C58E2F /* control.cpp */; };
 		DF44CE921EE64A8800C58E2F /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF44CE911EE64A8800C58E2F /* geometry.cpp */; };
+		DF44CE971EE6A84700C58E2F /* cubeDepth.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE941EE67BD600C58E2F /* cubeDepth.vert.glsl */; };
+		DF44CE981EE6A84700C58E2F /* cubeDepth.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE951EE67BE400C58E2F /* cubeDepth.frag.glsl */; };
+		DF44CE991EE6A84700C58E2F /* cubeDepth.geo.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE961EE67BF300C58E2F /* cubeDepth.geo.glsl */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
@@ -46,6 +49,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF44CE971EE6A84700C58E2F /* cubeDepth.vert.glsl in CopyFiles */,
+				DF44CE981EE6A84700C58E2F /* cubeDepth.frag.glsl in CopyFiles */,
+				DF44CE991EE6A84700C58E2F /* cubeDepth.geo.glsl in CopyFiles */,
 				DF44CE841EE4893600C58E2F /* debugQuad.frag.glsl in CopyFiles */,
 				DF44CE851EE4893600C58E2F /* debugQuad.vert.glsl in CopyFiles */,
 				DF19B3F41EE3E18000E4B19C /* suzanne.obj in CopyFiles */,
@@ -100,6 +106,9 @@
 		DF44CE8E1EE607FB00C58E2F /* control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = control.cpp; path = "CSE163-final/control.cpp"; sourceTree = SOURCE_ROOT; };
 		DF44CE911EE64A8800C58E2F /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = geometry.cpp; path = "CSE163-final/geometry.cpp"; sourceTree = SOURCE_ROOT; };
 		DF44CE931EE64B2A00C58E2F /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = math.hpp; path = "CSE163-final/math.hpp"; sourceTree = SOURCE_ROOT; };
+		DF44CE941EE67BD600C58E2F /* cubeDepth.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cubeDepth.vert.glsl; sourceTree = "<group>"; };
+		DF44CE951EE67BE400C58E2F /* cubeDepth.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cubeDepth.frag.glsl; sourceTree = "<group>"; };
+		DF44CE961EE67BF300C58E2F /* cubeDepth.geo.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cubeDepth.geo.glsl; sourceTree = "<group>"; };
 		DFB66C671EE2CF0100CAE706 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DFB66C691EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		DFB66C6B1EE2CF0100CAE706 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -1522,6 +1531,9 @@
 				6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */,
 				DF44CE7F1EE40C8900C58E2F /* debugQuad.frag.glsl */,
 				DF44CE801EE40C9B00C58E2F /* debugQuad.vert.glsl */,
+				DF44CE941EE67BD600C58E2F /* cubeDepth.vert.glsl */,
+				DF44CE951EE67BE400C58E2F /* cubeDepth.frag.glsl */,
+				DF44CE961EE67BF300C58E2F /* cubeDepth.geo.glsl */,
 			);
 			path = shader;
 			sourceTree = "<group>";

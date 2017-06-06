@@ -70,8 +70,6 @@ void initShadowMap() {
     
     for (int i = 0; i < lights.size(); i++) {
         
-        cout << depthMapFBOs[i] << endl;
-        
         glBindTexture(GL_TEXTURE_2D, depthMaps[i]);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

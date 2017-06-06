@@ -28,11 +28,9 @@ void checkCompileErrors(GLuint shader, std::string type) {
                       << std::endl;
         }
     }
-    else
-    {
+    else {
         glGetProgramiv(shader, GL_LINK_STATUS, &success);
-        if (!success)
-        {
+        if (!success) {
             glGetProgramInfoLog(shader, 1024, NULL, infoLog);
             std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog
                       << "\n -- --------------------------------------------------- -- "
@@ -174,14 +172,38 @@ void Shader::set(const char * name, const std::vector<vec4> & vs) {
     glUniform4fv(getUniId(name), (int) vs.size(), &v[0]);
 }
 
-void set(const char * name, const std::vector<mat2> & ms) {
-    
+void Shader::set(const char * name, const std::vector<mat2> & ms) {
+    vector<GLfloat> v;
+    for (int i = 0; i < ms.size(); i++) {
+        for (int j = 0; j < 2; j++) {
+            for (int k = 0; k < 2; k++) {
+                v.push_back(ms[i][j][k]);
+            }
+        }
+    }
+    glUniformMatrix2fv(getUniId(name), (int) ms.size(), GL_FALSE, &v[0]);
 }
 
-void set(const char * name, const std::vector<mat3> & ms) {
-    
+void Shader::set(const char * name, const std::vector<mat3> & ms) {
+    vector<GLfloat> v;
+    for (int i = 0; i < ms.size(); i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                v.push_back(ms[i][j][k]);
+            }
+        }
+    }
+    glUniformMatrix2fv(getUniId(name), (int) ms.size(), GL_FALSE, &v[0]);
 }
 
-void set(const char * name, const std::vector<mat4> & ms) {
-    
+void Shader::set(const char * name, const std::vector<mat4> & ms) {
+    vector<GLfloat> v;
+    for (int i = 0; i < ms.size(); i++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 4; k++) {
+                v.push_back(ms[i][j][k]);
+            }
+        }
+    }
+    glUniformMatrix2fv(getUniId(name), (int) ms.size(), GL_FALSE, &v[0]);
 }

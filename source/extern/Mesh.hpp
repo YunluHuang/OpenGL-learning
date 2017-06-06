@@ -11,13 +11,18 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include <vector>
+#include <map>
 #include <glm/glm.hpp>
 #include <OpenGL/gl3.h>
 
 struct Mesh {
+    
+    // Mesh id
+    int id;
+    
     Mesh(const char * filename);
-    unsigned long id;
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;

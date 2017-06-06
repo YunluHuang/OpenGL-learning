@@ -26,6 +26,7 @@ void checkCompileErrors(GLuint shader, std::string type) {
             std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog
                       << "\n -- --------------------------------------------------- -- "
                       << std::endl;
+            exit(1);
         }
     }
     else {
@@ -35,6 +36,7 @@ void checkCompileErrors(GLuint shader, std::string type) {
             std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog
                       << "\n -- --------------------------------------------------- -- "
                       << std::endl;
+            exit(1);
         }
     }
 }
@@ -96,6 +98,38 @@ Shader::Shader(const char * vertShaderPath, const char * fragShaderPath) {
     // delete the shaders as they're linked into our program
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+}
+
+Shader::Shader(const char * vertShaderPath, const char * fragShaderPath, const char * geoShaderPath) : Shader(vertShaderPath, fragShaderPath) {
+    
+    std::string geometryCode;
+    std::ifstream gShaderFile;
+    
+    gShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    
+    try {
+        gShaderFile.open(geoShaderPath);
+        std::stringstream gShaderStream;
+        gShaderStream << gShaderFile.rdbuf();
+        gShaderFile.close();
+        geometryCode = gShaderStream.str();
+    }
+    catch (std::ifstream::failure e) {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+    }
+    
+    unsigned int geometry;
+    const char * gShaderCode = geometryCode.c_str();
+    geometry = glCreateShader(GL_GEOMETRY_SHADER);
+    glShaderSource(geometry, 1, &gShaderCode, NULL);
+    glCompileShader(geometry);
+    checkCompileErrors(geometry, "GEOMETRY");
+    
+    glAttachShader(id, geometry);
+    glLinkProgram(id);
+    
+    checkCompileErrors(id, "PROGRAM");
+    glDeleteShader(geometry);
 }
 
 void Shader::use() {

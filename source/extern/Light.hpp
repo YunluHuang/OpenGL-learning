@@ -10,14 +10,29 @@
 #define Light_hpp
 
 #include <stdio.h>
+#include <vector>
 
 #include "math.hpp"
 
+
+
 struct Light {
+    
+    static int count;
+    static float borderColor[4];
+    
+    //
+    int id;
+    GLuint depthMap;
+    GLuint depthMapFBO;
+    vec3 color;
+    
+    // Constructor
     Light(vec3 color);
+    
+    // Virtual helper methods
     virtual vec4 getLightPosition();
     virtual mat4 getLightSpace();
-    vec3 color;
 };
 
 #endif /* Light_hpp */

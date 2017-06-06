@@ -62,38 +62,7 @@ void initMainShader() {
 }
 
 void initShadowMap() {
-    
     depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
-    
-    for (int i = 0; i < lights.size(); i++) {
-        depthMapFBOs.push_back(0);
-        depthMaps.push_back(0);
-    }
-    
-    glGenFramebuffers((int) lights.size(), &depthMapFBOs[0]);
-    glGenTextures((int) lights.size(), &depthMaps[0]);
-    
-    float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
-    
-    for (int i = 0; i < lights.size(); i++) {
-        
-        glBindTexture(GL_TEXTURE_2D, depthMaps[i]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-        
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-        
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs[i]);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMaps[i], 0);
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    }
 }
 
 void init() {

@@ -41,7 +41,7 @@ void displayDepthMap() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         glViewport(0, 0, 1024, 1024);
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs[i]);
+        glBindFramebuffer(GL_FRAMEBUFFER, lights[i]->depthMapFBO);
         glClear(GL_DEPTH_BUFFER_BIT);
         
         lightSpaceMatrices[i] = lights[i]->getLightSpace();
@@ -84,9 +84,9 @@ void displayMainProgram() {
     for (int i = 0; i < lights.size(); i++) {
         
         glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, depthMaps[i]);
+        glBindTexture(GL_TEXTURE_2D, lights[i]->depthMap);
         
-        mat4 depthBiasVP = biasMatrix * lightSpaceMatrices[i];
+        mat4 depthBiasVP = biasMatrix * lights[i]->getLightSpace();
         mainShader->set(("lightSpaceMatrices[" + to_string(i) + "]").c_str(), depthBiasVP);
         mainShader->set(("depthMaps[" + to_string(i) + "]").c_str(), i);
         

@@ -18,6 +18,7 @@ struct Shader {
     
     // Constructor
     Shader(const char * vertShader, const char * fragShader);
+    Shader(const char * vertShader, const char * fragShader, const char * geoShaderPath);
     
     // Program Id
     unsigned int id;

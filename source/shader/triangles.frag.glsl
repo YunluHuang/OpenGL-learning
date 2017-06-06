@@ -54,6 +54,7 @@ void main() {
         vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
+        // Calculate the inverse square brightness
         vec3 diff = lightPos - vPos;
         float brightness = 1 / sqrt(dot(diff, diff));
         

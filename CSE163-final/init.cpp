@@ -6,6 +6,7 @@
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
+#include <iostream>
 #include <stdio.h>
 #include "math.hpp"
 
@@ -100,4 +101,7 @@ void init() {
     initMainShader();
     initAllMeshes();
     initShadowMap();
+    
+    cout << "object: " << objects.size() << ", light: " << lights.size() << "." << endl;
+    cout << loadedMeshes.size() << " meshes loaded." << endl;
 }

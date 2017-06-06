@@ -1,10 +1,10 @@
-pointlight -4 1 2.3 0.8 0.8 1.0
-pointlight 4 3 -1.2 1.0 0.9 0.8
-pointlight 0 4 0 0.9 1.0 1.0
+pointlight -4 1 4.3 0.5 0.5 1.0
+pointlight 0 4 0 0.5 1.0 1.0
+pointlight 4 2 -1.4 1.0 0.7 0.7
 
 ambient 0.2 0.1 0.1
 diffuse 0.5 0.5 0.5
-specular 0.8 0.8 0.8
+specular 0.3 0.3 0.3
 shininess 3
 
 # First the Ground Object
@@ -16,7 +16,8 @@ poptransf
 
 # Then start putting the pillows
 
-shininess 20
+specular 0.8 0.8 0.8
+shininess 50
 
 pushtransf
 translate 0 0.55 0
@@ -83,7 +84,9 @@ poptransf
 # Finally put in the teapot
 
 pushtransf
-diffuse 0.7 0.6 0.4
+shininess 100
+specular 0.8 0.8 0.8
+diffuse 0.5 0.4 0.3
 scale 0.7 0.7 0.7
 object teapot.obj
 poptransf

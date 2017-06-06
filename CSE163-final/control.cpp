@@ -20,8 +20,8 @@ float moveSpeed = 0.03f;
 float mouseSpeed = 0.1f;
 float limitedFPS = 1.0f / 60.0f;
 
-float yaw;
-float pitch;
+float yaw = 0;
+float pitch = 0;
 
 bool activeKey[1024];
 
@@ -121,10 +121,6 @@ void mouseMove(int x, int y) {
 }
 
 void initControl() {
-    
-    yaw = 0;
-    pitch = 0;
-    
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
     glutMouseFunc(mouse);

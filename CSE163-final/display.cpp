@@ -16,14 +16,18 @@
 
 using namespace std;
 
+// Forward declarations
 void processKeyboard();
-
 void displayObject(Object * object);
 
+// Redeclare buffer objects
 std::vector<GLuint> VAOs;
 std::vector<GLuint> VBOs;
 std::vector<GLuint> NBOs;
 std::vector<GLuint> EBOs;
+
+// Bias Matrix for shadow map
+mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
 void displayDepthMap() {
     
@@ -31,7 +35,7 @@ void displayDepthMap() {
     
     depthShader->use();
     
-    lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, 1.0f, 7.5f);
+    lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, 0.1f, 10.0f);
     
     for (int i = 0; i < lights.size(); i++) {
         
@@ -48,7 +52,9 @@ void displayDepthMap() {
         DirectLight * dirlgt = static_cast<DirectLight *>(lights[i]);
         if (ptlgt) lightPos = ptlgt->pos;
         else lightPos = -dirlgt->dir;
-        mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+        vec3 upTest = cross(lightPos, vec3(0, 1, 0));
+        vec3 lightUp = upTest == vec3(0, 0, 0) ? vec3(1, 0, 0) : vec3(0, 1, 0);
+        mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), lightUp);
         
         lightSpaceMatrices[i] = lightProjection * lightView;
         
@@ -69,8 +75,6 @@ void displayDepthMap() {
     
     glCullFace(GL_BACK);
 }
-
-mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
 void displayMainProgram() {
     
@@ -131,15 +135,20 @@ void displayMainProgram() {
 
 void display() {
     
+    // First process keyboard input
     processKeyboard();
     
+    // Then render the depth map
     displayDepthMap();
+    
+    // Then execute the main render program
     displayMainProgram();
     
+    // Flush the viewport and swap the buffer
     glFlush();
     glutSwapBuffers();
 }
 
 void idle() {
-     display();
+    display();
 }

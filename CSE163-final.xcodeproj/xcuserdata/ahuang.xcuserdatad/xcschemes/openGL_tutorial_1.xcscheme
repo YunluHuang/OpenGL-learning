@@ -64,7 +64,15 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "basic.scene"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "suzanne.scene"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "temple.scene"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

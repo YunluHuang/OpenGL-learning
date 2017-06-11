@@ -67,6 +67,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C6B0D521EECF7B200534335 /* ame_powder.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = ame_powder.shader; sourceTree = "<group>"; };
+		6C6B0D531EECF7B200534335 /* powderpeak_bk.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_bk.tga; sourceTree = "<group>"; };
+		6C6B0D541EECF7B200534335 /* powderpeak_dn.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_dn.tga; sourceTree = "<group>"; };
+		6C6B0D551EECF7B200534335 /* powderpeak_ft.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_ft.tga; sourceTree = "<group>"; };
+		6C6B0D561EECF7B200534335 /* powderpeak_lf.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_lf.tga; sourceTree = "<group>"; };
+		6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_rt.tga; sourceTree = "<group>"; };
+		6C6B0D581EECF7B200534335 /* powderpeak_up.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_up.tga; sourceTree = "<group>"; };
+		6C6B0D591EECF7B200534335 /* readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -665,6 +673,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C6B0D501EECF74300534335 /* skybox */ = {
+			isa = PBXGroup;
+			children = (
+				6C6B0D511EECF7B200534335 /* ame_powder */,
+			);
+			name = skybox;
+			sourceTree = "<group>";
+		};
+		6C6B0D511EECF7B200534335 /* ame_powder */ = {
+			isa = PBXGroup;
+			children = (
+				6C6B0D521EECF7B200534335 /* ame_powder.shader */,
+				6C6B0D531EECF7B200534335 /* powderpeak_bk.tga */,
+				6C6B0D541EECF7B200534335 /* powderpeak_dn.tga */,
+				6C6B0D551EECF7B200534335 /* powderpeak_ft.tga */,
+				6C6B0D561EECF7B200534335 /* powderpeak_lf.tga */,
+				6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */,
+				6C6B0D581EECF7B200534335 /* powderpeak_up.tga */,
+				6C6B0D591EECF7B200534335 /* readme */,
+			);
+			name = ame_powder;
+			path = skybox/ame_powder;
+			sourceTree = "<group>";
+		};
 		6C73D0B01EDF35FF00D0763B = {
 			isa = PBXGroup;
 			children = (
@@ -1440,6 +1472,7 @@
 		DFB66E9B1EE2CF0200CAE706 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				6C6B0D501EECF74300534335 /* skybox */,
 				DFB66E9C1EE2CF0200CAE706 /* model */,
 				DFB66E9E1EE2CF0200CAE706 /* scene */,
 				DFB66EA01EE2CF0200CAE706 /* texture */,

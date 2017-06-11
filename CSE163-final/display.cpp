@@ -13,6 +13,7 @@
 
 #include "PointLight.hpp"
 #include "DirectLight.hpp"
+#include "Skybox.hpp"
 
 using namespace std;
 
@@ -112,16 +113,44 @@ void displayMainProgram() {
     }
 }
 
+void displaySkyBox() {
+    
+    cout << "displaySkyBox" << endl;
+    glViewport(0, 0, width, height);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glDepthMask(GL_FALSE);
+    skyboxShader->use();
+    
+    view = glm::lookAt(eye, center, up);
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    
+    //pass the projection and view matrix to shader
+    skyboxShader->set("projection", projection);
+    skyboxShader->set("view", view);
+    skyboxShader->set("skybox", 0);
+    
+    glBindVertexArray(skybox->skyboxVAO);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+   
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDepthMask(GL_TRUE);
+}
+
 void display() {
     
     // First process keyboard input
     processKeyboard();
     
+    // render the skybox
+    // TODO: this need to be rendered last in further development
+    displaySkyBox();
+    
     // Then render the depth map
-    displayDepthMap();
+    //displayDepthMap();
     
     // Then execute the main render program
-    displayMainProgram();
+    //displayMainProgram();
     
     // Flush the viewport and swap the buffer
     glFlush();

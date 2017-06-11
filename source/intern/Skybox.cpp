@@ -19,6 +19,10 @@ Skybox::Skybox(vector<const char *> cubeFaces) {
         NS_TGALOADER::IMAGE image;
         image.LoadTGA(cubeFaces[i]);
         
+        cout << "image " << i << ", " << image.getWidth() << ", " << image.getHeight() << endl;
+        
+        if(image.getDataForOpenGL() == 0) cout << "ERROR: image data not loaded correctly" << endl;
+        
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_BGRA,
                      image.getWidth(), image.getHeight(), 0,
                      GL_BGRA, GL_UNSIGNED_BYTE, image.getDataForOpenGL());
@@ -32,12 +36,14 @@ Skybox::Skybox(vector<const char *> cubeFaces) {
 }
 
 void Skybox::genCube() {
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    cout << "genCube" << endl;
+    glGenVertexArrays(1, &skyboxVAO);
+    glBindVertexArray(skyboxVAO);
     
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glGenBuffers(1, &skyboxVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+    
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), 0);
 }

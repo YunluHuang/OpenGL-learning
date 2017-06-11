@@ -25,6 +25,7 @@
 #include "Mesh.hpp"
 #include "Object.hpp"
 #include "Shader.hpp"
+#include "Skybox.hpp"
 
 extern int width, height;
 extern int windowX, windowY;
@@ -48,6 +49,9 @@ extern Shader * mainShader;
 extern Shader * depthShader;
 extern Shader * cubeDepthShader;
 extern std::vector<GLuint> depthMapFBOs, depthMaps;
+
+extern Shader * skyboxShader;
+extern Skybox * skybox;
 
 extern mat4 lightProjection;
 extern std::vector<mat4> lightSpaceMatrices;

@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		6C6B0D5C1EECF94700534335 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C6B0D5A1EECF94700534335 /* Skybox.cpp */; };
 		6C6B0D5F1EECFE0700534335 /* TGALoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C6B0D5E1EECFE0700534335 /* TGALoader.cpp */; };
+		6C6B0D621EED298700534335 /* skybox.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D601EED081200534335 /* skybox.vert.glsl */; };
+		6C6B0D631EED298700534335 /* skybox.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D611EED084000534335 /* skybox.frag.glsl */; };
+		6C6B0D641EED299600534335 /* powderpeak_bk.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D531EECF7B200534335 /* powderpeak_bk.tga */; };
+		6C6B0D651EED299600534335 /* powderpeak_dn.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D541EECF7B200534335 /* powderpeak_dn.tga */; };
+		6C6B0D661EED299600534335 /* powderpeak_ft.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D551EECF7B200534335 /* powderpeak_ft.tga */; };
+		6C6B0D671EED299600534335 /* powderpeak_lf.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D561EECF7B200534335 /* powderpeak_lf.tga */; };
+		6C6B0D681EED299600534335 /* powderpeak_rt.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */; };
+		6C6B0D691EED299600534335 /* powderpeak_up.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D581EECF7B200534335 /* powderpeak_up.tga */; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6CA5C21B1EE3BFF50011EA25 /* depth.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */; };
@@ -48,6 +56,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				6C6B0D641EED299600534335 /* powderpeak_bk.tga in CopyFiles */,
+				6C6B0D651EED299600534335 /* powderpeak_dn.tga in CopyFiles */,
+				6C6B0D661EED299600534335 /* powderpeak_ft.tga in CopyFiles */,
+				6C6B0D671EED299600534335 /* powderpeak_lf.tga in CopyFiles */,
+				6C6B0D681EED299600534335 /* powderpeak_rt.tga in CopyFiles */,
+				6C6B0D691EED299600534335 /* powderpeak_up.tga in CopyFiles */,
+				6C6B0D621EED298700534335 /* skybox.vert.glsl in CopyFiles */,
+				6C6B0D631EED298700534335 /* skybox.frag.glsl in CopyFiles */,
 				DF44CE841EE4893600C58E2F /* debugQuad.frag.glsl in CopyFiles */,
 				DF44CE851EE4893600C58E2F /* debugQuad.vert.glsl in CopyFiles */,
 				DF19B3F41EE3E18000E4B19C /* suzanne.obj in CopyFiles */,

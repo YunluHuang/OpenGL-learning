@@ -14,6 +14,7 @@
 
 #include "DirectLight.hpp"
 #include "PointLight.hpp"
+#include "Skybox.hpp"
 #include "Shader.hpp"
 #include "Object.hpp"
 
@@ -29,6 +30,7 @@ vec3 center = CENTER;
 
 Shader * mainShader;
 Shader * depthShader;
+Shader * skyboxShader;
 
 mat4 view;
 mat4 projection;
@@ -43,6 +45,8 @@ std::vector<vec3> lightColor;
 std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
+
+Skybox * skybox;
 
 void genBuffers();
 void initAllMeshes();
@@ -65,11 +69,26 @@ void initShadowMap() {
     depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
 }
 
+void initSkybox() {
+    skyboxShader = new Shader("skybox.vert.glsl", "skybox.frag.glsl");
+    vector<const char *> cubeFaces = {
+        "powderpeak_rt.tga",
+        "powderpeak_lf.tga",
+        "powderpeak_up.tga",
+        "powderpeak_dn.tga",
+        "powderpeak_bk.tga",
+        "powderpeak_ft.tga"
+    };
+    skybox = new Skybox(cubeFaces);
+    skybox->genCube();
+}
+
 void init() {
     genBuffers();
     initMainShader();
     initAllMeshes();
     initShadowMap();
+    initSkybox();
     
     cout << "object: " << objects.size() << ", light: " << lights.size() << "." << endl;
     cout << loadedMeshes.size() << " meshes loaded." << endl;

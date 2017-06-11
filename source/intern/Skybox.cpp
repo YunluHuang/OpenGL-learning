@@ -7,3 +7,37 @@
 //
 
 #include "Skybox.hpp"
+
+using namespace std;
+
+Skybox::Skybox(vector<const char *> cubeFaces) {
+    
+    glGenTextures(1, &cubeMapID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapID);
+    
+    for(GLuint i = 0; i < cubeFaces.size(); i++) {
+        NS_TGALOADER::IMAGE image;
+        image.LoadTGA(cubeFaces[i]);
+        
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_BGRA,
+                     image.getWidth(), image.getHeight(), 0,
+                     GL_BGRA, GL_UNSIGNED_BYTE, image.getDataForOpenGL());
+    }
+    
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+}
+
+void Skybox::genCube() {
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+}

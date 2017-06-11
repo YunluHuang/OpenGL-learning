@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C6B0D5C1EECF94700534335 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C6B0D5A1EECF94700534335 /* Skybox.cpp */; };
+		6C6B0D5F1EECFE0700534335 /* TGALoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C6B0D5E1EECFE0700534335 /* TGALoader.cpp */; };
 		6C73D0C51EDF371A00D0763B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C41EDF371A00D0763B /* GLUT.framework */; };
 		6C73D0C71EDF372000D0763B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73D0C61EDF372000D0763B /* OpenGL.framework */; };
 		6CA5C21B1EE3BFF50011EA25 /* depth.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */; };
@@ -78,6 +79,10 @@
 		6C6B0D591EECF7B200534335 /* readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		6C6B0D5A1EECF94700534335 /* Skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skybox.cpp; sourceTree = "<group>"; };
 		6C6B0D5B1EECF94700534335 /* Skybox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Skybox.hpp; sourceTree = "<group>"; };
+		6C6B0D5D1EECFDF900534335 /* TGALoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGALoader.h; sourceTree = "<group>"; };
+		6C6B0D5E1EECFE0700534335 /* TGALoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TGALoader.cpp; sourceTree = "<group>"; };
+		6C6B0D601EED081200534335 /* skybox.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skybox.vert.glsl; sourceTree = "<group>"; };
+		6C6B0D611EED084000534335 /* skybox.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skybox.frag.glsl; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		6C73D0C61EDF372000D0763B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1533,6 +1538,7 @@
 				DF3F3ECB1EE3447300DAC187 /* Object.hpp */,
 				DF44CE831EE4645A00C58E2F /* Shader.hpp */,
 				6C6B0D5B1EECF94700534335 /* Skybox.hpp */,
+				6C6B0D5D1EECFDF900534335 /* TGALoader.h */,
 			);
 			path = extern;
 			sourceTree = "<group>";
@@ -1547,6 +1553,7 @@
 				DF3F3EC81EE3445D00DAC187 /* Object.cpp */,
 				DF44CE811EE4644E00C58E2F /* Shader.cpp */,
 				6C6B0D5A1EECF94700534335 /* Skybox.cpp */,
+				6C6B0D5E1EECFE0700534335 /* TGALoader.cpp */,
 			);
 			path = intern;
 			sourceTree = "<group>";
@@ -1560,6 +1567,8 @@
 				6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */,
 				DF44CE7F1EE40C8900C58E2F /* debugQuad.frag.glsl */,
 				DF44CE801EE40C9B00C58E2F /* debugQuad.vert.glsl */,
+				6C6B0D601EED081200534335 /* skybox.vert.glsl */,
+				6C6B0D611EED084000534335 /* skybox.frag.glsl */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -1634,6 +1643,7 @@
 				DF44CE8D1EE603D500C58E2F /* readfile.cpp in Sources */,
 				6C6B0D5C1EECF94700534335 /* Skybox.cpp in Sources */,
 				DF3F3ECA1EE3445D00DAC187 /* Object.cpp in Sources */,
+				6C6B0D5F1EECFE0700534335 /* TGALoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

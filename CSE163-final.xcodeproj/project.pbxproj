@@ -76,7 +76,7 @@
 		6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_rt.tga; sourceTree = "<group>"; };
 		6C6B0D581EECF7B200534335 /* powderpeak_up.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = powderpeak_up.tga; sourceTree = "<group>"; };
 		6C6B0D591EECF7B200534335 /* readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
-		6C6B0D5A1EECF94700534335 /* Skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Skybox.cpp; path = ../extern/Skybox.cpp; sourceTree = "<group>"; };
+		6C6B0D5A1EECF94700534335 /* Skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skybox.cpp; sourceTree = "<group>"; };
 		6C6B0D5B1EECF94700534335 /* Skybox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Skybox.hpp; sourceTree = "<group>"; };
 		6C73D0B91EDF35FF00D0763B /* CSE163-final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CSE163-final"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C73D0C41EDF371A00D0763B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };

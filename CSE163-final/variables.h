@@ -61,10 +61,22 @@ extern Shader * cubeDepthShader;
 extern Shader * quadShader;
 extern Shader * skyboxShader;
 
+extern Shader * shaderGeometryPass;
+extern Shader * shaderLightingPass;
+extern Shader * shaderSSAO;
+extern Shader * shaderSSAOBlur;
+
 // ------------ Skybox --------------
 
 extern Skybox * skybox;
 extern mat4 fixedView, fixedProjection;
+
+// ------------ Skybox --------------
+
+extern GLuint gBuffer, gPosition, gNormal, gAlbedo;
+extern GLuint rboDepth;
+extern GLuint ssaoFBO, ssaoBlurFBO;
+extern GLuint ssaoColorBuffer, ssaoColorBufferBlur;
 
 // ------------ Objects & Buffers --------------
 

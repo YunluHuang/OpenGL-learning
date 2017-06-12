@@ -24,6 +24,12 @@
 		DF1D8DEA1EEE94B900B425AA /* irradiance.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DE61EEE8F1C00B425AA /* irradiance.vert.glsl */; };
 		DF1D8DF21EEE9DE200B425AA /* teapot.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF11EEE9CD800B425AA /* teapot.scene */; };
 		DF1D8DF41EEEA2AF00B425AA /* mainEnv.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF31EEEA1C400B425AA /* mainEnv.frag.glsl */; };
+		DF1D8DF51EEEAFE100B425AA /* ssao.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEB1EEE9A7200B425AA /* ssao.frag.glsl */; };
+		DF1D8DF61EEEAFE100B425AA /* ssao.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEC1EEE9A8100B425AA /* ssao.vert.glsl */; };
+		DF1D8DF71EEEAFE100B425AA /* ssaoBlur.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DED1EEE9A9600B425AA /* ssaoBlur.frag.glsl */; };
+		DF1D8DF81EEEAFE100B425AA /* ssaoGeometry.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */; };
+		DF1D8DF91EEEAFE100B425AA /* ssaoGeometry.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */; };
+		DF1D8DFA1EEEAFE100B425AA /* ssaoLighting.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */; };
 		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
 		DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
 		DF3F3EBE1EE2EA2500DAC187 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */; };
@@ -57,6 +63,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF1D8DF51EEEAFE100B425AA /* ssao.frag.glsl in CopyFiles */,
+				DF1D8DF61EEEAFE100B425AA /* ssao.vert.glsl in CopyFiles */,
+				DF1D8DF71EEEAFE100B425AA /* ssaoBlur.frag.glsl in CopyFiles */,
+				DF1D8DF81EEEAFE100B425AA /* ssaoGeometry.frag.glsl in CopyFiles */,
+				DF1D8DF91EEEAFE100B425AA /* ssaoGeometry.vert.glsl in CopyFiles */,
+				DF1D8DFA1EEEAFE100B425AA /* ssaoLighting.frag.glsl in CopyFiles */,
 				DF1D8DF41EEEA2AF00B425AA /* mainEnv.frag.glsl in CopyFiles */,
 				DF1D8DF21EEE9DE200B425AA /* teapot.scene in CopyFiles */,
 				DF1D8DE71EEE94B900B425AA /* skybox.vert.glsl in CopyFiles */,

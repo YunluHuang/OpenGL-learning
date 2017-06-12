@@ -117,6 +117,7 @@ void displaySkyBox() {
     
     cout << "displaySkyBox" << endl;
     glViewport(0, 0, width, height);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_FALSE);
     skyboxShader->use();
@@ -128,6 +129,7 @@ void displaySkyBox() {
     skyboxShader->set("projection", projection);
     skyboxShader->set("view", view);
     skyboxShader->set("skybox", 0);
+    skyboxShader->set("eyePos", eye);
     
     glBindVertexArray(skybox->skyboxVAO);
     glActiveTexture(GL_TEXTURE0);

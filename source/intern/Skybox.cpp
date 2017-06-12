@@ -23,9 +23,9 @@ Skybox::Skybox(vector<const char *> cubeFaces) {
         
         if(image.getDataForOpenGL() == 0) cout << "ERROR: image data not loaded correctly" << endl;
         
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_BGRA,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA,
                      image.getWidth(), image.getHeight(), 0,
-                     GL_BGRA, GL_UNSIGNED_BYTE, image.getDataForOpenGL());
+                     GL_RGBA, GL_UNSIGNED_BYTE, image.getDataForOpenGL());
     }
     
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

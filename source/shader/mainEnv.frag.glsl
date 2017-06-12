@@ -107,10 +107,11 @@ void main() {
         u = normalize(u == vec3(0, 0, 0) ? cross(normal, vec3(0, 1, 0)) : u);
         vec3 v = normalize(cross(normal, u));
         float currentDepth = length(diff);
+        float invsq = 1 / (currentDepth * currentDepth);
         float shadow = 0.0f;
         for (int j = -1; j <= 1; j++) {
             for (int k = -1; k <= 1; k++) {
-                float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.004 * u * j + 0.004 * v * k).r;
+                float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.001 / invsq * u * j + 0.001 / invsq * v * k).r;
                 if (currentDepth > closestDepth) {
                     shadow += 1.0f;
                 }

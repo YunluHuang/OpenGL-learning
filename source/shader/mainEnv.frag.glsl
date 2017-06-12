@@ -48,7 +48,7 @@ void main() {
     
     // First calculate all the direct light
     for (int i = 0; i < dirlgtAmount; i++) {
-    
+        
         // Get Light Color
         vec3 lightColor = dirlgtColors[i];
         vec4 lightSpace = modelView * vec4(dirlgtDirections[i], 0.0f);
@@ -101,10 +101,12 @@ void main() {
         finalDiffuse += brightness * visibility * lightColor * diffuseColor;
     }
     
+    vec3 env = vec3(0, 0, 0);
     vec3 eyedir = normalize(-vPos);
     vec3 envdir = vec3(inverse(view) * vec4(2 * normal * dot(eyedir, normal) - eyedir, 0.0f));
     vec3 specularEnv = specular * texture(envMap, envdir).xyz;
     vec3 diffuseEnv = diffuse * texture(irrMap, envdir).xyz;
-
-    fColor = vec4(ambient + finalSpecular + specularEnv + finalDiffuse + diffuseEnv, 1.0);
+    env = specularEnv + diffuseEnv;
+    
+    fColor = vec4(ambient + finalSpecular + finalDiffuse + env, 1.0);
 }

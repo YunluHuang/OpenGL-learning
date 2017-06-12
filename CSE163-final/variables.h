@@ -55,6 +55,7 @@ extern mat4 view, projection, modelView;
 // ------------ Shader --------------
 
 extern Shader * mainShader;
+extern Shader * mainEnvShader;
 extern Shader * depthShader;
 extern Shader * cubeDepthShader;
 extern Shader * quadShader;

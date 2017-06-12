@@ -13,7 +13,6 @@ uniform mat4 dirlgtMatrices[5];
 out vec3 myNormal;
 out vec4 myVertex;
 out vec4 shadowCoords[5];
-out vec4 ptShadowCoords[5];
 
 void main() {
     gl_Position = projection * view * model * vec4(vPosition, 1.0);

@@ -84,7 +84,7 @@ void displayPtlgtDepthMap() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     
     // Setup the projection matrix
-    glm::mat4 projection = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 25.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 25.0f);
     
     // Render the point light shadow map
     for (int i = 0; i < ptlgts.size(); i++) {
@@ -131,15 +131,16 @@ void displayMainProgram() {
     
     // reset viewport
     glViewport(0, 0, width, height);
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    mainShader->use();
+    Shader * shader = skybox ? mainEnvShader : mainShader;
+    
+    shader->use();
     
     // Update Matrices
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    mainShader->set("view", view);
-    mainShader->set("projection", projection);
+    shader->set("view", view);
+    shader->set("projection", projection);
     
     // Initiate Dump Dir Map
     int dumpDirlgtMapPos = (int) dirlgts.size() + (int) ptlgts.size();
@@ -152,63 +153,66 @@ void displayMainProgram() {
     glBindTexture(GL_TEXTURE_CUBE_MAP, dumpPtlgtMap);
     
     // Pass Direct Lights to the map
-    mainShader->set("dirlgtAmount", (int) dirlgts.size());
+    shader->set("dirlgtAmount", (int) dirlgts.size());
     for (int i = 0; i < 5; i++) {
         if (i < dirlgts.size()) {
             glActiveTexture(GL_TEXTURE0 + i);
             glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
-            mainShader->set("dirlgtMaps", i, i);
-            mainShader->set("dirlgtMatrices", i, biasMatrix * dirlgts[i]->getLightSpace());
-            mainShader->set("dirlgtDirections", i, dirlgts[i]->dir);
-            mainShader->set("dirlgtColors", i, dirlgts[i]->color);
+            shader->set("dirlgtMaps", i, i);
+            shader->set("dirlgtMatrices", i, biasMatrix * dirlgts[i]->getLightSpace());
+            shader->set("dirlgtDirections", i, dirlgts[i]->dir);
+            shader->set("dirlgtColors", i, dirlgts[i]->color);
         }
         else {
-            mainShader->set("dirlgtMaps", i, dumpDirlgtMapPos);
-            mainShader->set("dirlgtMatrices", i, mat4(1.0f));
-            mainShader->set("dirlgtDirections", i, vec3(1.0f));
-            mainShader->set("dirlgtColors", i, vec3(1.0f));
+            shader->set("dirlgtMaps", i, dumpDirlgtMapPos);
+            shader->set("dirlgtMatrices", i, mat4(1.0f));
+            shader->set("dirlgtDirections", i, vec3(1.0f));
+            shader->set("dirlgtColors", i, vec3(1.0f));
         }
     }
     
     // Pass the point lights to the map
-    mainShader->set("ptlgtAmount", (int) ptlgts.size());
+    shader->set("ptlgtAmount", (int) ptlgts.size());
     for (int i = 0; i < 5; i++) {
         if (i < ptlgts.size()) {
             int tid = (int) dirlgts.size() + i;
             glActiveTexture(GL_TEXTURE0 + tid);
             glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
-            mainShader->set("ptlgtMaps", i, tid);
-            mainShader->set("ptlgtPositions", i, ptlgts[i]->pos);
-            mainShader->set("ptlgtColors", i, ptlgts[i]->color);
+            shader->set("ptlgtMaps", i, tid);
+            shader->set("ptlgtPositions", i, ptlgts[i]->pos);
+            shader->set("ptlgtColors", i, ptlgts[i]->color);
         }
         else {
-            mainShader->set("ptlgtMaps", i, dumpPtlgtMapPos);
-            mainShader->set("ptlgtPositions", i, vec3(1.0f));
-            mainShader->set("ptlgtColors", i, vec3(1.0f));
+            shader->set("ptlgtMaps", i, dumpPtlgtMapPos);
+            shader->set("ptlgtPositions", i, vec3(1.0f));
+            shader->set("ptlgtColors", i, vec3(1.0f));
         }
     }
     
-    // Setup environment map
-    int envMapPos = dumpPtlgtMapPos + 1;
-    glActiveTexture(GL_TEXTURE0 + envMapPos);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
-    mainShader->set("envMap", envMapPos);
-    
-    // Setup irradiance map
-    int irrMapPos = envMapPos + 1;
-    glActiveTexture(GL_TEXTURE0 + irrMapPos);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
-    mainShader->set("irrMap", irrMapPos);
+    if (skybox) {
+        
+        // Setup environment map
+        int envMapPos = dumpPtlgtMapPos + 1;
+        glActiveTexture(GL_TEXTURE0 + envMapPos);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+        shader->set("envMap", envMapPos);
+        
+        // Setup irradiance map
+        int irrMapPos = envMapPos + 1;
+        glActiveTexture(GL_TEXTURE0 + irrMapPos);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
+        shader->set("irrMap", irrMapPos);
+    }
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
         
         // Setup mvp
-        mainShader->set("model", objects[i]->transf);
-        mainShader->set("ambient", objects[i]->ambient);
-        mainShader->set("diffuse", objects[i]->diffuse);
-        mainShader->set("specular", objects[i]->specular);
-        mainShader->set("shininess", objects[i]->shininess);
+        shader->set("model", objects[i]->transf);
+        shader->set("ambient", objects[i]->ambient);
+        shader->set("diffuse", objects[i]->diffuse);
+        shader->set("specular", objects[i]->specular);
+        shader->set("shininess", objects[i]->shininess);
         
         // Display the object
         displayObject(objects[i]);
@@ -216,27 +220,28 @@ void displayMainProgram() {
 }
 
 void displaySkyBox() {
-    
-    glViewport(0, 0, width, height);
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glDepthMask(GL_FALSE);
-    skyboxShader->use();
-    
-    fixedView = mat4(mat3(glm::lookAt(eye, center, up)));
-    fixedProjection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear , zFar);
-    
-    //pass the projection and view matrix to shader
-    skyboxShader->set("projection", fixedProjection);
-    skyboxShader->set("view", fixedView);
-    skyboxShader->set("skybox", 0);
-    
-    glBindVertexArray(skybox->skyboxVAO);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
-   
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthMask(GL_TRUE);
+    if (skybox) {
+        glViewport(0, 0, width, height);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glDepthMask(GL_FALSE);
+        skyboxShader->use();
+        
+        fixedView = mat4(mat3(glm::lookAt(eye, center, up)));
+        fixedProjection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear , zFar);
+        
+        //pass the projection and view matrix to shader
+        skyboxShader->set("projection", fixedProjection);
+        skyboxShader->set("view", fixedView);
+        skyboxShader->set("skybox", 0);
+        
+        glBindVertexArray(skybox->skyboxVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+        
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDepthMask(GL_TRUE);
+    }
 }
 
 void display() {
@@ -244,12 +249,12 @@ void display() {
     // First process keyboard input
     processKeyboard();
     
+    // Then render the depth map
+    displayDepthMap();
+    
     // render the skybox
     // TODO: this need to be rendered last in further development
     displaySkyBox();
-    
-    // Then render the depth map
-    displayDepthMap();
     
     // Then execute the main render program
     displayMainProgram();

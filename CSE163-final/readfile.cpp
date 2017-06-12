@@ -27,6 +27,8 @@ vec3 diffuse = vec3(0.5, 0.5, 0.5);
 vec3 specular = vec3(1, 1, 1);
 GLfloat shininess = 1.0f;
 
+Skybox * skybox = nullptr;
+
 std::stack<mat4> transfStack;
 std::vector<Object *> objects;
 std::map<std::string, Mesh *> loadedMeshes;

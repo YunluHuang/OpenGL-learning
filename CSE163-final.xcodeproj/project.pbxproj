@@ -22,6 +22,8 @@
 		DF1D8DE81EEE94B900B425AA /* skybox.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D611EED084000534335 /* skybox.frag.glsl */; };
 		DF1D8DE91EEE94B900B425AA /* irradiance.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DE51EEE8F1000B425AA /* irradiance.frag.glsl */; };
 		DF1D8DEA1EEE94B900B425AA /* irradiance.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DE61EEE8F1C00B425AA /* irradiance.vert.glsl */; };
+		DF1D8DF21EEE9DE200B425AA /* teapot.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF11EEE9CD800B425AA /* teapot.scene */; };
+		DF1D8DF41EEEA2AF00B425AA /* mainEnv.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF31EEEA1C400B425AA /* mainEnv.frag.glsl */; };
 		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
 		DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
 		DF3F3EBE1EE2EA2500DAC187 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */; };
@@ -44,8 +46,8 @@
 		DF44CE991EE6A84700C58E2F /* cubeDepth.geo.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF44CE961EE67BF300C58E2F /* cubeDepth.geo.glsl */; };
 		DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9D1EE2CF0200CAE706 /* teapot.obj */; };
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
-		DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */; };
-		DFB66EB31EE2CFD500CAE706 /* triangles.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */; };
+		DFB66EB21EE2CFD500CAE706 /* main.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* main.frag.glsl */; };
+		DFB66EB31EE2CFD500CAE706 /* basic.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAF1EE2CF0200CAE706 /* basic.vert.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +57,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF1D8DF41EEEA2AF00B425AA /* mainEnv.frag.glsl in CopyFiles */,
+				DF1D8DF21EEE9DE200B425AA /* teapot.scene in CopyFiles */,
 				DF1D8DE71EEE94B900B425AA /* skybox.vert.glsl in CopyFiles */,
 				DF1D8DE81EEE94B900B425AA /* skybox.frag.glsl in CopyFiles */,
 				DF1D8DE91EEE94B900B425AA /* irradiance.frag.glsl in CopyFiles */,
@@ -73,8 +77,8 @@
 				DF3F3ED51EE38B8600DAC187 /* cube2.obj in CopyFiles */,
 				DF3F3ED31EE3855000DAC187 /* sphere.obj in CopyFiles */,
 				DF3F3ED11EE3515B00DAC187 /* cube.obj in CopyFiles */,
-				DFB66EB21EE2CFD500CAE706 /* triangles.frag.glsl in CopyFiles */,
-				DFB66EB31EE2CFD500CAE706 /* triangles.vert.glsl in CopyFiles */,
+				DFB66EB21EE2CFD500CAE706 /* main.frag.glsl in CopyFiles */,
+				DFB66EB31EE2CFD500CAE706 /* basic.vert.glsl in CopyFiles */,
 				DFB66EB01EE2CFCC00CAE706 /* teapot.obj in CopyFiles */,
 				DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */,
 			);
@@ -116,6 +120,8 @@
 		DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoGeometry.frag.glsl; sourceTree = "<group>"; };
 		DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoGeometry.vert.glsl; sourceTree = "<group>"; };
 		DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoLighting.frag.glsl; sourceTree = "<group>"; };
+		DF1D8DF11EEE9CD800B425AA /* teapot.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teapot.scene; sourceTree = "<group>"; };
+		DF1D8DF31EEEA1C400B425AA /* mainEnv.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainEnv.frag.glsl; sourceTree = "<group>"; };
 		DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		DF3F3EBF1EE2EA4300DAC187 /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectLight.cpp; sourceTree = "<group>"; };
@@ -688,8 +694,8 @@
 		DFB66E9F1EE2CF0200CAE706 /* basic.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = basic.scene; sourceTree = "<group>"; };
 		DFB66EA51EE2CF0200CAE706 /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
-		DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangles.frag.glsl; sourceTree = "<group>"; };
-		DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangles.vert.glsl; sourceTree = "<group>"; };
+		DFB66EAE1EE2CF0200CAE706 /* main.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.frag.glsl; sourceTree = "<group>"; };
+		DFB66EAF1EE2CF0200CAE706 /* basic.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = basic.vert.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1532,6 +1538,7 @@
 				DFB66E9F1EE2CF0200CAE706 /* basic.scene */,
 				DF19B3EE1EE3A50100E4B19C /* temple.scene */,
 				DF19B3F21EE3E12900E4B19C /* suzanne.scene */,
+				DF1D8DF11EEE9CD800B425AA /* teapot.scene */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -1586,8 +1593,9 @@
 		DFB66EAD1EE2CF0200CAE706 /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				DFB66EAE1EE2CF0200CAE706 /* triangles.frag.glsl */,
-				DFB66EAF1EE2CF0200CAE706 /* triangles.vert.glsl */,
+				DFB66EAE1EE2CF0200CAE706 /* main.frag.glsl */,
+				DF1D8DF31EEEA1C400B425AA /* mainEnv.frag.glsl */,
+				DFB66EAF1EE2CF0200CAE706 /* basic.vert.glsl */,
 				6CA5C2191EE3AD920011EA25 /* depth.vert.glsl */,
 				6CA5C21A1EE3ADA70011EA25 /* depth.frag.glsl */,
 				DF44CE7F1EE40C8900C58E2F /* debugQuad.frag.glsl */,

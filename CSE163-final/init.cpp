@@ -29,6 +29,7 @@ vec3 up = UP;
 vec3 center = CENTER;
 
 Shader * mainShader;
+Shader * mainEnvShader;
 Shader * depthShader;
 Shader * cubeDepthShader;
 Shader * quadShader;
@@ -48,8 +49,6 @@ std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
 
-Skybox * skybox = nullptr;
-
 mat4 fixedView, fixedProjection;
 
 void genBuffers();
@@ -66,7 +65,8 @@ void initMainShader() {
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float) width / (float) height, zNear, zFar);
     
-    mainShader = new Shader("triangles.vert.glsl", "triangles.frag.glsl");
+    mainShader = new Shader("basic.vert.glsl", "main.frag.glsl");
+    mainEnvShader = new Shader("basic.vert.glsl", "mainEnv.frag.glsl");
 }
 
 void initDumpMaps() {
@@ -122,6 +122,10 @@ void initDebugQuad() {
 
 void initSkybox() {
     skyboxShader = new Shader("skybox.vert.glsl", "skybox.frag.glsl");
+}
+
+void initSSAO() {
+    
 }
 
 void init() {

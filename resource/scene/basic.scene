@@ -1,6 +1,6 @@
 ambient 0.1 0.1 0.1
 diffuse 1.0 1.0 0.7
-specular 0 0 0
+specular 0.1 0.1 0.1
 shininess 10
 
 skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga

@@ -62,9 +62,51 @@ void initMainShader() {
     mainShader = new Shader("triangles.vert.glsl", "triangles.frag.glsl");
 }
 
+void initDumpMaps() {
+    
+    // Initiate Dump Direct Light Map
+    glGenFramebuffers(1, &dumpDirlgtMapFBO);
+    glGenTextures(1, &dumpDirlgtMap);
+    glBindTexture(GL_TEXTURE_2D, dumpDirlgtMap);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    glBindFramebuffer(GL_FRAMEBUFFER, dumpDirlgtMapFBO);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, dumpDirlgtMap, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    // Initiate Dump Point Light Map
+    glGenFramebuffers(1, &dumpPtlgtMapFBO);
+    glGenTextures(1, &dumpPtlgtMap);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, dumpPtlgtMap);
+    for (int i = 0; i < 6; i++) {
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    glBindFramebuffer(GL_FRAMEBUFFER, dumpPtlgtMapFBO);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, dumpPtlgtMap, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void initShadowMap() {
     depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
     cubeDepthShader = new Shader("cubeDepth.vert.glsl", "cubeDepth.frag.glsl", "cubeDepth.geo.glsl");
+    initDumpMaps();
 }
 
 void initDebugQuad() {

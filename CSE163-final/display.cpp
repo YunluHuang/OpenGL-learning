@@ -26,6 +26,11 @@ std::vector<GLuint> VBOs;
 std::vector<GLuint> NBOs;
 std::vector<GLuint> EBOs;
 
+GLuint dumpDirlgtMap;
+GLuint dumpDirlgtMapFBO;
+GLuint dumpPtlgtMap;
+GLuint dumpPtlgtMapFBO;
+
 // Bias Matrix for shadow map
 mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
@@ -35,6 +40,14 @@ void displayDirlgtDepthMap() {
     
     depthShader->use();
     
+    // First setup the dump map
+    glViewport(0, 0, 1024, 1024);
+    glBindFramebuffer(GL_FRAMEBUFFER, dumpDirlgtMapFBO);
+    glClearColor(0, 0, 0, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    // Then render the direct light shadow map
     for (int i = 0; i < dirlgts.size(); i++) {
         
         glViewport(0, 0, 1024, 1024);
@@ -62,8 +75,17 @@ void displayPtlgtDepthMap() {
     
     cubeDepthShader->use();
     
+    // First setup the dump map
+    glViewport(0, 0, 1024, 1024);
+    glBindFramebuffer(GL_FRAMEBUFFER, dumpPtlgtMapFBO);
+    glClearColor(0, 0, 0, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    // Setup the projection matrix
     glm::mat4 projection = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 25.0f);
     
+    // Render the point light shadow map
     for (int i = 0; i < ptlgts.size(); i++) {
         
         glViewport(0, 0, 1024, 1024);
@@ -118,24 +140,51 @@ void displayMainProgram() {
     mainShader->set("view", view);
     mainShader->set("projection", projection);
     
+    // Initiate Dump Dir Map
+    int dumpDirlgtMapPos = (int) dirlgts.size() + (int) ptlgts.size();
+    glActiveTexture(GL_TEXTURE0 + dumpDirlgtMapPos);
+    glBindTexture(GL_TEXTURE_2D, dumpDirlgtMap);
+    
+    // Initiate Dump Pt Map
+    int dumpPtlgtMapPos = dumpDirlgtMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + dumpPtlgtMapPos);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, dumpPtlgtMap);
+    
+    // Pass Direct Lights to the map
     mainShader->set("dirlgtAmount", (int) dirlgts.size());
-    for (int i = 0; i < dirlgts.size(); i++) {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
-        mainShader->set(("dirlgtMaps[" + to_string(i) + "]").c_str(), i);
-        mainShader->set(("dirlgtMatrices[" + to_string(i) + "]").c_str(), biasMatrix * dirlgts[i]->getLightSpace());
-        mainShader->set(("dirlgtDirections[" + to_string(i) + "]").c_str(), dirlgts[i]->dir);
-        mainShader->set(("dirlgtColors[" + to_string(i) + "]").c_str(), dirlgts[i]->color);
+    for (int i = 0; i < 5; i++) {
+        if (i < dirlgts.size()) {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
+            mainShader->set("dirlgtMaps", i, i);
+            mainShader->set("dirlgtMatrices", i, biasMatrix * dirlgts[i]->getLightSpace());
+            mainShader->set("dirlgtDirections", i, dirlgts[i]->dir);
+            mainShader->set("dirlgtColors", i, dirlgts[i]->color);
+        }
+        else {
+            mainShader->set("dirlgtMaps", i, dumpDirlgtMapPos);
+            mainShader->set("dirlgtMatrices", i, mat4(1.0f));
+            mainShader->set("dirlgtDirections", i, vec3(1.0f));
+            mainShader->set("dirlgtColors", i, vec3(1.0f));
+        }
     }
     
+    // Pass the point lights to the map
     mainShader->set("ptlgtAmount", (int) ptlgts.size());
-    for (int i = 0; i < ptlgts.size(); i++) {
-        int tid = dirlgts.size() + i;
-        glActiveTexture(GL_TEXTURE0 + tid);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
-        mainShader->set(("ptlgtMaps[" + to_string(i) + "]").c_str(), tid);
-        mainShader->set("ptlgtPositions", i, ptlgts[i]->pos);
-        mainShader->set("ptlgtColors", i, ptlgts[i]->color);
+    for (int i = 0; i < 5; i++) {
+        if (i < ptlgts.size()) {
+            int tid = (int) dirlgts.size() + i;
+            glActiveTexture(GL_TEXTURE0 + tid);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
+            mainShader->set("ptlgtMaps", i, tid);
+            mainShader->set("ptlgtPositions", i, ptlgts[i]->pos);
+            mainShader->set("ptlgtColors", i, ptlgts[i]->color);
+        }
+        else {
+            mainShader->set("ptlgtMaps", i, dumpPtlgtMapPos);
+            mainShader->set("ptlgtPositions", i, vec3(1.0f));
+            mainShader->set("ptlgtColors", i, vec3(1.0f));
+        }
     }
     
     // Pass objects to the shader

@@ -27,34 +27,38 @@
 #include "Object.hpp"
 #include "Shader.hpp"
 
+// ------------ Window --------------
+
 extern int width, height;
 extern int windowX, windowY;
+
+// ------------ Control --------------
+
+extern float rotateAmount;
+extern float moveSpeed;
+extern float mouseSpeed;
+extern float limitedFPS;
+extern float yaw, pitch;
+
+extern bool activeKey[128];
+
+// ------------ Camera --------------
 
 extern vec3 eye;
 extern vec3 up;
 extern vec3 center;
 extern float fovy, zNear, zFar;
-extern float rotateAmount;
-extern float moveSpeed;
-extern float mouseSpeed;
-extern float limitedFPS;
-
-extern float yaw, pitch;
-
-extern bool activeKey[128];
 
 extern mat4 view, projection, modelView;
+
+// ------------ Camera --------------
 
 extern Shader * mainShader;
 extern Shader * depthShader;
 extern Shader * cubeDepthShader;
 extern Shader * quadShader;
 
-extern mat4 lightProjection;
-extern std::vector<mat4> lightSpaceMatrices;
-
-//GLuint depthMap;
-//GLuint depthMapID;
+// ------------ Objects & Buffers --------------
 
 extern std::vector<GLuint> VAOs;
 extern std::vector<GLuint> VBOs;
@@ -70,15 +74,14 @@ extern vec3 diffuse;
 extern vec3 specular;
 extern GLfloat shininess;
 
-extern GLuint ambientPosition;
-extern GLuint specularPosition;
-extern GLuint diffusePosition;
-extern GLuint shininessPosition;
+// ------------ Lights & ShadowMaps --------------
 
 extern std::vector<PointLight *> ptlgts;
 extern std::vector<DirectLight *> dirlgts;
 
-extern std::vector<vec4> ptlightPos;
-extern std::vector<vec3> lightColor;
+extern GLuint dumpDirlgtMap;
+extern GLuint dumpDirlgtMapFBO;
+extern GLuint dumpPtlgtMap;
+extern GLuint dumpPtlgtMapFBO;
 
 #endif

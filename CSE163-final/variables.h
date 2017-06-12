@@ -77,6 +77,8 @@ extern GLuint gBuffer, gPosition, gNormal, gAlbedo;
 extern GLuint rboDepth;
 extern GLuint ssaoFBO, ssaoBlurFBO;
 extern GLuint ssaoColorBuffer, ssaoColorBufferBlur;
+extern std::vector<glm::vec3> ssaoKernel;
+extern GLuint noiseTexture;
 
 // ------------ Objects & Buffers --------------
 

@@ -28,6 +28,10 @@ uniform float shininess;
 uniform samplerCube envMap;
 uniform samplerCube irrMap;
 
+uniform int width;
+uniform int height;
+uniform sampler2D ssao;
+
 void main() {
     
     mat4 modelView = view * model;
@@ -108,5 +112,8 @@ void main() {
     vec3 diffuseEnv = diffuse * texture(irrMap, envdir).xyz;
     env = specularEnv + diffuseEnv;
     
-    fColor = vec4(ambient + finalSpecular + finalDiffuse + env, 1.0);
+    vec2 ssaoCoord = vec2(gl_FragCoord.x / width, gl_FragCoord.y / height);
+    float ao = texture(ssao, ssaoCoord).r;
+    
+    fColor = vec4(ambient + finalSpecular + finalDiffuse + env, 1.0) * ao;
 }

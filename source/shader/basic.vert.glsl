@@ -12,6 +12,7 @@ uniform mat4 dirlgtMatrices[5];
 
 out vec3 myNormal;
 out vec4 myVertex;
+out vec2 myTexCoord;
 out vec4 shadowCoords[5];
 
 void main() {

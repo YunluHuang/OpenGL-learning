@@ -32,6 +32,107 @@ GLuint dumpDirlgtMapFBO;
 GLuint dumpPtlgtMap;
 GLuint dumpPtlgtMapFBO;
 
+unsigned int quadVAO = 0;
+unsigned int quadVBO;
+void renderQuad() {
+    if (quadVAO == 0) {
+        float quadVertices[] = {
+            // positions        // texture Coords
+            -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+            1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+            1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+        };
+        // setup plane VAO
+        glGenVertexArrays(1, &quadVAO);
+        glGenBuffers(1, &quadVBO);
+        glBindVertexArray(quadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    }
+    glBindVertexArray(quadVAO);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindVertexArray(0);
+}
+
+unsigned int smQuadVAO = 0;
+unsigned int smQuadVBO;
+void renderSmallQuad() {
+    if (smQuadVAO == 0) {
+        float quadVertices[] = {
+            // positions        // texture Coords
+            -1.0f,  -0.5f, 0.0f, 0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+            -0.5f,  -0.5f, 0.0f, 1.0f, 1.0f,
+            -0.5f, -1.0f, 0.0f, 1.0f, 0.0f,
+        };
+        // setup plane VAO
+        glGenVertexArrays(1, &smQuadVAO);
+        glGenBuffers(1, &smQuadVBO);
+        glBindVertexArray(smQuadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, smQuadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    }
+    glBindVertexArray(smQuadVAO);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindVertexArray(0);
+}
+
+void displaySSAO() {
+    
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        shaderGeometryPass->use();
+        shaderGeometryPass->set("projection", projection);
+        shaderGeometryPass->set("view", view);
+        
+        // objects
+        shaderGeometryPass->set("invertedNormals", 0);
+        for (int i = 0; i < objects.size(); i++) {
+            shaderGeometryPass->set("model", objects[i]->transf);
+            displayObject(objects[i]);
+        }
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+    
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+        glClear(GL_COLOR_BUFFER_BIT);
+        shaderSSAO->use();
+        // Send kernel + rotation
+        for (unsigned int i = 0; i < 64; ++i)
+        shaderSSAO->set(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
+        shaderSSAO->set("projection", projection);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, gPosition);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, gNormal);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, noiseTexture);
+        renderQuad();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+    
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, ssaoBlurFBO);
+        glClear(GL_COLOR_BUFFER_BIT);
+        shaderSSAOBlur->use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, ssaoColorBuffer);
+        renderQuad();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+}
+
 // Bias Matrix for shadow map
 mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
@@ -136,6 +237,10 @@ void displayMainProgram() {
     
     shader->use();
     
+    // Setup screen variable
+    shader->set("width", width);
+    shader->set("height", height);
+    
     // Update Matrices
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
@@ -189,20 +294,23 @@ void displayMainProgram() {
         }
     }
     
-    if (skybox) {
-        
-        // Setup environment map
-        int envMapPos = dumpPtlgtMapPos + 1;
-        glActiveTexture(GL_TEXTURE0 + envMapPos);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
-        shader->set("envMap", envMapPos);
-        
-        // Setup irradiance map
-        int irrMapPos = envMapPos + 1;
-        glActiveTexture(GL_TEXTURE0 + irrMapPos);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
-        shader->set("irrMap", irrMapPos);
-    }
+    // Setup environment map
+    int envMapPos = dumpPtlgtMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + envMapPos);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+    shader->set("envMap", envMapPos);
+    
+    // Setup irradiance map
+    int irrMapPos = envMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + irrMapPos);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
+    shader->set("irrMap", irrMapPos);
+    
+    // Setup SSAO map
+    int ssaoTexturePos = irrMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + ssaoTexturePos);
+    glBindTexture(GL_TEXTURE_2D, ssaoColorBufferBlur);
+    shader->set("ssao", ssaoTexturePos);
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
@@ -244,10 +352,19 @@ void displaySkyBox() {
     }
 }
 
+void displayQuad(GLuint texture) {
+    quadShader->use();
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    renderSmallQuad();
+}
+
 void display() {
     
     // First process keyboard input
     processKeyboard();
+    
+    displaySSAO();
     
     // Then render the depth map
     displayDepthMap();
@@ -258,6 +375,9 @@ void display() {
     
     // Then execute the main render program
     displayMainProgram();
+    
+    // Debug
+    displayQuad(ssaoColorBufferBlur);
     
     // Flush the viewport and swap the buffer
     glFlush();

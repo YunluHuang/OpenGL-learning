@@ -11,6 +11,7 @@
 
 #include <OpenGL/gl3.h>
 #include <vector>
+#include <string>
 
 #include "math.hpp"
 
@@ -47,6 +48,19 @@ struct Shader {
     void set(const char * name, const std::vector<mat2> & ms);
     void set(const char * name, const std::vector<mat3> & ms);
     void set(const char * name, const std::vector<mat4> & ms);
+    
+    // Set array variable element with array index
+    void set(const char * name, int index, const GLint i);
+    void set(const char * name, int index, const GLuint i);
+    void set(const char * name, int index, const GLfloat i);
+    
+    void set(const char * name, int index, const mat2 i);
+    void set(const char * name, int index, const mat3 i);
+    void set(const char * name, int index, const mat4 i);
+    
+    void set(const char * name, int index, const vec2 i);
+    void set(const char * name, int index, const vec3 i);
+    void set(const char * name, int index, const vec4 i);
 };
 
 

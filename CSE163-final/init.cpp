@@ -30,6 +30,7 @@ vec3 center = CENTER;
 Shader * mainShader;
 Shader * depthShader;
 Shader * cubeDepthShader;
+Shader * quadShader;
 
 mat4 view;
 mat4 projection;
@@ -64,6 +65,10 @@ void initMainShader() {
 void initShadowMap() {
     depthShader = new Shader("depth.vert.glsl", "depth.frag.glsl");
     cubeDepthShader = new Shader("cubeDepth.vert.glsl", "cubeDepth.frag.glsl", "cubeDepth.geo.glsl");
+}
+
+void initDebugQuad() {
+    quadShader = new Shader("debugQuad.vert.glsl", "debugQuad.frag.glsl");
 }
 
 void init() {

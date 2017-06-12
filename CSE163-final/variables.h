@@ -48,7 +48,7 @@ extern mat4 view, projection, modelView;
 extern Shader * mainShader;
 extern Shader * depthShader;
 extern Shader * cubeDepthShader;
-extern std::vector<GLuint> depthMapFBOs, depthMaps;
+extern Shader * quadShader;
 
 extern mat4 lightProjection;
 extern std::vector<mat4> lightSpaceMatrices;

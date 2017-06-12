@@ -285,3 +285,39 @@ void Shader::set(const char * name, const std::vector<mat4> & ms) {
     }
     glUniformMatrix2fv(getUniId(name), (int) ms.size(), GL_FALSE, &v[0]);
 }
+
+void Shader::set(const char * name, int index, const GLint i) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), i);
+}
+
+void Shader::set(const char * name, int index, const GLuint i) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), i);
+}
+
+void Shader::set(const char * name, int index, const GLfloat f) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), f);
+}
+
+void Shader::set(const char * name, int index, const mat2 m) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), m);
+}
+
+void Shader::set(const char * name, int index, const mat3 m) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), m);
+}
+
+void Shader::set(const char * name, int index, const mat4 m) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), m);
+}
+
+void Shader::set(const char * name, int index, const vec2 v) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), v);
+}
+
+void Shader::set(const char * name, int index, const vec3 v) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), v);
+}
+
+void Shader::set(const char * name, int index, const vec4 v) {
+    set((string(name) + "[" + to_string(index) + "]").c_str(), v);
+}

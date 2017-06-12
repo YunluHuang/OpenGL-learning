@@ -8,18 +8,18 @@
 
 #include "PointLight.hpp"
 
-const mat4 PointLight::projection = glm::perspective(PI, 1.0f, 0.1f, 10.0f);
+const mat4 PointLight::projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
 
 PointLight::PointLight(vec3 pos, vec3 color) : Light(color) {
     
     this->pos = pos;
-    
+
     glGenFramebuffers(1, &depthMapFBO);
     glGenTextures(1, &depthMap);
     
     glBindTexture(GL_TEXTURE_CUBE_MAP, depthMap);
     for (int i = 0; i < 6; i++) {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, 256, 256, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -35,6 +35,7 @@ PointLight::PointLight(vec3 pos, vec3 color) : Light(color) {
     glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthMap, 0);
     glDrawBuffer(GL_NONE);
     glReadBuffer(GL_NONE);
+    
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -46,6 +47,6 @@ mat4 PointLight::getLightSpace() {
     vec3 lightPos = pos;
     vec3 upTest = cross(lightPos, vec3(0, 1, 0));
     vec3 lightUp = upTest == vec3(0, 0, 0) ? vec3(1, 0, 0) : vec3(0, 1, 0);
-    mat4 lightView = glm::lookAt(lightPos, lightPos + vec3(1, 0, 0), lightUp);
+    mat4 lightView = glm::lookAt(lightPos, vec3(0, 0, 0), lightUp);
     return projection * lightView;
 }

@@ -30,7 +30,8 @@ int main(int argc, char * argv[]) {
     readfile(argv[1]);
     init();
     initControl();
-    
+
+    glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     

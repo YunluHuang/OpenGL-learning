@@ -70,6 +70,13 @@ void renderSmallQuad() {
             -0.5f,  -0.5f, 0.0f, 1.0f, 1.0f,
             -0.5f, -1.0f, 0.0f, 1.0f, 0.0f,
         };
+//        float quadVertices[] = {
+//            // positions        // texture Coords
+//            -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+//            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+//            1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+//            1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+//        };
         // setup plane VAO
         glGenVertexArrays(1, &smQuadVAO);
         glGenBuffers(1, &smQuadVBO);
@@ -109,8 +116,8 @@ void displaySSAO() {
         glClear(GL_COLOR_BUFFER_BIT);
         shaderSSAO->use();
         // Send kernel + rotation
-        for (unsigned int i = 0; i < 64; ++i)
-        shaderSSAO->set(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
+        for (unsigned int i = 0; i < 100; ++i)
+            shaderSSAO->set(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
         shaderSSAO->set("projection", projection);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, gPosition);

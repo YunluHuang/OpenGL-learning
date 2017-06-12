@@ -217,11 +217,11 @@ void initSSAO() {
     {
         std::uniform_real_distribution<GLfloat> randomFloats(0.0, 1.0); // generates random floats between 0.0 and 1.0
         std::default_random_engine generator;
-        for (unsigned int i = 0; i < 64; ++i) {
+        for (unsigned int i = 0; i < 100; ++i) {
             glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, randomFloats(generator) * 2.0 - 1.0, randomFloats(generator));
             sample = glm::normalize(sample);
             sample *= randomFloats(generator);
-            float scale = float(i) / 64.0f;
+            float scale = float(i) / 100.0f;
             
             // scale samples s.t. they're more aligned to center of kernel
             scale = 0.1f * (1.0 - scale * scale) + 1.0f * scale * scale;

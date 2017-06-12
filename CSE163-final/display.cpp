@@ -29,12 +29,11 @@ std::vector<GLuint> EBOs;
 // Bias Matrix for shadow map
 mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
-void displayDepthMap() {
+void displayDirlgtDepthMap() {
     
     glCullFace(GL_FRONT);
     
     depthShader->use();
-    
     for (int i = 0; i < dirlgts.size(); i++) {
         
         glViewport(0, 0, 1024, 1024);
@@ -53,13 +52,50 @@ void displayDepthMap() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
     
-    cubeDepthShader->use();
+    glCullFace(GL_BACK);
+}
+
+void displayPtlgtDepthMap() {
     
+    glCullFace(GL_FRONT);
+    
+    cubeDepthShader->use();
+    glm::mat4 shadowProj = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 25.0f);
     for (int i = 0; i < ptlgts.size(); i++) {
         
+        vec3 lightPos = ptlgts[i]->pos;
+        
+        std::vector<glm::mat4> shadowTransforms;
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)));
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)));
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)));
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)));
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)));
+        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f)));
+        
+        glViewport(0, 0, 1024, 1024);
+        glBindFramebuffer(GL_FRAMEBUFFER, ptlgts[i]->depthMapFBO);
+        
+        cubeDepthShader->set("lightPos", lightPos);
+        
+        for (int i = 0; i < 6; i++) {
+            cubeDepthShader->set(("shadowMatrices[" + std::to_string(i) + "]").c_str(), shadowTransforms[i]);
+        }
+        
+        for (int i = 0; i < objects.size(); i++) {
+            cubeDepthShader->set("model", objects[i]->transf);
+            displayObject(objects[i]);
+        }
+        
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
     
     glCullFace(GL_BACK);
+}
+
+void displayDepthMap() {
+    displayDirlgtDepthMap();
+    displayPtlgtDepthMap();
 }
 
 void displayMainProgram() {
@@ -83,13 +119,17 @@ void displayMainProgram() {
         glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
         mainShader->set(("dirlgtMaps[" + to_string(i) + "]").c_str(), i);
         mainShader->set(("dirlgtMatrices[" + to_string(i) + "]").c_str(), biasMatrix * dirlgts[i]->getLightSpace());
-        mainShader->set(("dirlgtDirections[" + to_string(i) + "]").c_str(), dirlgts[i]->getLightPosition());
+        mainShader->set(("dirlgtDirections[" + to_string(i) + "]").c_str(), dirlgts[i]->dir);
         mainShader->set(("dirlgtColors[" + to_string(i) + "]").c_str(), dirlgts[i]->color);
     }
     
     mainShader->set("ptlgtAmount", (int) ptlgts.size());
     for (int i = 0; i < ptlgts.size(); i++) {
-        
+        glActiveTexture(GL_TEXTURE0 + (int) dirlgts.size() + i);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
+        mainShader->set(("ptlgtMaps[" + to_string(i) + "]").c_str(), (int) dirlgts.size() + i);
+        mainShader->set(("ptlgtPositions[" + to_string(i) + "]").c_str(), ptlgts[i]->pos);
+        mainShader->set(("ptlgtColors[" + to_string(i) + "]").c_str(), ptlgts[i]->color);
     }
     
     // Pass objects to the shader

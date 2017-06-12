@@ -71,4 +71,6 @@ void init() {
     initMainShader();
     initAllMeshes();
     initShadowMap();
+    
+    cout << objects.size() << " objects, " << ptlgts.size() << " point lights, " << dirlgts.size() << " direct lights." << endl;
 }

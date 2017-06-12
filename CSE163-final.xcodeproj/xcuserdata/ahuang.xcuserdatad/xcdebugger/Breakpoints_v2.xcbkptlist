@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CSE163-final/display.cpp"
-            timestampString = "518910780.636339"
+            timestampString = "518927383.753788"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "displaySkyBox()"
             landmarkType = "9">
          </BreakpointContent>

@@ -52,6 +52,7 @@ extern std::vector<GLuint> depthMapFBOs, depthMaps;
 
 extern Shader * skyboxShader;
 extern Skybox * skybox;
+extern mat4 fixedView, fixedProjection;
 
 extern mat4 lightProjection;
 extern std::vector<mat4> lightSpaceMatrices;

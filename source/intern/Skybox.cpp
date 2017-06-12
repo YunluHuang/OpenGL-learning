@@ -35,7 +35,10 @@ Skybox::Skybox(vector<const char *> cubeFaces) {
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
 
-void Skybox::genCube() {
+void Skybox::genCube(int scale) {
+    for(int i = 0; i < 36 * 3; i++) {
+        skyboxVertices[i] = scale * unitSkyboxVertices[i];
+    }
     cout << "genCube" << endl;
     glGenVertexArrays(1, &skyboxVAO);
     glBindVertexArray(skyboxVAO);

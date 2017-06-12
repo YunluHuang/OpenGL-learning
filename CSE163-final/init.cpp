@@ -80,7 +80,7 @@ void initSkybox() {
         "powderpeak_ft.tga"
     };
     skybox = new Skybox(cubeFaces);
-    skybox->genCube();
+    skybox->genCube(50);
 }
 
 void init() {

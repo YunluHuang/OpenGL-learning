@@ -164,7 +164,11 @@ namespace NS_TGALOADER
 						ucBuffer[1] = ucBuffer[0];
 						ucBuffer[2] = ucBuffer[0];
 						ucBuffer[3] = ucBuffer[0];
-					}
+                    } else {
+                        unsigned char tmp = ucBuffer[0];
+                        ucBuffer[0] = ucBuffer[2];
+                        ucBuffer[2] = tmp;
+                    }
 
 					// copy all four values in one operation
 					(*pIntPointer) = (*pIntBuffer);
@@ -187,7 +191,11 @@ namespace NS_TGALOADER
 					ucBuffer[1] = ucBuffer[0];
 					ucBuffer[2] = ucBuffer[0];
 					ucBuffer[3] = ucBuffer[0];
-				}
+                } else {
+                    unsigned char tmp = ucBuffer[0];
+                    ucBuffer[0] = ucBuffer[2];
+                    ucBuffer[2] = tmp;
+                }
 
 				// copy the color into the image data as many times as dictated 
 				for (int i = 0; i < (int) ucChunkHeader; ++i)
@@ -215,18 +223,18 @@ namespace NS_TGALOADER
         
         for(int i = 0; i < w / 2; i+= 4) {
             for(int j = 0; j < h; j++) {
-                unsigned char temp0 = flip_Pixels[j*h + i];
-                unsigned char temp1 = flip_Pixels[j*h + i + 1];
-                unsigned char temp2 = flip_Pixels[j*h + i + 2];
-                unsigned char temp3 = flip_Pixels[j*h + i + 3];
-                flip_Pixels[j*h + i] = flip_Pixels[j*h + w - i - 3];
-                flip_Pixels[j*h + i + 1] = flip_Pixels[j*h + w - i - 2];
-                flip_Pixels[j*h + i + 2] = flip_Pixels[j*h + w - i - 1];
-                flip_Pixels[j*h + i + 3] = flip_Pixels[j*h + w - i];
-                flip_Pixels[j*h + w - i - 3] = temp0;
-                flip_Pixels[j*h + w - i - 2] = temp1;
-                flip_Pixels[j*h + w - i - 1] = temp2;
-                flip_Pixels[j*h + w - i] = temp3;
+                unsigned char temp0 = flip_Pixels[j*w + i];
+                unsigned char temp1 = flip_Pixels[j*w + i + 1];
+                unsigned char temp2 = flip_Pixels[j*w + i + 2];
+                unsigned char temp3 = flip_Pixels[j*w + i + 3];
+                flip_Pixels[j*w + i] = flip_Pixels[j*w + w - i - 4];
+                flip_Pixels[j*w + i + 1] = flip_Pixels[j*w + w - i - 3];
+                flip_Pixels[j*w + i + 2] = flip_Pixels[j*w + w - i - 2];
+                flip_Pixels[j*w + i + 3] = flip_Pixels[j*w + w - i - 1];
+                flip_Pixels[j*w + w - i - 4] = temp0;
+                flip_Pixels[j*w + w - i - 3] = temp1;
+                flip_Pixels[j*w + w - i - 2] = temp2;
+                flip_Pixels[j*w + w - i - 1] = temp3;
             }
         }
         m_Pixels.swap(flip_Pixels);

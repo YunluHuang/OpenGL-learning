@@ -5,7 +5,6 @@ out vec3 texCoords;
 
 uniform mat4 projection;
 uniform mat4 view;
-uniform vec3 eyePos;
 
 void main() {
     texCoords = vPos;

@@ -30,6 +30,9 @@ std::vector<GLuint> EBOs;
 // Bias Matrix for shadow map
 mat4 biasMatrix(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
+// fix view projection for skybox
+mat4 fixedView, fixedProjection;
+
 void displayDepthMap() {
     
     glCullFace(GL_FRONT);
@@ -69,7 +72,7 @@ void displayMainProgram() {
     
     // reset viewport
     glViewport(0, 0, width, height);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     mainShader->use();
     
@@ -115,21 +118,19 @@ void displayMainProgram() {
 
 void displaySkyBox() {
     
-    cout << "displaySkyBox" << endl;
     glViewport(0, 0, width, height);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_FALSE);
     skyboxShader->use();
     
-    view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
+    fixedView = mat4(mat3(glm::lookAt(eye, center, up)));
+    fixedProjection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear , zFar);
     
     //pass the projection and view matrix to shader
-    skyboxShader->set("projection", projection);
-    skyboxShader->set("view", view);
+    skyboxShader->set("projection", fixedProjection);
+    skyboxShader->set("view", fixedView);
     skyboxShader->set("skybox", 0);
-    skyboxShader->set("eyePos", eye);
     
     glBindVertexArray(skybox->skyboxVAO);
     glActiveTexture(GL_TEXTURE0);
@@ -152,7 +153,7 @@ void display() {
     //displayDepthMap();
     
     // Then execute the main render program
-    //displayMainProgram();
+    displayMainProgram();
     
     // Flush the viewport and swap the buffer
     glFlush();

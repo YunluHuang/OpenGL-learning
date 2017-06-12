@@ -33,6 +33,7 @@ Shader * depthShader;
 Shader * cubeDepthShader;
 Shader * quadShader;
 Shader * skyboxShader;
+Shader * irradianceShader;
 
 mat4 view;
 mat4 projection;

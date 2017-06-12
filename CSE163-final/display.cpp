@@ -188,6 +188,18 @@ void displayMainProgram() {
         }
     }
     
+    // Setup environment map
+    int envMapPos = dumpPtlgtMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + envMapPos);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+    mainShader->set("envMap", envMapPos);
+    
+    // Setup irradiance map
+    int irrMapPos = envMapPos + 1;
+    glActiveTexture(GL_TEXTURE0 + irrMapPos);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
+    mainShader->set("irrMap", irrMapPos);
+    
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {
         

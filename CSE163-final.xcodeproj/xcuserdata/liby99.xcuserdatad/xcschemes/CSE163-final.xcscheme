@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "temple.scene"
+            argument = "basic.scene"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -18,7 +18,7 @@
 
 struct Skybox {
     GLuint cubeMapID, skyboxVAO, skyboxVBO;
-    
+    GLuint irradianceMapID;
     Skybox(std::vector<const char *> cubFaces);
     void genCube(int scale);
 };

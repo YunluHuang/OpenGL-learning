@@ -1,33 +1,8 @@
-ambient 0.2 0.1 0.1
-diffuse 0.4 0.2 0.0
-specular 1 1 1
+ambient 0.1 0.1 0.1
+diffuse 1.0 1.0 0.7
+specular 0 0 0
 shininess 10
 
-# pointlight 0 10 0 1 1 1
-directlight -2 -2 -2 1 1 1
+skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga
 
-# pushtransf
-
-translate -1 0 0
-object cube2.obj
-
-# poptransf
-
-# translate 5 0 0
-# pushtransf
-# scale 2 2 2
-
-translate 2 0 0
 object teapot.obj
-
-# poptransf
-
-# pushtransf
-# translate 0 1 0
-
-# pushtransf
-# trasnlate -1 0 0
-# object cube.obj
-# poptransf
-
-# poptransf

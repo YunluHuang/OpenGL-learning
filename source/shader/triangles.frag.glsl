@@ -25,12 +25,14 @@ uniform vec3 diffuse;
 uniform vec3 specular;
 uniform float shininess;
 
+uniform samplerCube envMap;
+uniform samplerCube irrMap;
+
 void main() {
     
     mat4 modelView = view * model;
     
     // Setup the final color first
-    vec3 finalColor = ambient;
     vec3 finalSpecular = vec3(0, 0, 0);
     vec3 finalDiffuse = vec3(0, 0, 0);
     
@@ -66,7 +68,6 @@ void main() {
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
         // Add all these together
-        finalColor += visibility * lightColor * (diffuseColor + specularColor);
         finalSpecular += visibility * lightColor * specularColor;
         finalDiffuse += visibility * lightColor * diffuseColor;
     }
@@ -96,10 +97,14 @@ void main() {
         float brightness = 8 / (dist * dist);
         
         // Add all these together
-        finalColor += brightness * visibility * lightColor * (diffuseColor + specularColor);
         finalSpecular += brightness * visibility * lightColor * specularColor;
         finalDiffuse += brightness * visibility * lightColor * diffuseColor;
     }
+    
+    vec3 eyedir = normalize(-vPos);
+    vec3 envdir = vec3(inverse(view) * vec4(2 * normal * dot(eyedir, normal) - eyedir, 0.0f));
+    vec3 specularEnv = specular * texture(envMap, envdir).xyz;
+    vec3 diffuseEnv = diffuse * texture(irrMap, envdir).xyz;
 
-    fColor = vec4(ambient + finalSpecular + finalDiffuse, 1.0);
+    fColor = vec4(ambient + finalSpecular + specularEnv + finalDiffuse + diffuseEnv, 1.0);
 }

@@ -110,6 +110,12 @@
 		DF19B3F31EE3E14400E4B19C /* suzanne.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = suzanne.obj; sourceTree = "<group>"; };
 		DF1D8DE51EEE8F1000B425AA /* irradiance.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = irradiance.frag.glsl; sourceTree = "<group>"; };
 		DF1D8DE61EEE8F1C00B425AA /* irradiance.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = irradiance.vert.glsl; sourceTree = "<group>"; };
+		DF1D8DEB1EEE9A7200B425AA /* ssao.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssao.frag.glsl; sourceTree = "<group>"; };
+		DF1D8DEC1EEE9A8100B425AA /* ssao.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssao.vert.glsl; sourceTree = "<group>"; };
+		DF1D8DED1EEE9A9600B425AA /* ssaoBlur.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoBlur.frag.glsl; sourceTree = "<group>"; };
+		DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoGeometry.frag.glsl; sourceTree = "<group>"; };
+		DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoGeometry.vert.glsl; sourceTree = "<group>"; };
+		DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoLighting.frag.glsl; sourceTree = "<group>"; };
 		DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		DF3F3EBF1EE2EA4300DAC187 /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectLight.cpp; sourceTree = "<group>"; };
@@ -1593,6 +1599,12 @@
 				6C6B0D611EED084000534335 /* skybox.frag.glsl */,
 				DF1D8DE51EEE8F1000B425AA /* irradiance.frag.glsl */,
 				DF1D8DE61EEE8F1C00B425AA /* irradiance.vert.glsl */,
+				DF1D8DEB1EEE9A7200B425AA /* ssao.frag.glsl */,
+				DF1D8DEC1EEE9A8100B425AA /* ssao.vert.glsl */,
+				DF1D8DED1EEE9A9600B425AA /* ssaoBlur.frag.glsl */,
+				DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */,
+				DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */,
+				DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */,
 			);
 			path = shader;
 			sourceTree = "<group>";

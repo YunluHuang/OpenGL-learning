@@ -51,19 +51,12 @@ void addObject(const char * filename) {
     objects.push_back(obj);
 }
 
-void addLight(Light * light) {
-    lights.push_back(light);
-    lightSpaceMatrices.push_back(mat4(1.0f));
-    lightPos.push_back(vec4(1.0f));
-    lightColor.push_back(vec3(1.0f));
-}
-
 void addPointLight(vec3 pos, vec3 color) {
-    addLight(new PointLight(pos, color));
+    ptlgts.push_back(new PointLight(pos, color));
 }
 
 void addDirectLight(vec3 dir, vec3 color) {
-    addLight(new DirectLight(dir, color));
+    dirlgts.push_back(new DirectLight(dir, color));
 }
 
 void readfile(const char * filename) {

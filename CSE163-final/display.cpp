@@ -35,30 +35,28 @@ void displayDepthMap() {
     
     depthShader->use();
     
-    for (int i = 0; i < lights.size(); i++) {
-        
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    for (int i = 0; i < dirlgts.size(); i++) {
         
         glViewport(0, 0, 1024, 1024);
-        glBindFramebuffer(GL_FRAMEBUFFER, lights[i]->depthMapFBO);
-        glClear(GL_DEPTH_BUFFER_BIT);
+        glBindFramebuffer(GL_FRAMEBUFFER, dirlgts[i]->depthMapFBO);
         
-        lightSpaceMatrices[i] = lights[i]->getLightSpace();
+        glClearColor(0, 0, 0, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        depthShader->set("lightProjectionView", lightSpaceMatrices[i]);
+        depthShader->set("lightProjectionView", dirlgts[i]->getLightSpace());
         
-        // Pass objects to the shader
         for (int i = 0; i < objects.size(); i++) {
-            
-            // Setup mvp
             depthShader->set("lightModel", objects[i]->transf);
-            
-            // Display the object
             displayObject(objects[i]);
         }
         
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+    
+    cubeDepthShader->use();
+    
+    for (int i = 0; i < ptlgts.size(); i++) {
+        
     }
     
     glCullFace(GL_BACK);
@@ -79,22 +77,20 @@ void displayMainProgram() {
     // Pass the projection to the shader
     mainShader->set("projection", projection);
     
-    // Pass the lights to the shader
-    mainShader->set("lightAmount", (int) lights.size());
-    for (int i = 0; i < lights.size(); i++) {
-        
+    mainShader->set("dirlgtAmount", (int) dirlgts.size());
+    for (int i = 0; i < dirlgts.size(); i++) {
         glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, lights[i]->depthMap);
-        
-        mat4 depthBiasVP = biasMatrix * lights[i]->getLightSpace();
-        mainShader->set(("lightSpaceMatrices[" + to_string(i) + "]").c_str(), depthBiasVP);
-        mainShader->set(("depthMaps[" + to_string(i) + "]").c_str(), i);
-        
-        lightPos[i] = lights[i]->getLightPosition();
-        lightColor[i] = lights[i]->color;
+        glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
+        mainShader->set(("dirlgtMaps[" + to_string(i) + "]").c_str(), i);
+        mainShader->set(("dirlgtMatrices[" + to_string(i) + "]").c_str(), biasMatrix * dirlgts[i]->getLightSpace());
+        mainShader->set(("dirlgtDirections[" + to_string(i) + "]").c_str(), dirlgts[i]->getLightPosition());
+        mainShader->set(("dirlgtColors[" + to_string(i) + "]").c_str(), dirlgts[i]->color);
     }
-    mainShader->set("lightPositions", lightPos);
-    mainShader->set("lightColors", lightColor);
+    
+    mainShader->set("ptlgtAmount", (int) ptlgts.size());
+    for (int i = 0; i < ptlgts.size(); i++) {
+        
+    }
     
     // Pass objects to the shader
     for (int i = 0; i < objects.size(); i++) {

@@ -37,9 +37,8 @@ mat4 projection;
 int windowX;
 int windowY;
 
-std::vector<Light *> lights;
-std::vector<vec4> lightPos;
-std::vector<vec3> lightColor;
+std::vector<PointLight *> ptlgts;
+std::vector<DirectLight *> dirlgts;
 
 std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
@@ -72,7 +71,4 @@ void init() {
     initMainShader();
     initAllMeshes();
     initShadowMap();
-    
-    cout << "object: " << objects.size() << ", light: " << lights.size() << "." << endl;
-    cout << loadedMeshes.size() << " meshes loaded." << endl;
 }

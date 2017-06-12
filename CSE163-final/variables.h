@@ -21,7 +21,8 @@
 #include <map>
 
 #include "math.hpp"
-#include "Light.hpp"
+#include "PointLight.hpp"
+#include "DirectLight.hpp"
 #include "Mesh.hpp"
 #include "Object.hpp"
 #include "Shader.hpp"
@@ -74,9 +75,10 @@ extern GLuint specularPosition;
 extern GLuint diffusePosition;
 extern GLuint shininessPosition;
 
-extern std::vector<Light *> lights;
+extern std::vector<PointLight *> ptlgts;
+extern std::vector<DirectLight *> dirlgts;
 
-extern std::vector<vec4> lightPos;
+extern std::vector<vec4> ptlightPos;
 extern std::vector<vec3> lightColor;
 
 #endif

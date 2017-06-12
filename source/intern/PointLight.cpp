@@ -8,7 +8,7 @@
 
 #include "PointLight.hpp"
 
-const mat4 PointLight::projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+const mat4 PointLight::projection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 25.0f);
 
 PointLight::PointLight(vec3 pos, vec3 color) : Light(color) {
     

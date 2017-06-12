@@ -36,33 +36,36 @@ void main() {
     vec4 _vPos = modelView * myVertex;
     vec3 vPos = _vPos.xyz / _vPos.w;
     
-    // 
+    vec4 _oriPos = model * myVertex;
+    vec3 oriPos = _oriPos.xyz / _oriPos.w;
+    
+    //
     vec3 normal = normalize(vec3(transpose(inverse(modelView)) * vec4(myNormal, 0.0)));
     
     // First calculate all the direct light
-//    for (int i = 0; i < dirlgtAmount; i++) {
-//    
-//        // Get Light Color
-//        vec3 lightColor = dirlgtColors[i];
-//        vec4 lightSpace = modelView * vec4(dirlgtDirections[i], 0.0f);
-//        
-//        // Calculate in and out direction
-//        vec3 lightPos = lightSpace.xyz;
-//        vec3 inDir = normalize(-vPos);
-//        vec3 outDir = normalize(lightPos);
-//        
-//        // Calculate the shadow position with
-//        vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);
-//        float visibility = texture(dirlgtMaps[i], shadowPos);
-//        
-//        // Calculate diffuse and specular color
-//        vec3 halfAngle = normalize(inDir + outDir);
-//        vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
-//        vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
-//        
-//        // Add all these together
-//        finalColor += visibility * lightColor * (diffuseColor + specularColor);
-//    }
+    for (int i = 0; i < dirlgtAmount; i++) {
+    
+        // Get Light Color
+        vec3 lightColor = dirlgtColors[i];
+        vec4 lightSpace = modelView * vec4(dirlgtDirections[i], 0.0f);
+        
+        // Calculate in and out direction
+        vec3 lightPos = lightSpace.xyz;
+        vec3 inDir = normalize(-vPos);
+        vec3 outDir = normalize(lightPos);
+        
+        // Calculate the shadow position with
+        vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);
+        float visibility = 1.0f; // texture(dirlgtMaps[i], shadowPos);
+        
+        // Calculate diffuse and specular color
+        vec3 halfAngle = normalize(inDir + outDir);
+        vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
+        vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
+        
+        // Add all these together
+        finalColor += visibility * lightColor * (diffuseColor + specularColor);
+    }
     
     // Then calculate all the point light
     for (int i = 0; i < ptlgtAmount; i++) {
@@ -80,15 +83,16 @@ void main() {
         vec3 diffuseColor = diffuse * max(dot(outDir, normal), 0);
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
-        vec4 _oriPos = model * myVertex;
-        vec3 oriPos = _oriPos.xyz / _oriPos.w;
         vec3 diff = oriPos - ptlgtPositions[i];
         float closestDepth = 25.0f * texture(ptlgtMaps[i], diff).r;
         float currentDepth = length(diff);
         float visibility = currentDepth > closestDepth ? 0.0f : 1.0f;
         
+        float dist = sqrt(dot(diff, diff));
+        float brightness = 8 / (dist * dist);
+        
         // Add all these together
-        finalColor += visibility * lightColor * (diffuseColor + specularColor);
+        finalColor += brightness * visibility * lightColor * (diffuseColor + specularColor);
     }
 
     fColor = vec4(finalColor, 1.0);

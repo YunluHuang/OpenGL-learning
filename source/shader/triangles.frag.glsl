@@ -31,6 +31,8 @@ void main() {
     
     // Setup the final color first
     vec3 finalColor = ambient;
+    vec3 finalSpecular = vec3(0, 0, 0);
+    vec3 finalDiffuse = vec3(0, 0, 0);
     
     // Calculate the transformed position
     vec4 _vPos = modelView * myVertex;
@@ -65,6 +67,8 @@ void main() {
         
         // Add all these together
         finalColor += visibility * lightColor * (diffuseColor + specularColor);
+        finalSpecular += visibility * lightColor * specularColor;
+        finalDiffuse += visibility * lightColor * diffuseColor;
     }
     
     // Then calculate all the point light
@@ -93,7 +97,9 @@ void main() {
         
         // Add all these together
         finalColor += brightness * visibility * lightColor * (diffuseColor + specularColor);
+        finalSpecular += brightness * visibility * lightColor * specularColor;
+        finalDiffuse += brightness * visibility * lightColor * diffuseColor;
     }
 
-    fColor = vec4(finalColor, 1.0);
+    fColor = vec4(ambient + finalSpecular + finalDiffuse, 1.0);
 }

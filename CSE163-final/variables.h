@@ -52,12 +52,18 @@ extern float fovy, zNear, zFar;
 
 extern mat4 view, projection, modelView;
 
-// ------------ Camera --------------
+// ------------ Shader --------------
 
 extern Shader * mainShader;
 extern Shader * depthShader;
 extern Shader * cubeDepthShader;
 extern Shader * quadShader;
+extern Shader * skyboxShader;
+
+// ------------ Skybox --------------
+
+extern Skybox * skybox;
+extern mat4 fixedView, fixedProjection;
 
 // ------------ Objects & Buffers --------------
 

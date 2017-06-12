@@ -56,7 +56,7 @@ void main() {
         
         // Calculate the shadow position with
         vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);
-        float visibility = texture(dirlgtMaps[i], shadowPos);
+        float visibility = 1.0f; // texture(dirlgtMaps[i], shadowPos);
         
         // Calculate diffuse and specular color
         vec3 halfAngle = normalize(inDir + outDir);

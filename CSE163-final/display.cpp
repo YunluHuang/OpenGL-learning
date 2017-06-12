@@ -237,7 +237,7 @@ void display() {
     displaySkyBox();
     
     // Then render the depth map
-    //displayDepthMap();
+    displayDepthMap();
     
     // Then execute the main render program
     displayMainProgram();

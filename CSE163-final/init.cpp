@@ -32,6 +32,7 @@ Shader * mainShader;
 Shader * depthShader;
 Shader * cubeDepthShader;
 Shader * quadShader;
+Shader * skyboxShader;
 
 mat4 view;
 mat4 projection;
@@ -47,6 +48,8 @@ mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
 
 Skybox * skybox;
+
+mat4 fixedView, fixedProjection;
 
 void genBuffers();
 void initAllMeshes();

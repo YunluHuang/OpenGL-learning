@@ -47,7 +47,7 @@ std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
 
-Skybox * skybox;
+Skybox * skybox = nullptr;
 
 mat4 fixedView, fixedProjection;
 
@@ -121,16 +121,6 @@ void initDebugQuad() {
 
 void initSkybox() {
     skyboxShader = new Shader("skybox.vert.glsl", "skybox.frag.glsl");
-    vector<const char *> cubeFaces = {
-        "powderpeak_rt.tga",
-        "powderpeak_lf.tga",
-        "powderpeak_up.tga",
-        "powderpeak_dn.tga",
-        "powderpeak_bk.tga",
-        "powderpeak_ft.tga"
-    };
-    skybox = new Skybox(cubeFaces);
-    skybox->genCube(50);
 }
 
 void init() {

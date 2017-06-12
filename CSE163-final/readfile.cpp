@@ -88,6 +88,21 @@ void readfile(const char * filename) {
         if (command == "#") {
             continue;
         }
+        else if (command == "skybox") {
+            if (skybox != nullptr) {
+                cerr << "Multiple Skybox in the Scene File. Aborting. " << endl;
+                exit(101);
+            }
+            vector<const char *> cubeFaces;
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            cubeFaces.push_back(strtok(nullptr, " \n"));
+            skybox = new Skybox(cubeFaces);
+            skybox->genCube(50);
+        }
         else if (command == "ambient") {
             float r = atof(strtok(nullptr, " \n"));
             float g = atof(strtok(nullptr, " \n"));

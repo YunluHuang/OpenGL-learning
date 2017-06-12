@@ -1,4 +1,6 @@
 
+skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga
+
 pointlight -4 1 4.3 0.5 0.5 1.0
 pointlight 4 2 -1.4 1.0 0.7 0.7
 pointlight 0 3 0 1.0 1.0 1.0

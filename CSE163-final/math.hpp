@@ -21,6 +21,9 @@
 #define EYE vec3(0.0,0.0,5.0)
 #define UP vec3(0.0,1.0,0.0)
 #define CENTER vec3(0.0,0.0,0.0)
+#define Z_NEAR 0.1f
+#define Z_FAR 100.0f
+#define FOVY 75.0f
 
 typedef glm::vec2 vec2;
 typedef glm::vec3 vec3;

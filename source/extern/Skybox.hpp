@@ -11,23 +11,24 @@
 
 #include <stdio.h>
 #include <vector>
+#include <iostream>
 
 #include "math.hpp"
 #include "TGALoader.h"
 
 struct Skybox {
-    GLuint cubeMapID, VAO, VBO;
+    GLuint cubeMapID, skyboxVAO, skyboxVBO;
     
     Skybox(std::vector<const char *> cubFaces);
-    void genCube();
+    void genCube(int scale);
 };
 
-static const GLfloat skyboxVertices[] = {
+const GLfloat unitSkyboxVertices[] = {
     -1.0f,  1.0f, -1.0f,
     -1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    1.0f,  1.0f, -1.0f,
     -1.0f,  1.0f, -1.0f,
     
     -1.0f, -1.0f,  1.0f,
@@ -37,33 +38,35 @@ static const GLfloat skyboxVertices[] = {
     -1.0f,  1.0f,  1.0f,
     -1.0f, -1.0f,  1.0f,
     
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
     
     -1.0f, -1.0f,  1.0f,
     -1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f,
+    1.0f, -1.0f,  1.0f,
     -1.0f, -1.0f,  1.0f,
     
     -1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f, -1.0f,
+    1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f,
     -1.0f,  1.0f,  1.0f,
     -1.0f,  1.0f, -1.0f,
     
     -1.0f, -1.0f, -1.0f,
     -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
     -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f
+    1.0f, -1.0f,  1.0f
 };
+
+static GLfloat skyboxVertices[36 * 3];
 
 #endif /* Skybox_hpp */

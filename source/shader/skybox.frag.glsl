@@ -1,11 +1,13 @@
 #version 410 core
 
-out vec4 fCol;
+out vec4 fColor;
 
 in vec3 texCoords;
 
 uniform samplerCube skybox;
 
 void main() {
-    fCol = texture(skybox, TexCoords);
+    fColor = texture(skybox, texCoords);
+    //fColor = vec4(1, 1, 1, 1);
+    //fColor = vec4(texCoords, 1);
 }

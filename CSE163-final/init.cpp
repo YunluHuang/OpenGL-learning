@@ -14,6 +14,7 @@
 
 #include "DirectLight.hpp"
 #include "PointLight.hpp"
+#include "Skybox.hpp"
 #include "Shader.hpp"
 #include "Object.hpp"
 
@@ -44,6 +45,8 @@ std::vector<DirectLight *> dirlgts;
 std::vector<GLuint> depthMapFBOs, depthMaps;
 mat4 lightProjection;
 std::vector<mat4> lightSpaceMatrices;
+
+Skybox * skybox;
 
 void genBuffers();
 void initAllMeshes();
@@ -113,11 +116,26 @@ void initDebugQuad() {
     quadShader = new Shader("debugQuad.vert.glsl", "debugQuad.frag.glsl");
 }
 
+void initSkybox() {
+    skyboxShader = new Shader("skybox.vert.glsl", "skybox.frag.glsl");
+    vector<const char *> cubeFaces = {
+        "powderpeak_rt.tga",
+        "powderpeak_lf.tga",
+        "powderpeak_up.tga",
+        "powderpeak_dn.tga",
+        "powderpeak_bk.tga",
+        "powderpeak_ft.tga"
+    };
+    skybox = new Skybox(cubeFaces);
+    skybox->genCube(50);
+}
+
 void init() {
     genBuffers();
     initMainShader();
     initAllMeshes();
     initShadowMap();
+    initSkybox();
     
     cout << objects.size() << " objects, " << ptlgts.size() << " point lights, " << dirlgts.size() << " direct lights." << endl;
 }

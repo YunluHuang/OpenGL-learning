@@ -26,6 +26,7 @@
 #include "Mesh.hpp"
 #include "Object.hpp"
 #include "Shader.hpp"
+#include "Skybox.hpp"
 
 // ------------ Window --------------
 

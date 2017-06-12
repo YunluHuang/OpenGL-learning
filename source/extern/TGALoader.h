@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string.h>
+#include <iostream>
 
 namespace NS_TGALOADER
 {
@@ -48,6 +49,7 @@ namespace NS_TGALOADER
 	private:
 		void LoadCompressedTGA (FILE* pFile);
 		void LoadUncompressedTGA (FILE* pFile);
+        void flip();
 
 		vector<unsigned char> m_Pixels;
 

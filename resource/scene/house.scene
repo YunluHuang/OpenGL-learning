@@ -1,0 +1,7 @@
+ambient 0.2 0.2 0.2
+diffuse 1.0 1.0 1.0
+
+skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga
+
+translate 0 -0.5 0
+object house.obj

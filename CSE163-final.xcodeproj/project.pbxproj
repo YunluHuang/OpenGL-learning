@@ -30,6 +30,9 @@
 		DF1D8DF81EEEAFE100B425AA /* ssaoGeometry.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */; };
 		DF1D8DF91EEEAFE100B425AA /* ssaoGeometry.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */; };
 		DF1D8DFA1EEEAFE100B425AA /* ssaoLighting.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */; };
+		DF1D8DFE1EEF0AA400B425AA /* house.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DFC1EEF0A4600B425AA /* house.obj */; };
+		DF1D8DFF1EEF0AAC00B425AA /* house.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8DFD1EEF0A5500B425AA /* house.scene */; };
+		DF1D8E011EEF147200B425AA /* whitetemple.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF1D8E001EEF142D00B425AA /* whitetemple.scene */; };
 		DF3F3EB61EE2D2E900DAC187 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF62661EE1070700B237F3 /* main.cpp */; };
 		DF3F3EBA1EE2D2E900DAC187 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */; };
 		DF3F3EBE1EE2EA2500DAC187 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */; };
@@ -63,6 +66,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DF1D8E011EEF147200B425AA /* whitetemple.scene in CopyFiles */,
+				DF1D8DFF1EEF0AAC00B425AA /* house.scene in CopyFiles */,
+				DF1D8DFE1EEF0AA400B425AA /* house.obj in CopyFiles */,
 				DF1D8DF51EEEAFE100B425AA /* ssao.frag.glsl in CopyFiles */,
 				DF1D8DF61EEEAFE100B425AA /* ssao.vert.glsl in CopyFiles */,
 				DF1D8DF71EEEAFE100B425AA /* ssaoBlur.frag.glsl in CopyFiles */,
@@ -134,6 +140,9 @@
 		DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoLighting.frag.glsl; sourceTree = "<group>"; };
 		DF1D8DF11EEE9CD800B425AA /* teapot.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teapot.scene; sourceTree = "<group>"; };
 		DF1D8DF31EEEA1C400B425AA /* mainEnv.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainEnv.frag.glsl; sourceTree = "<group>"; };
+		DF1D8DFC1EEF0A4600B425AA /* house.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = house.obj; sourceTree = "<group>"; };
+		DF1D8DFD1EEF0A5500B425AA /* house.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = house.scene; sourceTree = "<group>"; };
+		DF1D8E001EEF142D00B425AA /* whitetemple.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whitetemple.scene; sourceTree = "<group>"; };
 		DF3F3EBC1EE2EA2500DAC187 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		DF3F3EBF1EE2EA4300DAC187 /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		DF3F3EC01EE2EAB000DAC187 /* DirectLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectLight.cpp; sourceTree = "<group>"; };
@@ -1534,6 +1543,7 @@
 		DFB66E9C1EE2CF0200CAE706 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				DF1D8DFC1EEF0A4600B425AA /* house.obj */,
 				DF19B3F31EE3E14400E4B19C /* suzanne.obj */,
 				DF3F3ED41EE38B7300DAC187 /* cube2.obj */,
 				DF3F3ED01EE3513700DAC187 /* cube.obj */,
@@ -1551,6 +1561,8 @@
 				DF19B3EE1EE3A50100E4B19C /* temple.scene */,
 				DF19B3F21EE3E12900E4B19C /* suzanne.scene */,
 				DF1D8DF11EEE9CD800B425AA /* teapot.scene */,
+				DF1D8DFD1EEF0A5500B425AA /* house.scene */,
+				DF1D8E001EEF142D00B425AA /* whitetemple.scene */,
 			);
 			path = scene;
 			sourceTree = "<group>";

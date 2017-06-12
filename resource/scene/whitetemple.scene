@@ -1,0 +1,84 @@
+
+skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga
+
+pointlight -4 1 4.3 0.5 0.5 1.0
+pointlight 4 2 -1.4 1.0 0.7 0.7
+pointlight 0 5 0 0.8 0.8 0.8
+
+ambient 0.1 0.1 0.1
+diffuse 1 1 1
+specular 0 0 0
+shininess 3
+
+# First the Ground Object
+
+pushtransf
+scale 1 0.05 1
+object cube.obj
+poptransf
+
+# Then start putting the pillows
+
+shininess 50
+
+pushtransf
+translate 0 0.55 0
+scale 0.2 0.5 0.2
+
+pushtransf
+translate -4 0 -4
+object cube.obj
+poptransf
+
+pushtransf
+translate -4 0 4
+object cube.obj
+poptransf
+
+pushtransf
+translate 4 0 -4
+object cube.obj
+poptransf
+
+pushtransf
+translate 4 0 4
+object cube.obj
+poptransf
+
+poptransf
+
+# Then start putting the spheres
+
+pushtransf
+translate 0 1.25 0
+scale 0.2 0.2 0.2
+
+pushtransf
+translate -4 0 -4
+object smoothsphere.obj
+poptransf
+
+pushtransf
+translate -4 0 4
+object smoothsphere.obj
+poptransf
+
+pushtransf
+translate 4 0 -4
+object smoothsphere.obj
+poptransf
+
+pushtransf
+translate 4 0 4
+object smoothsphere.obj
+poptransf
+
+poptransf
+
+# Finally put in the teapot
+
+pushtransf
+shininess 100
+scale 0.7 0.7 0.7
+object teapot.obj
+poptransf

@@ -152,7 +152,7 @@ void displayDirlgtDepthMap() {
     // First setup the dump map
     glViewport(0, 0, 1024, 1024);
     glBindFramebuffer(GL_FRAMEBUFFER, dumpDirlgtMapFBO);
-    glClearColor(0, 0, 0, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     
@@ -187,7 +187,7 @@ void displayPtlgtDepthMap() {
     // First setup the dump map
     glViewport(0, 0, 1024, 1024);
     glBindFramebuffer(GL_FRAMEBUFFER, dumpPtlgtMapFBO);
-    glClearColor(0, 0, 0, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     
@@ -245,6 +245,7 @@ void displayMainProgram() {
     shader->use();
     
     // Setup screen variable
+    shader->set("viewPos", eye);
     shader->set("width", width);
     shader->set("height", height);
     

@@ -17,6 +17,7 @@ uniform vec3 ptlgtPositions[5];
 uniform vec3 ptlgtColors[5];
 uniform samplerCube ptlgtMaps[5];
 
+uniform vec3 viewPos;
 uniform mat4 view;
 uniform mat4 model;
 
@@ -31,6 +32,15 @@ uniform samplerCube irrMap;
 uniform int width;
 uniform int height;
 uniform sampler2D ssao;
+
+vec3 gridSamplingDisk[20] = vec3[] (
+    vec3(1, 1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1, 1,  1),
+    vec3(1, 1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
+    vec3(1, 1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1, 1,  0),
+    vec3(1, 0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1, 0, -1),
+    vec3(0, 1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0, 1, -1)
+);
+int samples = 20;
 
 void main() {
     
@@ -93,9 +103,22 @@ void main() {
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
         vec3 diff = oriPos - ptlgtPositions[i];
-        float closestDepth = 25.0f * texture(ptlgtMaps[i], diff).r;
+        vec3 u = cross(normal, vec3(1, 0, 0));
+        u = normalize(u == vec3(0, 0, 0) ? cross(normal, vec3(0, 1, 0)) : u);
+        vec3 v = normalize(cross(normal, u));
         float currentDepth = length(diff);
-        float visibility = currentDepth > closestDepth ? 0.0f : 1.0f;
+        float shadow = 0.0f;
+        for (int j = -1; j <= 1; j++) {
+            for (int k = -1; k <= 1; k++) {
+                float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.004 * u * j + 0.004 * v * k).r;
+                if (currentDepth > closestDepth) {
+                    shadow += 1.0f;
+                }
+            }
+        }
+        shadow /= 9.0f;
+        float visibility = 1.0f - shadow;
+        
         
         float dist = sqrt(dot(diff, diff));
         float brightness = 8 / (dist * dist);
@@ -112,7 +135,7 @@ void main() {
     vec3 diffuseEnv = diffuse * texture(irrMap, envdir).xyz;
     env = specularEnv + diffuseEnv;
     
-    vec2 ssaoCoord = vec2(gl_FragCoord.x / width, gl_FragCoord.y / height);
+    vec2 ssaoCoord = vec2((gl_FragCoord.x + 0.5) / width, (gl_FragCoord.y + 0.5) / height);
     float ao = texture(ssao, ssaoCoord).r;
     
     fColor = vec4(ambient + finalSpecular + finalDiffuse + env, 1.0) * ao;

@@ -1,0 +1,55 @@
+<section id="basic-section">
+    <h2>High Quality Real Time Rendering</h2>
+    <section id="abstract-section">
+        <h2>Abstract</h2>
+        <div>
+            <p>
+                In this Project 3, we are implementing a high quality real time rendering
+                enging using OpenGl and GLSL shader language. The first part we implement
+                is the scene loader, mesh loader and the FPS like control system, which
+                require us to write a generalized <code>.obj</code> file loader that can
+                handle multiple object loading in the same file. For our shadow and
+                lighting, we implemented both direct light which will generate
+                <code>sampler2DShadow</code> map and point light which will generate
+                <code>samplerCubeShadow</code> map. We also implemented SSAO (screen-based
+                ambient occlusion) to assist the shadowing to make the scene look more
+                realistic. For the environment map, we have implemented both normal environment
+                map and irradiance environment map, which can not only give the scene a
+                environment but can also contribute to the reflection and diffuse lighting
+                of the scene.
+            </p>
+        </div>
+    </section>
+    <section id="compile-section">
+        <h2>Compile &amp; Run</h2>
+        <div>
+            <p>
+                Our program is setup in Xcode on MacOS. So if you want to compile the code
+                you might need Xcode to do that. In our provided code there's already a
+                <code>CSE163-final.xcodeproj</code> file. Open Xcode and select this file
+                so that you can open this project as a whole. After that, when all the
+                project has been setup in Xcode, the code should be automatically compiled
+                and you can than run it.
+            </p>
+            <p>
+                Or if you are using the appropriate system, you can download the executable
+                from this website directly. Simply hit the button in the left bottom to
+                download.
+            </p>
+            <p>
+                When starting the program, we requires the user to specify the scene file.
+                To do that you may want to have a scene file setup. You can either download
+                our test scene files (including the <code>.obj</code> files), or follow the
+                write-up downward to write your own scene files.
+            </p>
+            <p>
+                When you have your scene file, use this command:
+                <pre>$ ./renderer basic.scene</pre>
+                to start the program. This will start the program with the
+                <code>basic.scene</code>. Note that all the <code>.obj</code> files that
+                are specified in <code>basic.scene</code> must also be placed within the
+                same directory.
+            </p>
+        </div>
+    </section>
+</section>

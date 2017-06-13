@@ -1,5 +1,5 @@
 {
-    "debug": true,
+    "debug": false,
     "name": "CSE 163 Project 3",
     "port": 9052,
     "session_secret": "keeling-session",

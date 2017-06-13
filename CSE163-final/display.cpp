@@ -367,7 +367,15 @@ void displayQuad(GLuint texture) {
     renderSmallQuad();
 }
 
+void processAnimation() {
+    for (int i = 0; i < ptlgts.size(); i++) {
+        ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(1.0f), vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
+    }
+}
+
 void display() {
+    
+    processAnimation();
     
     // First process keyboard input
     processKeyboard();

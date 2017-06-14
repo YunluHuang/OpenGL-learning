@@ -63,6 +63,9 @@
 		DFBDF9A81EF0EBAE00C1AA95 /* powderpeak_lf.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D561EECF7B200534335 /* powderpeak_lf.tga */; };
 		DFBDF9A91EF0EBAE00C1AA95 /* powderpeak_rt.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */; };
 		DFBDF9AA1EF0EBAE00C1AA95 /* powderpeak_up.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D581EECF7B200534335 /* powderpeak_up.tga */; };
+		DFBDF9AC1EF0F78500C1AA95 /* cube.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AB1EF0F73100C1AA95 /* cube.scene */; };
+		DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */; };
+		DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +75,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */,
+				DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */,
+				DFBDF9AC1EF0F78500C1AA95 /* cube.scene in CopyFiles */,
 				DFBDF9A51EF0EBAE00C1AA95 /* powderpeak_bk.tga in CopyFiles */,
 				DFBDF9A61EF0EBAE00C1AA95 /* powderpeak_dn.tga in CopyFiles */,
 				DFBDF9A71EF0EBAE00C1AA95 /* powderpeak_ft.tga in CopyFiles */,
@@ -729,6 +735,9 @@
 		DFB66EAB1EE2CF0200CAE706 /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		DFB66EAE1EE2CF0200CAE706 /* main.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.frag.glsl; sourceTree = "<group>"; };
 		DFB66EAF1EE2CF0200CAE706 /* basic.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = basic.vert.glsl; sourceTree = "<group>"; };
+		DFBDF9AB1EF0F73100C1AA95 /* cube.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.scene; sourceTree = "<group>"; };
+		DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = torus.obj; sourceTree = "<group>"; };
+		DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = suzanne_smooth.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1557,11 +1566,13 @@
 			children = (
 				DF1D8DFC1EEF0A4600B425AA /* house.obj */,
 				DF19B3F31EE3E14400E4B19C /* suzanne.obj */,
+				DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */,
 				DF3F3ED41EE38B7300DAC187 /* cube2.obj */,
 				DF3F3ED01EE3513700DAC187 /* cube.obj */,
 				DF19B3F01EE3ABA100E4B19C /* smoothsphere.obj */,
 				DF3F3ED21EE35CC700DAC187 /* sphere.obj */,
 				DFB66E9D1EE2CF0200CAE706 /* teapot.obj */,
+				DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1575,6 +1586,7 @@
 				DF1D8DF11EEE9CD800B425AA /* teapot.scene */,
 				DF1D8DFD1EEF0A5500B425AA /* house.scene */,
 				DF1D8E001EEF142D00B425AA /* whitetemple.scene */,
+				DFBDF9AB1EF0F73100C1AA95 /* cube.scene */,
 			);
 			path = scene;
 			sourceTree = "<group>";

@@ -10,7 +10,7 @@ uniform int dirlgtAmount;
 uniform vec3 dirlgtDirections[5];
 uniform vec3 dirlgtColors[5];
 uniform mat4 dirlgtMatrices[5];
-uniform sampler2DShadow dirlgtMaps[5];
+uniform sampler2D dirlgtMaps[5];
 
 uniform int ptlgtAmount;
 uniform vec3 ptlgtPositions[5];
@@ -32,15 +32,6 @@ uniform samplerCube irrMap;
 uniform int width;
 uniform int height;
 uniform sampler2D ssao;
-
-vec3 gridSamplingDisk[20] = vec3[] (
-    vec3(1, 1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1, 1,  1),
-    vec3(1, 1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
-    vec3(1, 1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1, 1,  0),
-    vec3(1, 0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1, 0, -1),
-    vec3(0, 1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0, 1, -1)
-);
-int samples = 20;
 
 void main() {
     
@@ -73,8 +64,8 @@ void main() {
         vec3 outDir = normalize(lightPos);
         
         // Calculate the shadow position with
-        vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z - 0.005) / shadowCoords[i].w);
-        float visibility = 1.0f; // texture(dirlgtMaps[i], shadowPos);
+        vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z) / shadowCoords[i].w);
+        float visibility = 1; // texture(dirlgtMaps[i], shadowPos);
         
         // Calculate diffuse and specular color
         vec3 halfAngle = normalize(inDir + outDir);
@@ -118,8 +109,7 @@ void main() {
             }
         }
         shadow /= 9.0f;
-        float visibility = 1.0f - shadow;
-        
+        float visibility = 1.0f;
         
         float dist = sqrt(dot(diff, diff));
         float brightness = 8 / (dist * dist);
@@ -136,7 +126,7 @@ void main() {
     vec3 diffuseEnv = diffuse * texture(irrMap, envdir).xyz;
     env = specularEnv + diffuseEnv;
     
-    vec2 ssaoCoord = vec2((gl_FragCoord.x + 0.5) / width, (gl_FragCoord.y + 0.5) / height);
+    vec2 ssaoCoord = vec2(gl_FragCoord.x / width, gl_FragCoord.y / height);
     float ao = texture(ssao, ssaoCoord).r;
     
     fColor = vec4(ambient + finalSpecular + finalDiffuse + env, 1.0) * ao;

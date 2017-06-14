@@ -95,6 +95,8 @@ void renderSmallQuad() {
 
 void displaySSAO() {
     
+    glViewport(0, 0, width, height);
+    
     {
         glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -250,8 +252,6 @@ void displayMainProgram() {
     shader->set("height", height);
     
     // Update Matrices
-    view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     shader->set("view", view);
     shader->set("projection", projection);
     
@@ -265,30 +265,11 @@ void displayMainProgram() {
     glActiveTexture(GL_TEXTURE0 + dumpPtlgtMapPos);
     glBindTexture(GL_TEXTURE_CUBE_MAP, dumpPtlgtMap);
     
-    // Pass Direct Lights to the map
-    shader->set("dirlgtAmount", (int) dirlgts.size());
-    for (int i = 0; i < 5; i++) {
-        if (i < dirlgts.size()) {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
-            shader->set("dirlgtMaps", i, i);
-            shader->set("dirlgtMatrices", i, biasMatrix * dirlgts[i]->getLightSpace());
-            shader->set("dirlgtDirections", i, dirlgts[i]->dir);
-            shader->set("dirlgtColors", i, dirlgts[i]->color);
-        }
-        else {
-            shader->set("dirlgtMaps", i, dumpDirlgtMapPos);
-            shader->set("dirlgtMatrices", i, mat4(1.0f));
-            shader->set("dirlgtDirections", i, vec3(1.0f));
-            shader->set("dirlgtColors", i, vec3(1.0f));
-        }
-    }
-    
     // Pass the point lights to the map
     shader->set("ptlgtAmount", (int) ptlgts.size());
     for (int i = 0; i < 5; i++) {
         if (i < ptlgts.size()) {
-            int tid = (int) dirlgts.size() + i;
+            int tid = i;
             glActiveTexture(GL_TEXTURE0 + tid);
             glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
             shader->set("ptlgtMaps", i, tid);
@@ -299,6 +280,26 @@ void displayMainProgram() {
             shader->set("ptlgtMaps", i, dumpPtlgtMapPos);
             shader->set("ptlgtPositions", i, vec3(1.0f));
             shader->set("ptlgtColors", i, vec3(1.0f));
+        }
+    }
+    
+    // Pass Direct Lights to the map
+    shader->set("dirlgtAmount", (int) dirlgts.size());
+    for (int i = 0; i < 5; i++) {
+        if (i < dirlgts.size()) {
+            int tid = (int) ptlgts.size() + i;
+            glActiveTexture(GL_TEXTURE0 + tid);
+            glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
+            shader->set("dirlgtMaps", i, tid);
+            shader->set("dirlgtMatrices", i, biasMatrix * dirlgts[i]->getLightSpace());
+            shader->set("dirlgtDirections", i, dirlgts[i]->dir);
+            shader->set("dirlgtColors", i, dirlgts[i]->color);
+        }
+        else {
+            shader->set("dirlgtMaps", i, dumpDirlgtMapPos);
+            shader->set("dirlgtMatrices", i, mat4(1.0f));
+            shader->set("dirlgtDirections", i, vec3(1.0f));
+            shader->set("dirlgtColors", i, vec3(1.0f));
         }
     }
     
@@ -371,9 +372,15 @@ void processAnimation() {
     for (int i = 0; i < ptlgts.size(); i++) {
         ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(1.0f), vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
     }
+    for (int i = 0; i < dirlgts.size(); i++) {
+        dirlgts[i]->dir = vec3(glm::rotate(mat4(1.0f), glm::radians(1.0f), vec3(0, 1, 0)) * vec4(dirlgts[i]->dir, 1.0f));
+    }
 }
 
 void display() {
+    
+    view = glm::lookAt(eye, center, up);
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
     processAnimation();
     

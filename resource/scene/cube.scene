@@ -1,6 +1,8 @@
-skybox a.tga a.tga a.tga a.tga a.tga a.tga
+skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga powderpeak_bk.tga powderpeak_ft.tga
 
-pointlight -2 3 0.5 0.35 0.3 0.3
-pointlight 4 0 3 0.3 0.3 0.35
+specular 1 1 1
+diffuse 0 0 0
+ambient 0 0 0
+shininess 0
 
-object torus.obj
+object teapot.obj

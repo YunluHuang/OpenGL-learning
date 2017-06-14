@@ -1,0 +1,68 @@
+<section id="environment-section">
+    <h2>Environment Map</h2>
+    <div>
+        <p>
+            As you might have noticed in the previous part of the website, we have already
+            showcased most of our environment map feature. It is basically a cube map based on a
+            really big cube that is moving along with the camera. The environment map we are
+            using is the powdered peak. Full image is like this:
+        </p>
+        <table class="center">
+            <tr>
+                <td></td>
+                <td>
+                    <img src="img/final/envmap/powderpeak_up.tga" width="150px" />
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/envmap/powderpeak_lf.tga" width="150px" />
+                </td>
+                <td>
+                    <img src="img/final/envmap/powderpeak_bk.tga" width="150px" />
+                </td>
+                <td>
+                    <img src="img/final/envmap/powderpeak_rt.tga" width="150px" />
+                </td>
+                <td>
+                    <img src="img/final/envmap/powderpeak_ft.tga" width="150px" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <img src="img/final/envmap/powderpeak_dn.tga" width="150px" />
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <p>
+            But we haven't shown the specular object that can reflect the environment map yet.
+            Here're some sample images that the object in it is fully reflective with no
+            diffuse:
+        </p>
+        <p class="center">
+            <img src="img/final/specular_cube.png" width="600px" />
+        </p>
+        <p class="center">
+            <img src="img/final/specular_sphere.png" width="600px" />
+        </p>
+        <p class="center">
+            <img src="img/final/specular_torus.png" width="600px" />
+        </p>
+        <p class="center">
+            <img src="img/final/specular_teapot.png" width="600px" />
+        </p>
+        <p>
+            Although these pictures look great, but when it comes to the complex scene, the
+            problem occurs. The objects does not reflect with each other, since the reflection
+            is just sampling on the environment map.
+        </p>
+        <p class="center">
+            <img src="img/final/specular_scene.png" width="600px" />
+        </p>
+    </div>
+</section>

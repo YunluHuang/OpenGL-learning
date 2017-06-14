@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "city.scene"
+            argument = "cube.scene"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

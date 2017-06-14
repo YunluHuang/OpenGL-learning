@@ -7,7 +7,7 @@ pointlight 0 3 0 1.0 1.0 1.0
 
 ambient 0.2 0.1 0.1
 diffuse 0.5 0.5 0.5
-specular 0 0 0
+specular 0.5 0.5 0.5
 shininess 3
 
 # First the Ground Object
@@ -26,25 +26,25 @@ translate 0 0.55 0
 scale 0.2 0.5 0.2
 
 pushtransf
-diffuse 1.0 0.3 0.3
+diffuse 0.8 0.1 0.1
 translate -4 0 -4
 object cube.obj
 poptransf
 
 pushtransf
-diffuse 1.0 1.0 0.3
+diffuse 0.8 0.8 0.1
 translate -4 0 4
 object cube.obj
 poptransf
 
 pushtransf
-diffuse 0 0 1
+diffuse 0 0 0.8
 translate 4 0 -4
 object cube.obj
 poptransf
 
 pushtransf
-diffuse 0 1.0 0
+diffuse 0 0.8 0
 translate 4 0 4
 object cube.obj
 poptransf

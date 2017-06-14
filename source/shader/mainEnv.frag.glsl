@@ -10,7 +10,7 @@ uniform int dirlgtAmount;
 uniform vec3 dirlgtDirections[5];
 uniform vec3 dirlgtColors[5];
 uniform mat4 dirlgtMatrices[5];
-uniform sampler2D dirlgtMaps[5];
+uniform sampler2DShadow dirlgtMaps[5];
 
 uniform int ptlgtAmount;
 uniform vec3 ptlgtPositions[5];
@@ -109,7 +109,7 @@ void main() {
             }
         }
         shadow /= 9.0f;
-        float visibility = 1.0f;
+        float visibility = 1 - shadow;
         
         float dist = sqrt(dot(diff, diff));
         float brightness = 8 / (dist * dist);

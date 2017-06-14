@@ -267,29 +267,11 @@ void displayMainProgram() {
     glActiveTexture(GL_TEXTURE0 + dumpPtlgtMapPos);
     glBindTexture(GL_TEXTURE_CUBE_MAP, dumpPtlgtMap);
     
-    // Pass the point lights to the map
-    shader->set("ptlgtAmount", (int) ptlgts.size());
-    for (int i = 0; i < 5; i++) {
-        if (i < ptlgts.size()) {
-            int tid = i;
-            glActiveTexture(GL_TEXTURE0 + tid);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
-            shader->set("ptlgtMaps", i, tid);
-            shader->set("ptlgtPositions", i, ptlgts[i]->pos);
-            shader->set("ptlgtColors", i, ptlgts[i]->color);
-        }
-        else {
-            shader->set("ptlgtMaps", i, dumpPtlgtMapPos);
-            shader->set("ptlgtPositions", i, vec3(1.0f));
-            shader->set("ptlgtColors", i, vec3(1.0f));
-        }
-    }
-    
     // Pass Direct Lights to the map
     shader->set("dirlgtAmount", (int) dirlgts.size());
     for (int i = 0; i < 5; i++) {
         if (i < dirlgts.size()) {
-            int tid = (int) ptlgts.size() + i;
+            int tid = i;
             glActiveTexture(GL_TEXTURE0 + tid);
             glBindTexture(GL_TEXTURE_2D, dirlgts[i]->depthMap);
             shader->set("dirlgtMaps", i, tid);
@@ -302,6 +284,24 @@ void displayMainProgram() {
             shader->set("dirlgtMatrices", i, mat4(1.0f));
             shader->set("dirlgtDirections", i, vec3(1.0f));
             shader->set("dirlgtColors", i, vec3(1.0f));
+        }
+    }
+    
+    // Pass the point lights to the map
+    shader->set("ptlgtAmount", (int) ptlgts.size());
+    for (int i = 0; i < 5; i++) {
+        if (i < ptlgts.size()) {
+            int tid = (int) dirlgts.size() + i;
+            glActiveTexture(GL_TEXTURE0 + tid);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, ptlgts[i]->depthMap);
+            shader->set("ptlgtMaps", i, tid);
+            shader->set("ptlgtPositions", i, ptlgts[i]->pos);
+            shader->set("ptlgtColors", i, ptlgts[i]->color);
+        }
+        else {
+            shader->set("ptlgtMaps", i, dumpPtlgtMapPos);
+            shader->set("ptlgtPositions", i, vec3(1.0f));
+            shader->set("ptlgtColors", i, vec3(1.0f));
         }
     }
     

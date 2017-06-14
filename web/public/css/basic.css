@@ -67,6 +67,17 @@ section h1, section h2 {
     font-weight: normal;
 }
 
+section > section > div > h1,
+section > section > div > h2,
+section > section > div > h3,
+section > section > div > h4,
+section > section > div > h5,
+section > section > div > h6 {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(230, 230, 230, 1);
+    font-weight: normal;
+}
+
 section > div {
     display: block;
     padding: 0 30px;

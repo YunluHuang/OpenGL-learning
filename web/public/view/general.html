@@ -1,0 +1,231 @@
+<section id="general-section">
+    <h2>Program</h2>
+    <section id="control-section">
+        <h2>Control</h2>
+        <div>
+            <h3>Move &amp; Perspective</h3>
+            <p>
+                In our program we use a FPS like control system. You simply use
+                <code>w</code>, <code>a</code>, <code>s</code>, and <code>d</code> to
+                move forward, left, backward, and right. You can also use <code>space</code>
+                to move up and <code>x</code> to move down. Simply moving the mouse
+                will change the viewing direction. It is noticable that we have limited
+                that the maximum up angle and down angle is pi / 2 so that the camera
+                will not be flipped.
+            </p>
+            <p>
+                We are using the FPS control system to simulate a kind of game, since
+                the goal we do this project is to do real-time rendering that can give
+                high quality vision and this is pretty much close to the game developments.
+            </p>
+            <h3>Change the Viewing Mode</h3>
+            <ul>
+                <li>
+                    Normal Mode: Press <code>1</code>
+                </li>
+                <li>
+                    SSAO Mode: Press <code>2</code>
+                </li>
+                <li>
+                    Debug Mode (with SSAO layer displayed in the bottom left corner): Press
+                    <code>3</code>
+                </li>
+            </ul>
+            <table class="center">
+                <tr>
+                    <td>
+                        <img src="img/final/normal_mode.png" width="250px" />
+                    </td>
+                    <td>
+                        <img src="img/final/ssao_mode.png" width="250px" />
+                    </td>
+                    <td>
+                        <img src="img/final/debug_mode.png" width="250px" />
+                    </td>
+                </tr>
+            </table>
+            <h3>Animate the Light</h3>
+            <p>
+                We have a simple animator that will automatically let the light rotate
+                around the y-axis. By pressing <code>p</code> (stands for 'play') you
+                can start the light animation. By pressing <code>p</code> again you can
+                then stop the animation. The demo of this will be shown in the
+                <a href="#demo">demo</a> section.
+            </p>
+            <h3>Motion Blur</h3>
+            <p>
+                A very naive motion blur system. By pressing <code>m</code> you can
+                enter the motion blur mode. And pressing it another time will get you
+                back to the normal mode. But enabling motion blur will significantly drop
+                the framerate.
+            </p>
+        </div>
+    </section>
+    <section id="scene-section">
+        <h2>Scene File Loader</h2>
+        <div>
+            <p>
+                As you already know that we need to specify scene file when starting the
+                program, we are going to talk about scene file in this section. The
+                scene file loader is pretty much the same as the one in the CSE 167 Project
+                2. But we have somehow changed some of the format of it.
+            </p>
+            <p>
+                Let's first see what operations that we can write in the scene file:
+            </p>
+            <p>
+                You can have comment in the scene file:
+            </p>
+            <pre># This is some comment</pre>
+            <p>
+                You can input any object file here:
+            </p>
+            <pre>object [FILE.obj]</pre>
+            <p>
+                You can specify the skybox by giving it 6 texture maps. The texture maps
+                must be in <code>.tga</code> file format. Note that the order of the maps
+                definitely matters here:
+            </p>
+            <pre>skybox [RIGHT.tga] [LEFT.tga] [UP.tga] [DOWN.tga] [BACK.tga] [FRONT.tga]</pre>
+            <p>
+                Setting the ambient color for the next object to be drawn
+            </p>
+            <pre>ambient [R] [G] [B]</pre>
+            <p>
+                Setting the diffuse color for the next object to be drawn
+            </p>
+            <pre>diffuse [R] [G] [B]</pre>
+            <p>
+                Setting the specular color for the next object to be drawn
+            </p>
+            <pre>specular [R] [G] [B]</pre>
+            <p>
+                Setting the shininess for the specular the next object to be drawn
+            </p>
+            <pre>shininess [S]</pre>
+            <p>
+                Translate the next object to be drawn
+            </p>
+            <pre>translate [X] [Y] [Z]</pre>
+            <p>
+                Scale the next object to be drawn
+            </p>
+            <pre>scale [X] [Y] [Z]</pre>
+            <p>
+                Rotate the next object to be drawn by X axis
+            </p>
+            <pre>rotatex [X]</pre>
+            <p>
+                Rotate the next object to be drawn by Y axis
+            </p>
+            <pre>rotatey [Y]</pre>
+            <p>
+                Rotate the next object to be drawn by Z axis
+            </p>
+            <pre>rotatez [Z]</pre>
+            <p>
+                Push the Transformation matrix stack
+            </p>
+            <pre>pushtransf</pre>
+            <p>
+                Pop from the Transformation matrix stack. If the stack has no
+                element, then nothing will be popped.
+            </p>
+            <pre>poptransf</pre>
+            <p>
+                Here's also a sample scene file. We suggest that a proper scene file
+                should have a filename end with <code>.scene</code>
+            </p>
+            <pre># basic.scene
+
+# Setup the skybox
+skybox rt.tga lf.tga up.tga dn.tga bk.tga ft.tga
+
+# Setup five point lights
+pointlight 0 1.8 0 0.3 0.3 0.3
+pointlight 0.3 6 5 0.3 0.3 0.2
+pointlight 4 5 -0.3 0.3 0.4 0.3
+pointlight -2 3 0.5 0.2 0.3 0.3
+pointlight -3 4 -2 0.3 0.2 0.3
+
+# Setup basic color properties
+ambient 0 0 0.03
+diffuse 0.8 0.8 0.8
+specular 0 0 0
+shininess 10
+
+# Translate the whole scene downward
+translate 0 -0.3 0
+
+# Floor
+pushtransf
+scale 10 0.1 10
+object cube.obj
+poptransf
+
+# Teapot
+ambient 0.1 0.1 0.1
+diffuse 1.0 1.0 1.0
+specular 0.05 0.05 0.05
+shininess 10
+object teapot.obj</pre>
+        </div>
+    </section>
+    <section id="obj-section">
+        <h2><code>.obj</code> File Loader</h2>
+        <div>
+            <p>
+                For more general purpose, we have written a <code>.obj</code> file
+                loader which will properly handle the relationship between points and
+                theirs normals. Now the loader can kind of load all
+                <strong>single object</strong> <code>.obj</code> files. But it cannot
+                handle the multiple objects file yet. Also the object will have to be
+                triangulated in the modeling softwares. We have tested on this and
+                created bunch of models from <a href="http://blender.org">Blender</a>.
+            </p>
+            <blockquote>
+                Before exporting <code>.obj</code> files from Blender, you need to add
+                a modifier called "triangulate" and hit "apply" on that modifier so
+                that the triangulation is applied to the model.
+            </blockquote>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <img src="img/final/obj_blender_cube.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/cube.png" width="400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/obj_blender_torus.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/torus.png" width="400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/obj_blender_suzanne.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/suzanne.png" width="400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/obj_blender_smooth_suzanne.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/smooth_suzanne.png" width="400px" />
+                </td>
+            </tr>
+        </table>
+        <blockquote>
+            It is interesting to notice that when the suzanne is smoothed in Blender,
+            and it will also be smoothed in our renderer.
+        </blockquote>
+    </section>
+</section>

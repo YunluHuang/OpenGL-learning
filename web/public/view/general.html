@@ -249,5 +249,15 @@ object teapot.obj</pre>
             It is interesting to notice that when the suzanne is smoothed in Blender,
             and it will also be smoothed in our renderer.
         </blockquote>
+        <p>
+            There's also a feature of our <code>.obj</code> file loader, which is that we will
+            only load the model (Vertex Array &amp; Buffer Objects) once. So if there are 1000
+            cubes in the scene but they are all referencing to the same <code>cube.obj</code>,
+            we will store only one Mesh object in our memory, while all the cubes can be transformed
+            individually. That's because we have separated <code>Object</code> and <code>Mesh</code>.
+            Each <code>Object</code> have their own transformation and material properties along
+            with a map to the <code>Mesh</code>. So this is making the space complexity very
+            friendly.
+        </p>
     </section>
 </section>

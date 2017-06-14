@@ -45,6 +45,7 @@ extern int mode;
 extern const int NORMAL_MODE;
 extern const int SSAO_MODE;
 extern const int DEBUG_MODE;
+extern const int NO_SSAO_MODE;
 extern bool animate;
 
 // ------------ Camera --------------
@@ -67,6 +68,7 @@ extern Shader * cubeDepthShader;
 extern Shader * quadShader;
 extern Shader * skyboxShader;
 
+extern Shader * whiteShader;
 extern Shader * shaderGeometryPass;
 extern Shader * shaderLightingPass;
 extern Shader * shaderSSAO;

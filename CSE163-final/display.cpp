@@ -323,6 +323,13 @@ void displayMainProgram() {
     glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMapID);
     shader->set("irrMap", irrMapPos);
     
+    if (mode == NO_SSAO_MODE) {
+        glBindFramebuffer(GL_FRAMEBUFFER, ssaoBlurFBO);
+        glClearColor(1, 1, 1, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+    
     // Setup SSAO map
     int ssaoTexturePos = irrMapPos + 1;
     glActiveTexture(GL_TEXTURE0 + ssaoTexturePos);
@@ -407,7 +414,7 @@ void display() {
     }
     
     // Use different mode
-    if (mode == NORMAL_MODE) {
+    if (mode == NORMAL_MODE || mode == NO_SSAO_MODE) {
         displaySSAO();
         displayDepthMap();
         displaySkyBox();
@@ -426,6 +433,12 @@ void display() {
         displaySkyBox();
         displayMainProgram();
         displaySmallQuad(ssaoColorBufferBlur);
+    }
+    else if (mode == NO_SSAO_MODE) {
+        displaySSAO();
+        displayDepthMap();
+        displaySkyBox();
+        displayMainProgram();
     }
     
     if (useMotionBlur) {

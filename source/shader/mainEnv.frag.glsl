@@ -74,7 +74,7 @@ void main() {
     for (int i = 0; i < dirlgtAmount; i++) {
         
         // Get Light Color
-        vec3 lightColor = dirlgtColors[i];
+        vec3 lightColor = dirlgtColors[i] * 0.5;
         vec4 lightSpace = modelView * vec4(dirlgtDirections[i], 0.0f);
         
         // Calculate in and out direction
@@ -84,7 +84,7 @@ void main() {
         
         // Calculate the shadow position with
         vec3 shadowPos = vec3(shadowCoords[i].xy, (shadowCoords[i].z) / shadowCoords[i].w);
-        float visibility = 1; // texture(dirlgtMaps[i], shadowPos);
+        float visibility = 1.0f; //texture(dirlgtMaps[i], shadowPos);
         
         // Calculate diffuse and specular color
         vec3 halfAngle = normalize(inDir + outDir);
@@ -119,15 +119,19 @@ void main() {
         float currentDepth = length(diff);
         float invsq = 1 / (currentDepth * currentDepth);
         float shadow = 0.0f;
-        for (int j = 0; j < 9; j++) {
-            vec2 off = poissonDisk[j];
-            float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.001 / invsq * u * off.x + 0.001 / invsq * v * off.y).r;
-            if (currentDepth > closestDepth) {
-                shadow += 1.0f;
-            }
+//        for (int j = 0; j < 9; j++) {
+//            vec2 off = poissonDisk[j];
+//            float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.001 / invsq * u * off.x + 0.001 / invsq * v * off.y).r;
+//            if (currentDepth > closestDepth) {
+//                shadow += 1.0f;
+//            }
+//        }
+//        shadow /= 9.0f;
+        float closestDepth = 25.0f * texture(ptlgtMaps[i], diff).r;
+        if (currentDepth > closestDepth) {
+            shadow += 1.0f;
         }
-        shadow /= 9.0f;
-        float visibility = 1 - shadow;
+        float visibility = 1.0f - shadow;
         
         float dist = sqrt(dot(diff, diff));
         float brightness = 8 / (dist * dist);

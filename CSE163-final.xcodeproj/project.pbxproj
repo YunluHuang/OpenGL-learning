@@ -66,6 +66,7 @@
 		DFBDF9AC1EF0F78500C1AA95 /* cube.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AB1EF0F73100C1AA95 /* cube.scene */; };
 		DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */; };
 		DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */; };
+		DFBDF9B21EF1075D00C1AA95 /* white.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DFBDF9B21EF1075D00C1AA95 /* white.frag.glsl in CopyFiles */,
 				DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */,
 				DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */,
 				DFBDF9AC1EF0F78500C1AA95 /* cube.scene in CopyFiles */,
@@ -738,6 +740,7 @@
 		DFBDF9AB1EF0F73100C1AA95 /* cube.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.scene; sourceTree = "<group>"; };
 		DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = torus.obj; sourceTree = "<group>"; };
 		DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = suzanne_smooth.obj; sourceTree = "<group>"; };
+		DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = white.frag.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1661,6 +1664,7 @@
 				DF1D8DEE1EEE9AA700B425AA /* ssaoGeometry.frag.glsl */,
 				DF1D8DEF1EEE9AB700B425AA /* ssaoGeometry.vert.glsl */,
 				DF1D8DF01EEE9AC600B425AA /* ssaoLighting.frag.glsl */,
+				DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */,
 			);
 			path = shader;
 			sourceTree = "<group>";

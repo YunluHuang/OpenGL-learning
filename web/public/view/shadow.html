@@ -1,0 +1,89 @@
+<section id="shadow-section">
+    <h2>Shadow &amp; Lighting</h2>
+    <div>
+        <p>
+            To get the shadow we first need lights. There are two kinds of lights in our scene. And
+            according to their type, they are associated with different kind of shadow maps.
+        </p>
+        <ol>
+            <li>Direct Light: <code>sampler2DShadow</code></li>
+            <li>Point Light: <code>samplerCubeShadow</code></li>
+        </ol>
+        <p>
+            So here, we are just treating the direct light as if it is comming from far end of the
+            direction and using an orthogonal matrix as its projection matrix. Here is a little
+            sample image of the scene consisting of direct lights:
+        </p>
+        <p class="center">
+            <img src="img/final/directlight.png" width="500px" />
+        </p>
+        <p>
+            The direct lights seems a little bit creepy since we have to sample the shadow map
+            from far away and therefore the resolution become bad when it comes to details. In
+            the same sense, the point lights are doing far better works.
+        </p>
+        <p>
+            For the Point Light, we are sampling the depth map in every single direction. So we
+            can put the point light anywhere and it will produce great point shadows. For point
+            lights, we also have antialiasing and soft shadows implemented. There is also
+            inverse-square attenuation for the point lights. In the following picture you can see
+            some nice intersection of different shadows. If you take a careful look to the shadow of
+            the bottom-left pillow, you can definitely see that the shadow looks sharp near the
+            pillow and it's getting softer as the distance gets farther. For the antialiasing
+            we are using poisson distribution table to sample points to make the shadow look real.
+            We have also tried random sampling but the effect was not that good considering a
+            real-time renderer.
+        </p>
+        <p class="center">
+            <img src="img/final/pointlight.png" width="500px" />
+        </p>
+        <blockquote>
+            Note that there's no SSAO enabled (in NO_SSAO_MODE) in the above two images.
+        </blockquote>
+        <p>
+            Here's also another image that has interesting effects (SSAO Enabled). You can
+            definitely see a lot of shadows intersecting with each other and they have
+            different colors (according to the light colors).
+        </p>
+        <p class="center">
+            <img src="img/final/multiple_shadow.png" width="500px" />
+        </p>
+        <p>
+            Here's a close-up look of the shadow anti-aliasing. We are using the poisson sampling
+            table to create a semi-random blur of the shadow. As you can see the general shape
+            of the pixels of the shadow is still perceivable, but is much better comparing to the
+            normal ones. And from the above image you can also see the soft shadow of that greenish
+            shadow, since that light is a little far from the teapot than the others.
+        </p>
+        <table class="center">
+            <tr>
+                <td>
+                    <img src="img/final/shadow_no_aa.png" width="420px" />
+                </td>
+                <td>
+                    <img src="img/final/shadow_aa.png" width="420px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No AA
+                </td>
+                <td>
+                    Anti-Aliased (3 x 3)
+                </td>
+            </tr>
+        </table>
+        <table class="center">
+            <tr>
+                <td>
+                    <img src="img/final/shadow_detail.png" width="600px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Anti-Aliased Shadow Zoomed In (NO SSAO)
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>

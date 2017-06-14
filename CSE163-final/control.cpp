@@ -29,6 +29,7 @@ int mode = 1;
 const int NORMAL_MODE = 1;
 const int SSAO_MODE = 2;
 const int DEBUG_MODE = 3;
+const int NO_SSAO_MODE = 4;
 
 bool animate = false;
 
@@ -90,6 +91,10 @@ void keyboardDown(unsigned char key, int x, int y) {
         }
         case '3': {
             mode = DEBUG_MODE;
+            break;
+        }
+        case '4': {
+            mode = NO_SSAO_MODE;
             break;
         }
         case 'p': {

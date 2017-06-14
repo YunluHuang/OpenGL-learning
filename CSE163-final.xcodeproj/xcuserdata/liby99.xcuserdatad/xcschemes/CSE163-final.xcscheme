@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "cube.scene"
+            argument = "teapot.scene"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

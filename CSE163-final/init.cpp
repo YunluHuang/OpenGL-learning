@@ -65,6 +65,7 @@ mat4 fixedView, fixedProjection;
 void genBuffers();
 void initAllMeshes();
 void displayObject(Object * object);
+void renderQuad();
 
 void initMainShader() {
     

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int width = 720, height = 480;
+int width = 960, height = 540;
 
 void readfile(const char * filename);
 void init();

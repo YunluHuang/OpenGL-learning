@@ -3,9 +3,14 @@ out float FragColor;
 
 in vec2 TexCoords;
 
+uniform int width;
+uniform int height;
+
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
 uniform sampler2D texNoise;
+
+uniform mat4 projection;
 
 uniform vec3 samples[100];
 
@@ -14,12 +19,9 @@ int kernelSize = 100;
 float radius = 0.25;
 float bias = 0.025;
 
-// tile noise texture over screen based on screen dimensions divided by noise size
-const vec2 noiseScale = vec2(1280.0/4.0, 720.0/4.0);
-
-uniform mat4 projection;
-
 void main() {
+    
+    vec2 noiseScale = vec2(width / 4.0, height / 4.0);
     
     // get input for SSAO algorithm
     vec3 fragPos = texture(gPosition, TexCoords).xyz;

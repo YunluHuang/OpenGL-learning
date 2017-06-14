@@ -121,6 +121,8 @@ void displaySSAO() {
         for (unsigned int i = 0; i < 100; ++i)
             shaderSSAO->set(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
         shaderSSAO->set("projection", projection);
+        shaderSSAO->set("width", width);
+        shaderSSAO->set("height", height);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, gPosition);
         glActiveTexture(GL_TEXTURE1);

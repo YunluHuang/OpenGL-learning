@@ -1,0 +1,124 @@
+<section id="ssao-section">
+    <h2>SSAO (Screen-Space Ambient Occlusion)</h2>
+    <div>
+        <p>
+            SSAO, also known as Screen-Space Ambient Occlusion, is a trick that can surpass
+            the ray-tracing process to make the corner area darker than the open area. Although
+            sometimes the SSAOs are really subtle to observe, it does serves a great deal for
+            the overall quality of the image. We choose SSAO as one of our add-ons since we
+            think that SSAO adds a lot more detail to the traditional shadow-map and will
+            make the image look more realistic. Actually sampling SSAO could be time consuming.
+            In our implementation, lots of resources are taken by the SSAO sampling process (we
+            are doing 100 samples per fragment) and at first the frame-rate does drop a little bit.
+            Now it is a little bit better but overall SSAO is still a slow process.
+        </p>
+        <p>
+            One cannot tell the SSAO as long as they can compare two different images:
+        </p>
+        <table class="center">
+            <tr>
+                <td>
+                    Without SSAO
+                </td>
+                <td>
+                    With SSAO
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/no_ssao_1.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/with_ssao_1.png" width="400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/no_ssao_2.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/with_ssao_2.png" width="400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/city_no_ssao.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/city_ssao.png" width="400px" />
+                </td>
+            </tr>
+        </table>
+        <p>
+            As you can see, the difference between the images with or without SSAO mainly lies in
+            the shadow part. More specifically, you can see a clear dark gradient under the teapot
+            in the right image. This is making the image much more realistic than the left side
+            one. In the second group of images, we can also see the SSAO under the spheres on the
+            top of the pillows. That is very nice looking too. And at the bottom of the pillows
+            you can also see a tiny little dark tint, also making the image looks great.
+            But there is actually some bug of SSAO (since it's just a trick): the right side of
+            the sphere on the right should not be tinted black that way though.
+        </p>
+        <p>
+            The last scene file is a random generated scene file that has a grid of cubes each with
+            randomized size. This image is a great example showcasing the power of SSAO. As you
+            can see the contrasts between the shadows and the surfaces become very big, making
+            it better for the viewer to perceive the relationship of the space.
+        </p>
+        <p>
+            Our process of rendering SSAO is basically rendering the image in two passes. In the
+            first pass we will run the SSAO shaders to generate an SSAO texture. And in the second
+            pass, despite the normally rendering the image we multiply every pixel in the image with
+            the SSAO texture we computed before. We already have different view modes setup for
+            debugging the SSAO (since that process was a nightmare).
+        </p>
+        <table class="center">
+            <tr>
+                <td>
+                    <img src="img/final/ssao_no.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/ssao_texture.png" width="400px" />
+                </td>
+            </tr>
+        </table>
+        <table class="center">
+            <tr>
+                <td>
+                    Combining the above two together:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/ssao_normal.png" width="400px" />
+                </td>
+            </tr>
+        </table>
+        <p>
+            The continued city image. We changed a generator and make the center building the
+            tallest. Notice how well the gaps between tall buildings are depicted using SSAO.
+            The layers are much clearer.
+        </p>
+        <div class="center">
+            <img src="img/final/city.png" width="700px" />
+        </div>
+        <table class="center">
+            <tr>
+                <td>
+                    Without SSAO
+                </td>
+                <td>
+                    With SSAO
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/final/city_no_ssao_2.png" width="400px" />
+                </td>
+                <td>
+                    <img src="img/final/city_ssao_2.png" width="400px" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>

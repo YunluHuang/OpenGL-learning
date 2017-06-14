@@ -33,6 +33,8 @@ const int NO_SSAO_MODE = 4;
 
 bool animate = false;
 
+bool mouseControl = true;
+
 void processKeyboard() {
     
     vec3 xAxis = -cross(eye - center, up);
@@ -74,11 +76,21 @@ void processKeyboard() {
     }
 }
 
+void enableMouseControl() {
+    mouseControl = true;
+    glutSetCursor(GLUT_CURSOR_NONE);
+}
+
+void disableMouseControl() {
+    mouseControl = false;
+    glutSetCursor(GLUT_CURSOR_INHERIT);
+}
+
 void keyboardDown(unsigned char key, int x, int y) {
     activeKey[key] = true;
     switch (key) {
         case 27: {
-            exit(1);
+            disableMouseControl();
             break;
         }
         case '1': {
@@ -105,6 +117,10 @@ void keyboardDown(unsigned char key, int x, int y) {
             useMotionBlur = !useMotionBlur;
             break;
         }
+        case 'q': {
+            exit(1);
+            break;
+        }
         default: {
             break;
         }
@@ -116,7 +132,11 @@ void keyboardUp(unsigned char key, int x, int y) {
 }
 
 void mouse(int button, int state, int x, int y) {
-    
+    if (button == GLUT_LEFT_BUTTON) {
+        if (state == GLUT_DOWN) {
+            enableMouseControl();
+        }
+    }
 }
 
 void setMousePosition(int x, int y) {
@@ -131,21 +151,24 @@ void centerMousePosition() {
 
 void mouseRotate(int x, int y) {
     
-    yaw += -mouseSpeed * limitedFPS * float (x - width / 2);
-    pitch += -mouseSpeed * limitedFPS * float (y - height / 2);
-    
-    yaw = yaw < -pi ? 2 * pi + yaw : yaw > pi ? -2 * pi + yaw : yaw;
-    pitch = pitch < -pi / 2 ? -pi / 2 + 0.01 : pitch > pi / 2 ? pi / 2 - 0.01 : pitch;
-    
-    mat4 rotation = mat4(1.0f), identity = mat4(1.0f);
-    rotation *= glm::rotate(identity, yaw, vec3(0, 1, 0));
-    rotation *= glm::rotate(identity, pitch, vec3(1, 0, 0));
-    
-    vec3 diff = vec3(rotation * vec4(0, 0, -1.0f, 0.0f));
-    center = eye + diff;
-    
-    centerMousePosition();
-    glutPostRedisplay();
+    if (mouseControl) {
+        
+        yaw += -mouseSpeed * limitedFPS * float (x - width / 2);
+        pitch += -mouseSpeed * limitedFPS * float (y - height / 2);
+        
+        yaw = yaw < -pi ? 2 * pi + yaw : yaw > pi ? -2 * pi + yaw : yaw;
+        pitch = pitch < -pi / 2 ? -pi / 2 + 0.01 : pitch > pi / 2 ? pi / 2 - 0.01 : pitch;
+        
+        mat4 rotation = mat4(1.0f), identity = mat4(1.0f);
+        rotation *= glm::rotate(identity, yaw, vec3(0, 1, 0));
+        rotation *= glm::rotate(identity, pitch, vec3(1, 0, 0));
+        
+        vec3 diff = vec3(rotation * vec4(0, 0, -1.0f, 0.0f));
+        center = eye + diff;
+        
+        centerMousePosition();
+        glutPostRedisplay();
+    }
 }
 
 void mouseMove(int x, int y) {

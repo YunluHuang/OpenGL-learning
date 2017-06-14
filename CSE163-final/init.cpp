@@ -66,13 +66,14 @@ void genBuffers();
 void initAllMeshes();
 void displayObject(Object * object);
 void renderQuad();
+void enableMouseControl();
 
 void initMainShader() {
     
     windowX = glutGet((GLenum)GLUT_WINDOW_X);
     windowY = glutGet((GLenum)GLUT_WINDOW_Y) + 46;
     
-    glutSetCursor(GLUT_CURSOR_NONE);
+    enableMouseControl();
     
     view = glm::lookAt(eye, center, up);
     projection = glm::perspective(glm::radians(fovy), (float) width / (float) height, zNear, zFar);

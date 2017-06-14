@@ -47,6 +47,7 @@ extern const int SSAO_MODE;
 extern const int DEBUG_MODE;
 extern const int NO_SSAO_MODE;
 extern bool animate;
+extern bool mouseControl;
 
 // ------------ Camera --------------
 

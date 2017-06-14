@@ -67,6 +67,7 @@
 		DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */; };
 		DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */; };
 		DFBDF9B21EF1075D00C1AA95 /* white.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */; };
+		DFBDF9B41EF11F2700C1AA95 /* city.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFBDF9B31EF11F0700C1AA95 /* city.scene */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DFBDF9B41EF11F2700C1AA95 /* city.scene in CopyFiles */,
 				DFBDF9B21EF1075D00C1AA95 /* white.frag.glsl in CopyFiles */,
 				DFBDF9B01EF0FBEF00C1AA95 /* suzanne_smooth.obj in CopyFiles */,
 				DFBDF9AE1EF0F92C00C1AA95 /* torus.obj in CopyFiles */,
@@ -741,6 +743,7 @@
 		DFBDF9AD1EF0F91D00C1AA95 /* torus.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = torus.obj; sourceTree = "<group>"; };
 		DFBDF9AF1EF0FBDD00C1AA95 /* suzanne_smooth.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = suzanne_smooth.obj; sourceTree = "<group>"; };
 		DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = white.frag.glsl; sourceTree = "<group>"; };
+		DFBDF9B31EF11F0700C1AA95 /* city.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = city.scene; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1590,6 +1593,7 @@
 				DF1D8DFD1EEF0A5500B425AA /* house.scene */,
 				DF1D8E001EEF142D00B425AA /* whitetemple.scene */,
 				DFBDF9AB1EF0F73100C1AA95 /* cube.scene */,
+				DFBDF9B31EF11F0700C1AA95 /* city.scene */,
 			);
 			path = scene;
 			sourceTree = "<group>";

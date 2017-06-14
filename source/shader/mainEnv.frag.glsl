@@ -113,24 +113,29 @@ void main() {
         vec3 specularColor = specular * pow(max(dot(halfAngle, normal), 0), shininess);
         
         vec3 diff = oriPos - ptlgtPositions[i];
+        
+        // Anti-Aliasing and Soft Shadows
         vec3 u = cross(normal, vec3(1, 0, 0));
         u = normalize(u == vec3(0, 0, 0) ? cross(normal, vec3(0, 1, 0)) : u);
         vec3 v = normalize(cross(normal, u));
         float currentDepth = length(diff);
         float invsq = 1 / (currentDepth * currentDepth);
         float shadow = 0.0f;
-//        for (int j = 0; j < 9; j++) {
-//            vec2 off = poissonDisk[j];
-//            float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.001 / invsq * u * off.x + 0.001 / invsq * v * off.y).r;
-//            if (currentDepth > closestDepth) {
-//                shadow += 1.0f;
-//            }
-//        }
-//        shadow /= 9.0f;
-        float closestDepth = 25.0f * texture(ptlgtMaps[i], diff).r;
-        if (currentDepth > closestDepth) {
-            shadow += 1.0f;
+        for (int j = 0; j < 9; j++) {
+            vec2 off = poissonDisk[j];
+            float closestDepth = 25.0f * texture(ptlgtMaps[i], diff + 0.001 / invsq * u * off.x + 0.001 / invsq * v * off.y).r;
+            if (currentDepth > closestDepth) {
+                shadow += 1.0f;
+            }
         }
+        shadow /= 9.0f;
+        
+        // // No Anti-Aliasing Code
+        // float closestDepth = 25.0f * texture(ptlgtMaps[i], diff).r;
+        // if (currentDepth > closestDepth) {
+        //    shadow += 1.0f;
+        // }
+        
         float visibility = 1.0f - shadow;
         
         float dist = sqrt(dot(diff, diff));

@@ -5,4 +5,4 @@ diffuse 1 1 1
 ambient 0 0 0
 shininess 0
 
-object torus.obj
+object kagi.obj

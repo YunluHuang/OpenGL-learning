@@ -97,7 +97,7 @@ void keyboardDown(unsigned char key, int x, int y) {
             break;
         }
         case 'm': {
-            useMotionBlur = true;
+            useMotionBlur = !useMotionBlur;
             break;
         }
         default: {

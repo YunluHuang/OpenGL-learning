@@ -16,7 +16,7 @@ uniform vec3 samples[100];
 
 // parameters (you'd probably want to use them as uniforms to more easily tweak the effect)
 int kernelSize = 100;
-float radius = 0.5;
+float radius = 0.3;
 float bias = 0.025;
 
 void main() {

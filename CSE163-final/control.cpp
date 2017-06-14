@@ -96,6 +96,10 @@ void keyboardDown(unsigned char key, int x, int y) {
             animate = !animate;
             break;
         }
+        case 'm': {
+            useMotionBlur = true;
+            break;
+        }
         default: {
             break;
         }

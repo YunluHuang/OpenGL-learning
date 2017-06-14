@@ -3,7 +3,7 @@ skybox powderpeak_rt.tga powderpeak_lf.tga powderpeak_up.tga powderpeak_dn.tga p
 
 pointlight -4 1 4.3 0.5 0.5 1.0
 pointlight 4 2 -1.4 1.0 0.7 0.7
-pointlight 0 5 0 0.8 0.8 0.8
+pointlight 0 5 1 0.8 0.8 0.8
 
 ambient 0.1 0.1 0.1
 diffuse 1 1 1
@@ -79,7 +79,7 @@ poptransf
 
 pushtransf
 shininess 100
-specular 0.3 0.3 0.3
+specular 0.5 0.5 0.5
 scale 0.7 0.7 0.7
 object teapot.obj
 poptransf

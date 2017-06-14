@@ -53,8 +53,10 @@ extern vec3 eye;
 extern vec3 up;
 extern vec3 center;
 extern float fovy, zNear, zFar;
-
 extern mat4 view, projection, modelView;
+
+extern bool useMotionBlur;
+extern int motionBlur;
 
 // ------------ Shader --------------
 

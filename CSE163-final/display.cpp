@@ -6,6 +6,8 @@
 //  Copyright © 2017 Ah Huang. All rights reserved.
 //
 
+#include <OpenGL/gl3.h>
+#include <OpenGL/glu.h>
 #include <stdio.h>
 
 #include "variables.h"
@@ -16,6 +18,10 @@
 #include "Skybox.hpp"
 
 using namespace std;
+
+bool useMotionBlur = false;
+int motionBlurSample = 5;
+int mbi = 0;
 
 // Forward declarations
 void processKeyboard();
@@ -379,10 +385,10 @@ void displaySmallQuad(GLuint texture) {
 
 void processAnimation() {
     for (int i = 0; i < ptlgts.size(); i++) {
-        ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(1.0f), vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
+        ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(0.5f) * i, vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
     }
     for (int i = 0; i < dirlgts.size(); i++) {
-        dirlgts[i]->dir = vec3(glm::rotate(mat4(1.0f), glm::radians(1.0f), vec3(0, 1, 0)) * vec4(dirlgts[i]->dir, 1.0f));
+        dirlgts[i]->dir = vec3(glm::rotate(mat4(1.0f), glm::radians(0.5f) * i, vec3(0, 1, 0)) * vec4(dirlgts[i]->dir, 1.0f));
     }
 }
 
@@ -422,9 +428,24 @@ void display() {
         displaySmallQuad(ssaoColorBufferBlur);
     }
     
-    // Flush the viewport and swap the buffer
-    glFlush();
-    glutSwapBuffers();
+    if (useMotionBlur) {
+        
+        if (mbi++ == 0) {
+            glAccum(GL_LOAD, 1.0 / motionBlurSample);
+        }
+        else {
+            glAccum(GL_ACCUM, 1.0 / motionBlurSample);
+        }
+        
+        if (mbi >= motionBlurSample) {
+            mbi = 0;
+            glAccum(GL_RETURN, 1.0);
+            glutSwapBuffers();
+        }
+    }
+    else {
+        glutSwapBuffers();
+    }
 }
 
 void idle() {

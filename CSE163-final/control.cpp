@@ -35,6 +35,8 @@ bool animate = false;
 
 bool mouseControl = true;
 
+bool useIrradiance = false;
+
 void processKeyboard() {
     
     vec3 xAxis = -cross(eye - center, up);
@@ -115,6 +117,10 @@ void keyboardDown(unsigned char key, int x, int y) {
         }
         case 'm': {
             useMotionBlur = !useMotionBlur;
+            break;
+        }
+        case 'i': {
+            useIrradiance = !useIrradiance;
             break;
         }
         case 'q': {

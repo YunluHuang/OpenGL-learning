@@ -57,6 +57,7 @@ extern vec3 center;
 extern float fovy, zNear, zFar;
 extern mat4 view, projection, modelView;
 
+extern bool useIrradiance;
 extern bool useMotionBlur;
 extern int motionBlur;
 

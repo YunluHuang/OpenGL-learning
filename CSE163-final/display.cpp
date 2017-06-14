@@ -369,7 +369,7 @@ void displaySkyBox() {
         
         glBindVertexArray(skybox->skyboxVAO);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->cubeMapID);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, useIrradiance ? skybox->irradianceMapID : skybox->cubeMapID);
         
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthMask(GL_TRUE);

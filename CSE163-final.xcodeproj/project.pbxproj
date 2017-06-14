@@ -57,6 +57,12 @@
 		DFB66EB11EE2CFCC00CAE706 /* basic.scene in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66E9F1EE2CF0200CAE706 /* basic.scene */; };
 		DFB66EB21EE2CFD500CAE706 /* main.frag.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAE1EE2CF0200CAE706 /* main.frag.glsl */; };
 		DFB66EB31EE2CFD500CAE706 /* basic.vert.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFB66EAF1EE2CF0200CAE706 /* basic.vert.glsl */; };
+		DFBDF9A51EF0EBAE00C1AA95 /* powderpeak_bk.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D531EECF7B200534335 /* powderpeak_bk.tga */; };
+		DFBDF9A61EF0EBAE00C1AA95 /* powderpeak_dn.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D541EECF7B200534335 /* powderpeak_dn.tga */; };
+		DFBDF9A71EF0EBAE00C1AA95 /* powderpeak_ft.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D551EECF7B200534335 /* powderpeak_ft.tga */; };
+		DFBDF9A81EF0EBAE00C1AA95 /* powderpeak_lf.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D561EECF7B200534335 /* powderpeak_lf.tga */; };
+		DFBDF9A91EF0EBAE00C1AA95 /* powderpeak_rt.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D571EECF7B200534335 /* powderpeak_rt.tga */; };
+		DFBDF9AA1EF0EBAE00C1AA95 /* powderpeak_up.tga in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6C6B0D581EECF7B200534335 /* powderpeak_up.tga */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +72,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				DFBDF9A51EF0EBAE00C1AA95 /* powderpeak_bk.tga in CopyFiles */,
+				DFBDF9A61EF0EBAE00C1AA95 /* powderpeak_dn.tga in CopyFiles */,
+				DFBDF9A71EF0EBAE00C1AA95 /* powderpeak_ft.tga in CopyFiles */,
+				DFBDF9A81EF0EBAE00C1AA95 /* powderpeak_lf.tga in CopyFiles */,
+				DFBDF9A91EF0EBAE00C1AA95 /* powderpeak_rt.tga in CopyFiles */,
+				DFBDF9AA1EF0EBAE00C1AA95 /* powderpeak_up.tga in CopyFiles */,
 				DF1D8E011EEF147200B425AA /* whitetemple.scene in CopyFiles */,
 				DF1D8DFF1EEF0AAC00B425AA /* house.scene in CopyFiles */,
 				DF1D8DFE1EEF0AA400B425AA /* house.obj in CopyFiles */,

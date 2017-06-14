@@ -392,10 +392,10 @@ void displaySmallQuad(GLuint texture) {
 
 void processAnimation() {
     for (int i = 0; i < ptlgts.size(); i++) {
-        ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(0.5f) * i, vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
+        ptlgts[i]->pos = vec3(glm::rotate(mat4(1.0f), glm::radians(0.2f) * (i + 1), vec3(0, 1, 0)) * vec4(ptlgts[i]->pos, 1.0f));
     }
     for (int i = 0; i < dirlgts.size(); i++) {
-        dirlgts[i]->dir = vec3(glm::rotate(mat4(1.0f), glm::radians(0.5f) * i, vec3(0, 1, 0)) * vec4(dirlgts[i]->dir, 1.0f));
+        dirlgts[i]->dir = vec3(glm::rotate(mat4(1.0f), glm::radians(0.2f) * (i + 1), vec3(0, 1, 0)) * vec4(dirlgts[i]->dir, 1.0f));
     }
 }
 

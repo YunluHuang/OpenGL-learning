@@ -747,6 +747,7 @@
 		DFBDF9B11EF1068B00C1AA95 /* white.frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = white.frag.glsl; sourceTree = "<group>"; };
 		DFBDF9B31EF11F0700C1AA95 /* city.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = city.scene; sourceTree = "<group>"; };
 		DFBDF9B51EF1359B00C1AA95 /* kagi.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = kagi.obj; sourceTree = "<group>"; };
+		DFBDF9B81EF1C76500C1AA95 /* CSE163-final.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CSE163-final.profdata"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -796,6 +797,7 @@
 				DFB66E9B1EE2CF0200CAE706 /* resource */,
 				6C73D0BA1EDF35FF00D0763B /* Products */,
 				6C73D0C31EDF371A00D0763B /* Frameworks */,
+				DFBDF9B71EF1C76500C1AA95 /* OptimizationProfiles */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1677,6 +1679,14 @@
 			path = shader;
 			sourceTree = "<group>";
 		};
+		DFBDF9B71EF1C76500C1AA95 /* OptimizationProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				DFBDF9B81EF1C76500C1AA95 /* CSE163-final.profdata */,
+			);
+			path = OptimizationProfiles;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1846,6 +1856,7 @@
 		6C73D0C11EDF35FF00D0763B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1861,6 +1872,7 @@
 		6C73D0C21EDF35FF00D0763B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (

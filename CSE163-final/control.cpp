@@ -25,6 +25,13 @@ float pitch = 0;
 
 bool activeKey[128];
 
+int mode = 1;
+const int NORMAL_MODE = 1;
+const int SSAO_MODE = 2;
+const int DEBUG_MODE = 3;
+
+bool animate = false;
+
 void processKeyboard() {
     
     vec3 xAxis = -cross(eye - center, up);
@@ -71,6 +78,22 @@ void keyboardDown(unsigned char key, int x, int y) {
     switch (key) {
         case 27: {
             exit(1);
+            break;
+        }
+        case '1': {
+            mode = NORMAL_MODE;
+            break;
+        }
+        case '2': {
+            mode = SSAO_MODE;
+            break;
+        }
+        case '3': {
+            mode = DEBUG_MODE;
+            break;
+        }
+        case 'p': {
+            animate = !animate;
             break;
         }
         default: {

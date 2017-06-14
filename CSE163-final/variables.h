@@ -40,8 +40,12 @@ extern float moveSpeed;
 extern float mouseSpeed;
 extern float limitedFPS;
 extern float yaw, pitch;
-
 extern bool activeKey[128];
+extern int mode;
+extern const int NORMAL_MODE;
+extern const int SSAO_MODE;
+extern const int DEBUG_MODE;
+extern bool animate;
 
 // ------------ Camera --------------
 

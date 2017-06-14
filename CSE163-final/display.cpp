@@ -367,6 +367,13 @@ void displayQuad(GLuint texture) {
     quadShader->use();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
+    renderQuad();
+}
+
+void displaySmallQuad(GLuint texture) {
+    quadShader->use();
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
     renderSmallQuad();
 }
 
@@ -381,28 +388,39 @@ void processAnimation() {
 
 void display() {
     
-    view = glm::lookAt(eye, center, up);
-    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
-    
-    processAnimation();
-    
     // First process keyboard input
     processKeyboard();
     
-    displaySSAO();
+    //
+    view = glm::lookAt(eye, center, up);
+    projection = glm::perspective(glm::radians(fovy), (float)width / (float)height, zNear, zFar);
     
-    // Then render the depth map
-    displayDepthMap();
+    // Animation
+    if (animate) {
+        processAnimation();
+    }
     
-    // render the skybox
-    // TODO: this need to be rendered last in further development
-    displaySkyBox();
-    
-    // Then execute the main render program
-    displayMainProgram();
-    
-    // Debug
-    displayQuad(ssaoColorBufferBlur);
+    // Use different mode
+    if (mode == NORMAL_MODE) {
+        displaySSAO();
+        displayDepthMap();
+        displaySkyBox();
+        displayMainProgram();
+    }
+    else if (mode == SSAO_MODE) {
+        displaySSAO();
+        displayDepthMap();
+        displaySkyBox();
+        displayMainProgram();
+        displayQuad(ssaoColorBufferBlur);
+    }
+    else if (mode == DEBUG_MODE) {
+        displaySSAO();
+        displayDepthMap();
+        displaySkyBox();
+        displayMainProgram();
+        displaySmallQuad(ssaoColorBufferBlur);
+    }
     
     // Flush the viewport and swap the buffer
     glFlush();
